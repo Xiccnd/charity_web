@@ -34,9 +34,7 @@
           <div class="category">
               <span>服务类别</span>
               <ul>
-                <li>{{class_of_service[0].service_name}}</li>
-                <li>{{class_of_service[1].service_name}}</li>
-                <li>{{class_of_service[2].service_name}}</li>
+                <li>{{class_of_service[0].serviceName}}</li>
               </ul>
             </div>
 
@@ -100,19 +98,19 @@
           <li>
             岗位
             <p>
-            <a>	{{volunteer_program_details[0].Posts}} </a>个
+            <a>	{{volunteer_program_details[0].posts}} </a>个
             </p>
           </li>
           <li>
             目标
             <p>
-            <a>	{{volunteer_program_details[0].Target_number}} </a>个
+            <a>	{{volunteer_program_details[0].targetNumber}} </a>个
             </p>
           </li>
           <li>
             报名
             <p>
-            <a>	{{volunteer_program_details[0].Enrolled_number}} </a>个
+            <a>	{{volunteer_program_details[0].enrolledNumber}} </a>个
             </p>
           </li>
         </ul>
@@ -121,125 +119,12 @@
           项目进度：0%  
         </span>
         <span style="float:right;">
-           截止日期：{{volunteer_program_details[0].Recruit_date}}
+           截止日期：{{volunteer_program_details[0].recruitDate}}
         </span>
         </div>
 				</div>
 
-		<div class="col-md-3 column p_card">
-          <router-link to="/volunteer_program_details">
-	      <img style="width:260px;height:170px;" src="../assets/images/p1.png" />
-          </router-link>
-					<h5>
-					{{volunteer_program_details[0].pname}} &nbsp;<span class="label label-success">招募中</span>
-					</h5>
-					
 
-				<ul>
-          <li>
-            岗位
-            <p>
-            <a>	{{volunteer_program_details[0].Posts}} </a>个
-            </p>
-          </li>
-          <li>
-            目标
-            <p>
-            <a>	{{volunteer_program_details[0].Target_number}} </a>个
-            </p>
-          </li>
-          <li>
-            报名
-            <p>
-            <a>	{{volunteer_program_details[0].Enrolled_number}} </a>个
-            </p>
-          </li>
-        </ul>
-        <div>
-          <span style="float:left;">
-          项目进度：0%  
-        </span>
-        <span style="float:right;">
-           截止日期：{{volunteer_program_details[0].Recruit_date}}
-        </span>
-        </div>
-				</div>
-        	<div class="col-md-3 column p_card">
-          <router-link to="/volunteer_program_details">
-	      <img style="width:260px;height:170px;" src="../assets/images/p1.png" />
-          </router-link>
-					<h5>
-					{{volunteer_program_details[0].pname}} &nbsp;<span class="label label-success">招募中</span>
-					</h5>
-					
-
-				<ul>
-          <li>
-            岗位
-            <p>
-            <a>	{{volunteer_program_details[0].Posts}} </a>个
-            </p>
-          </li>
-          <li>
-            目标
-            <p>
-            <a>	{{volunteer_program_details[0].Target_number}} </a>个
-            </p>
-          </li>
-          <li>
-            报名
-            <p>
-            <a>	{{volunteer_program_details[0].Enrolled_number}} </a>个
-            </p>
-          </li>
-        </ul>
-        <div>
-          <span style="float:left;">
-          项目进度：0%  
-        </span>
-        <span style="float:right;">
-           截止日期：{{volunteer_program_details[0].Recruit_date}}
-        </span>
-        </div>
-				</div>
-        	<div class="col-md-3 column p_card">
-          <router-link to="/volunteer_program_details">
-	      <img style="width:260px;height:170px;" src="../assets/images/p1.png" />
-          </router-link>
-					<h5>
-					{{volunteer_program_details[0].pname}} &nbsp;<span class="label label-success">招募中</span>
-					</h5>
-					
-
-				<ul>
-          <li>
-            岗位
-            <p>
-            <a>	{{volunteer_program_details[0].Posts}} </a>个
-            </p>
-          </li>
-          <li>
-            目标
-            <p>
-            <a>	{{volunteer_program_details[0].Target_number}} </a>个
-            </p>
-          </li>
-          <li>
-            报名
-            <p>
-            <a>	{{volunteer_program_details[0].Enrolled_number}} </a>个
-            </p>
-          </li>
-        </ul>
-        <div>
-          <span style="float:left;">
-          项目进度：0%  
-        </span>
-        <span style="float:right;">
-           截止日期：{{volunteer_program_details[0].Recruit_date}}
-        </span>
-        </div>
-				</div>
 			
 			</div>
 		</div>
@@ -280,9 +165,9 @@
 export default {
     data() {
       return{
-       class_of_service:[{Sid:0,service_name:"全部"},
-      {Sid:1,service_name: "社区服务"},
-      {Sid:2,service_name:"扶贫减贫"}
+       class_of_service:[{sid:0,serviceName:"全部"},
+      {sid:1,serviceName: "社区服务"},
+      {sid:2,serviceName:"扶贫减贫"}
        ],
           
     volunteer_program_details:[
@@ -290,10 +175,10 @@ export default {
         pid:0,
         pname:"汛期安全知识”志愿宣讲活动 ",
         Project_status:"招募中",
-        Posts:1,
-        Target_number:3,
-        Enrolled_number:2,
-        Recruit_date:"2022-6-9"
+        posts:1,
+        targetNumber:3,
+        enrolledNumber:2,
+        recruitDate:"2022-6-9"
       }
     ]
 
@@ -309,10 +194,30 @@ export default {
     mounted() {
     },
     methods:{
+<<<<<<< HEAD
       // queryList:function(){
       //   //c查询所有的数据信息，进行绑定显示
       //   // console.log(111111111111111111111111111111111111)
       // },
+=======
+      queryList:function(){
+        const _this = this
+        this.$http({
+                  method:"get",
+                  url:"/volunteerProgramDetails/selectOne?id=1"
+               })
+              .then(res => {
+                console.log(res.data)
+                _this.volunteer_program_details[0]=res.data
+              })
+              .catch(err => {
+                console.error(err); 
+              })
+      },
+     
+       
+
+>>>>>>> 4b066f09721c017040534b9d38c739e33b5de8d0
     }
   };
 </script>
