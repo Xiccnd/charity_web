@@ -304,18 +304,15 @@ export default {
     props:[],
     components: {},
     created() {
-      this.queryList();
+      // this.queryList();
     },
     mounted() {
     },
     methods:{
-      queryList:function(){
-        //c查询所有的数据信息，进行绑定显示
-          console.log(111111111111111111111111111111111111)
-      },
-     
-       
-
+      // queryList:function(){
+      //   //c查询所有的数据信息，进行绑定显示
+      //   // console.log(111111111111111111111111111111111111)
+      // },
     }
   };
 </script>

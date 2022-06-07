@@ -1,0 +1,42 @@
+img {
+  vertical-align: middle;
+  border: 0;
+}
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "\5FAE\8F6F\96C5\9ED1";
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+span,i,b {
+  display: inline-block;
+}
+b {
+  font-weight: normal;
+}
+.button {
+  display: inline-block;
+  font-size: 14px;
+  color: #fff;
+  background: #e60012;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+  text-align: center;
+  padding: 0 30px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  white-space: nowrap;
+  outline: none;
+  cursor: pointer;
+}
+body .bannerimg {
+  background: url(../images/background/banner.1e1ab6c.png) no-repeat center top;
+}

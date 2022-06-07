@@ -171,7 +171,7 @@ export default {
     methods:{
       queryList:function(){
         //c查询所有的数据信息，进行绑定显示
-          console.log(111111111111111111111111111111111111)
+          // console.log(111111111111111111111111111111111111)
       },
      
        
