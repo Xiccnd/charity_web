@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div id="header" class="js-top-bar header" style="padding-bottom: 15px">
     <div class="mid row">
       <div class="col t-l">
@@ -18,9 +18,9 @@
             <a href="https://chinavolunteer.mca.gov.cn" target="_blank">中国志愿服务网</a>
           </span>
           <div style="display: inline-block"></div>
-          <span class="red">请登录</span>
-          <a href="javascript:void(0);" class="a">志愿者注册</a> <span>|</span>
-          <a href="javascript:void(0);">志愿队伍注册</a>
+          <span class="red" id="login_username">请登录</span>
+          <a href="javascript:void(0);" class="a" v-show="!isLogin">志愿者注册</a> <span v-show="!isLogin">|</span>
+          <a href="javascript:void(0);" v-show="!isLogin">志愿队伍注册</a>
           <img src="../assets/images/header/font.png" alt="" style="margin-bottom: 13px"/>
         </div>
         <div class="js-search" style="margin-top: -20px;overflow: visible;background: rgb(255, 255, 255);">
@@ -39,67 +39,34 @@
         </div>
       </div>
     </div>
-    <!-- <div class="mask docs">
-      <div id="tc_zhandian" class="mask-info">
-        <div class="mask-header row w">
-          <div class="col v-m"><h2>请选择站点</h2></div>
-          <div class="col v-m t-r">
-            <a href="javascript:void(0);" class="mask-close"><img src="" alt=""/></a>
-          </div>
-        </div>
-        <div>
-          <a href="https://chinavolunteer.mca.gov.cn" target="_blank" class="v-m category__item" style="width: 250px"><h3>中国志愿服务网</h3></a>
-        </div>
-      </div>
-    </div>
-    <div class="mask docs2">
-      <div id="tc_denglu" class="mask-info">
-        <div class="mask-header row w">
-          <div class="col v-m"><h2>请选择登录方式</h2></div>
-          <div class="col v-m t-r">
-            <a href="javascript:void(0);" class="mask-close"><img src="" alt=""/></a>
-          </div>
-        </div>
-        <div id="tc" class="login_way">
-          <a>
-            <div class="d_1">
-              <img src="" alt=""/>
-            </div>
-            <div class="d_2">
-              <p>志愿者登录</p>
-              <div><span>什么是志愿者</span> <span>有哪些权利和义务</span></div>
-            </div>
-          </a>
-          <a>
-            <div class="d_1">
-              <img src="" alt=""/>
-            </div>
-            <div class="d_2">
-              <p>志愿队伍登录</p>
-              <div>
-                <span>志愿队伍注册、审核</span>
-                <span>招募志愿者、管理项目</span>
-              </div>
-            </div>
-          </a>
-          <a>
-            <div class="d_1">
-              <img src="" alt=""/>
-            </div>
-            <div class="d_2">
-              <p>管理部门登录</p>
-              <span>管理部门登录</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      isLogin : false
+    }
+  },
   name: "header",
+  methods:{
+    checkLoginUser: function () {
+      const username = localStorage.getItem("username")
+      let login_username = document.getElementById("login_username")
+      if(username != null) {
+        login_username.innerHTML = '你好！' + username
+        this.isLogin = true
+      } else {
+        login_username.innerHTML = '请登录'
+        this.isLogin = false
+      }
+    }
+  },
+  mounted: function () {
+    this.checkLoginUser()
+    console.log(this.isLogin);
+  }
 };
 </script>
 

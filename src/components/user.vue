@@ -79,9 +79,7 @@
 export default {
   methods: {
     checkUser: function () {
-      const username = localStorage.getItem('username');
-      const password = localStorage.getItem('password');
-      if (username != null && password != null) {
+      if (localStorage.getItem('username') != null) {
         alert("已登录")
       } else {
         alert('未登录')
