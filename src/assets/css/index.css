@@ -1,5 +1,5 @@
 
-.logo_title{
+.logo_title {
     font-size: 32px;
     font-weight: 600;
     letter-spacing: 7px;
@@ -9,51 +9,61 @@
     min-width: 18rem;
     line-height: 18px;
 }
-.top_bar ul{
+
+.top_bar ul {
     list-style: none;
-   
+
 }
-.top_bar ul li{
+
+.top_bar ul li {
     margin-left: 7px;
     float: left;
     height: 20px;
     line-height: 20px;
     margin-top: 5px;
 }
-.index_nav{
-  margin-top: 20px;
+
+.index_nav {
+    margin-top: 20px;
 }
-.index_nav li{
+
+.index_nav li {
     font-size: 16px;
     width: 140px;
 }
-.category span{
+
+.category span {
     font-size: 14px;
     color: #333;
     /* line-height: 1.8; */
     /* margin: 0; */
     float: left;
     font-weight: 600;
-   
+
 }
-.category{
+
+.category {
     height: 30px;
 }
-.category li{
+
+.category li {
     list-style: none;
     float: left;
     width: 70px;
-    
+
     margin-left: 5px;
 }
-.p_card ul{
+
+.p_card ul {
     height: 50px;
 }
-.p_card ul li{
+
+.p_card ul li {
     float: left;
     width: 60px;
-    text-align:center;
+    text-align: center;
 }
-.p_card span{
+
+.p_card span {
     font-size: 12px;
 }

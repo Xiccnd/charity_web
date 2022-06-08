@@ -28,23 +28,25 @@
             <table class="table">
               <tbody>
               <tr>
-                <td class="col-md-6 text-left">登记部门：{{volunteer_team.Regis_department}}</td>
-                <td class="col-md-6 text-left">登记机关：{{volunteer_team.registration_authority}}</td>
+                <td class="col-md-6 text-left">登记部门：{{ volunteer_team.Regis_department }}</td>
+                <td class="col-md-6 text-left">登记机关：{{ volunteer_team.registration_authority }}</td>
               </tr>
               <tr>
-                <td class="col-md-6 text-left">成立日期：{{volunteer_team.Register_date}}</td>
-                <td class="col-md-6 text-left">联络组织：{{volunteer_team.Liaison_organization}}</td>
+                <td class="col-md-6 text-left">成立日期：{{ volunteer_team.Register_date }}</td>
+                <td class="col-md-6 text-left">联络组织：{{ volunteer_team.Liaison_organization }}</td>
               </tr>
               <tr>
-                <td colspan="2" class="col-md-6 text-left">地址：{{volunteer_team.address}}</td>
+                <td colspan="2" class="col-md-6 text-left">地址：{{ volunteer_team.address }}</td>
               </tr>
               <tr>
                 <td class="col-md-6 text-left" style="height: 50px;line-height: 50px">队伍简介:</td>
-                <td class="col-md-6 text-right" style="height: 50px;line-height: 50px"><button type="button" class="btn btn-default" v-on:click="myfun()">{{ btn }}</button> </td>
+                <td class="col-md-6 text-right" style="height: 50px;line-height: 50px">
+                  <button type="button" class="btn btn-default" v-on:click="myfun()">{{ btn }}</button>
+                </td>
               </tr>
               <tr>
                 <td colspan="2" class="text-left">
-                  <p>{{volunteer_team.Team_profile}}</p></td>
+                  <p>{{ volunteer_team.Team_profile }}</p></td>
               </tr>
               </tbody>
             </table>
@@ -56,8 +58,8 @@
             <div class="col-md-9">
               <div class="row h3 text-left" style="border-left: red solid 5px;padding-left: 15px">队伍联系人</div>
               <div class="row">
-                <div class="row text-left h4" style="margin-top: 30px">{{volunteer_team.contact}}</div>
-                <div class="row text-left h4" style="margin-top: 10px">手机：{{volunteer_team.telephone}}</div>
+                <div class="row text-left h4" style="margin-top: 30px">{{ volunteer_team.contact }}</div>
+                <div class="row text-left h4" style="margin-top: 10px">手机：{{ volunteer_team.telephone }}</div>
               </div>
             </div>
           </div>
@@ -66,7 +68,7 @@
             <div class="col-md-9">
               <div class="row h3 text-left" style="border-left: red solid 5px;padding-left: 15px">队伍地址</div>
               <div class="row">
-                <div class="row text-left h4" style="margin-top: 30px">{{volunteer_team.Detailed_address}}</div>
+                <div class="row text-left h4" style="margin-top: 30px">{{ volunteer_team.Detailed_address }}</div>
               </div>
             </div>
           </div>
@@ -75,33 +77,35 @@
     </div>
   </div>
 </template>
-<script >
+<script>
 export default {
   data() {
     return {
       volunteer_team: {
         Teamid: 1,
         Team_name: "涪陵区发展中心志愿服务队",
-        contact:"麻辣鸡丝",
-        telephone:"123456789",
-        Detailed_address:"重庆市涪陵区",
-        Liaison_organization:"重庆市蓝帽子城市环境服务站",
-        Team_profile:"志愿志愿志愿志愿志愿志愿",
-        address:"重庆市涪陵区",
-        Register_date:"2020-07-25",
-        Regis_department:"银河系",
-        registration_authority:"银河系"
+        contact: "麻辣鸡丝",
+        telephone: "123456789",
+        Detailed_address: "重庆市涪陵区",
+        Liaison_organization: "重庆市蓝帽子城市环境服务站",
+        Team_profile: "志愿志愿志愿志愿志愿志愿",
+        address: "重庆市涪陵区",
+        Register_date: "2020-07-25",
+        Regis_department: "银河系",
+        registration_authority: "银河系"
       },
-      btn:"我要加入"
+      btn: "我要加入"
     };
   },
   props: [],
   components: {},
-  created() {},
-  mounted() {},
+  created() {
+  },
+  mounted() {
+  },
   methods: {
-    myfun:function (){
-      this.btn="申请成功"
+    myfun: function () {
+      this.btn = "申请成功"
     }
   },
 };
@@ -109,7 +113,7 @@ export default {
 <style>
 #all {
   background-image: url(../assets/images/1.png);
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   font-size: 16px;
 }
 </style>
