@@ -18,8 +18,8 @@
             <a href="https://chinavolunteer.mca.gov.cn" target="_blank">中国志愿服务网</a>
           </span>
           <div style="display: inline-block"></div>
-          <span class="red" id="login_username">请登录</span>
-          <a href="javascript:void(0);" class="a" v-show="!isLogin">志愿者注册</a> <span v-show="!isLogin">|</span>
+          <span class="red" id="login_username" @click="bthClick('/volunteer_login')" style="cursor: pointer">请登录</span>
+          <a href="javascript:void(0);" class="a" v-show="!isLogin" @click="bthClick('/volunteer_register')">志愿者注册</a> <span v-show="!isLogin">|</span>
           <a href="javascript:void(0);" v-show="!isLogin">志愿队伍注册</a>
           <img src="../assets/images/header/font.png" alt="" style="margin-bottom: 13px"/>
         </div>
@@ -51,6 +51,9 @@ export default {
   },
   name: "header",
   methods:{
+    bthClick(address) {
+      this.$router.replace(address)
+    },
     checkLoginUser: function () {
       const username = localStorage.getItem("username")
       let login_username = document.getElementById("login_username")
