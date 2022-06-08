@@ -1,6 +1,4 @@
 <template>
-  <Header></Header>
-  <Navigation-bar></Navigation-bar>
   <div>
     <router-view></router-view>
   </div>
@@ -8,15 +6,11 @@
 </template>
 
 <script>
-import Footer from "../src/components/footer.vue";
-import Header from "../src/components/header.vue";
-import NavigationBar from "../src/components/navigationBar.vue";
+import Footer from './components/footer.vue'
 export default {
   name: "App",
   components: {
-    Footer,
-    Header,
-    NavigationBar
+   Footer
   },
   methods: {},
 };
@@ -24,6 +18,9 @@ export default {
 
 <style>
 @import "./assets/css/base.css";
+.white {
+    background: #fff;
+}
 .w {
   width: 100%;
 }
@@ -68,6 +65,26 @@ export default {
 .t-r {
     text-align: right;
 }
+.t-c {
+    text-align: center;
+}
+.g-16 {
+    width: 66.66%;
+}
+.g-12 {
+    width: 50%;
+}
+.pwd_img {
+    position: absolute;
+    right: 10px;
+    bottom: 12px;
+    width: 26px;
+    cursor: pointer;
+}
+.form {
+    padding-left: 0;
+    margin-right: 20px;
+}
 .js-top-bar .login-box a, .js-top-bar .login-box span, .js-top-bar .login-box img {
     display: inline-block;
     vertical-align: middle;
@@ -89,4 +106,10 @@ export default {
     outline: none;
     border: none;
 }
+.label {
+    font-size: 14px;
+    color: #333;
+    margin-right: 5px;
+}
+
 </style>

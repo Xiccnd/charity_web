@@ -1,4 +1,5 @@
 <template>
+  <Head></Head>
   <div id="login">
     <div class="main bannerimg">
       <div class="mid">
@@ -61,15 +62,17 @@
 </template>
 
 <script>
+import Head from '../components/login_head.vue'
 import guidebar from "../components/guidebar.vue";
 export default {
   components: {
-    guidebar
+    guidebar,
+    Head
   }
 }
 </script>
 
-<style>
+<style scoped>
 /* ======== main */
 .login{
   box-shadow: 0 10px 20px #ddd;
@@ -94,29 +97,7 @@ export default {
   margin-right: auto;
 }
 /* ======== top */
-.router {
-  margin: 16px 0 !important;
-}
-.router {
-  font-size: 0;
-  color: #8d8d8d;
-  font-weight: 400;
-  margin: 30px 0 30px 0px;
-}
-.router span {
-  font-size: 16px;
-}
-.router a {
-  text-decoration: none;
-  color: #e60012;
-  font-size: 16px;
-}
-.router a:after {
-  content: ">";
-  font-size: 16px;
-  color: #8d8d8d;
-  margin: 0 5px;
-}
+
 /* ======== left */
 .login > .col:first-child {
   width: 754px;
@@ -214,5 +195,8 @@ export default {
 }
 .width1 {
     width: 33.3%;
+}
+body .bannerimg {
+  background: url(../assets/images/background/banner.1e1ab6c.png) no-repeat center top;
 }
 </style>

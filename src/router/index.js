@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import volunteer_program from '../components/volunteer_program.vue'
+import volunteer_program from '../views/volunteer_program.vue'
 import volunteer_team from '../components/volunteer_team.vue'
 import user from '../components/user.vue'
 import program from '../components/program.vue'
@@ -7,7 +7,8 @@ import team from '../components/team.vue'
 import media from '../components/media.vue'
 import volunteer_program_details from '../components/volunteer_program_details.vue'
 import volunteer_team_details from '../components/volunteer_team_details.vue'
-const login = () => import("../views/login.vue")
+const login = () => import("../views/volunteer_login.vue")
+const register = () => import("../views/volunteer_register.vue")
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
@@ -24,6 +25,10 @@ const routes = [
     {
      path: '/volunteer_login', 
      component: login
+    },
+    {
+        path: '/volunteer_register',
+        component: register
     }
 ]
 

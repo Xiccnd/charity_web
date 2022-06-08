@@ -1,5 +1,5 @@
 <template>
-  <div id="header" class="js-top-bar" style="padding-bottom: 15px">
+  <div id="header" class="js-top-bar header" style="padding-bottom: 15px">
     <div class="mid row">
       <div class="col t-l">
         <h1>

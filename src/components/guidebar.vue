@@ -12,9 +12,32 @@
   </ul>
 </template>
 
-<script>
+<script >
 export default {};
 </script>
 
 <style>
+.router {
+  margin: 16px 0 !important;
+}
+.router {
+  font-size: 0;
+  color: #8d8d8d;
+  font-weight: 400;
+  margin: 30px 0 30px 0px;
+}
+.router span {
+  font-size: 16px;
+}
+.router a {
+  text-decoration: none;
+  color: #e60012;
+  font-size: 16px;
+}
+.router a:after {
+  content: ">";
+  font-size: 16px;
+  color: #8d8d8d;
+  margin: 0 5px;
+}
 </style>

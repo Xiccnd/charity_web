@@ -37,6 +37,7 @@ b {
   outline: none;
   cursor: pointer;
 }
-body .bannerimg {
-  background: url(../images/background/banner.1e1ab6c.png) no-repeat center top;
+.main {
+  background: url(../images/background/banner.1e1ab6c.png) no-repeat top center;
+  min-height: 530px;
 }
