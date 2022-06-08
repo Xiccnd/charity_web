@@ -368,7 +368,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .tj-bj {
   height: 440px;
   margin-bottom: -40px;
