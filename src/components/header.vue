@@ -68,7 +68,11 @@ export default {
     },
     logout:function () {
       localStorage.clear()
-      location.reload()
+      if (this.$route.path === "/volunteer_login") {
+        location.reload()
+      } else {
+        this.$router.push("/volunteer_login")
+      }
     }
   },
   mounted: function () {
