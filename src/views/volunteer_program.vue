@@ -140,7 +140,7 @@
             <ul  class="panel-list">
               <li class="panel-list__item" style="width: 25%" v-for="(item,i) in volunteer_program_details" :key="i">
                 <div class="panel-card">
-                  <router-link :to="{path:'/volunteer_program_details',query:{id:item.pid}}">
+                  <router-link :to="{path:'/volunteer_program/volunteer_program_details',query:{id:item.pid}}">
                   <img src="../assets/images/program/1.png" alt="" style="width: 260px; height: 170px"/>
                   </router-link>
                   <p  class="t-c">

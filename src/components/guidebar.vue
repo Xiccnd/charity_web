@@ -6,7 +6,10 @@
         <a href="javascript:void(0);">
           <slot name="pp"></slot>
         </a>
-        <slot name="cp"></slot>
+         <a href="javascript:void(0);">
+          <slot name="cp"></slot>
+        </a>
+        <slot name="tp"></slot>
       </div>
     </li>
   </ul>

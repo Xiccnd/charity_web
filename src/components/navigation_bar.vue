@@ -20,9 +20,9 @@ export default {
         {address:"/team",pagename:"信息动态"},
         {address:"/program",pagename:"媒体报道"},
         {address:"/media",pagename:"研究培训"},
-        {address:"/volunteer_program_details",pagename:"政策文件"},
-        {address:"/volunteer_program_details",pagename:"通知公告"},
-        {address:"/volunteer_program_details",pagename:"使用指南"},
+        {address:"/#",pagename:"政策文件"},
+        {address:"/#",pagename:"通知公告"},
+        {address:"/#",pagename:"使用指南"},
       ]
     }
   },
