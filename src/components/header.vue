@@ -79,7 +79,6 @@ export default {
   },
   mounted: function () {
     this.checkLoginUser()
-    console.log(this.isLogin);
   }
 };
 </script>
