@@ -4,12 +4,12 @@ import volunteer_team from '../components/volunteer_team.vue'
 import program from '../components/program.vue'
 import team from '../components/team.vue'
 import media from '../components/media.vue'
-import volunteer_program_details from '../components/volunteer_program_details.vue'
 import volunteer_team_details from '../components/volunteer_team_details.vue'
 import default_index from '../views/default_index.vue'
 const login = () => import("../views/volunteer_login.vue")
 const register = () => import("../views/volunteer_register.vue")
 const center = () => import("../views/volunteer_center.vue")
+const volunteer_program_details = () => import("../views/volunteer_program_details.vue")
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
@@ -34,6 +34,10 @@ const routes = [
     {
         path: '/volunteer_center',
         component: center
+    },
+    {
+        path: '/volunteer_program/volunteer_program_details',
+        component: volunteer_program_details
     }
 ]
 

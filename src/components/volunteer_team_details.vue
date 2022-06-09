@@ -1,5 +1,6 @@
 <!--  -->
 <template>
+  <normal-head></normal-head>
   <div id="all">
     <div class="container">
       <div class="row">
@@ -78,6 +79,7 @@
   </div>
 </template>
 <script>
+import NormalHead from "@/components/normal_head";
 export default {
   data() {
     return {
@@ -98,7 +100,9 @@ export default {
     };
   },
   props: [],
-  components: {},
+ components: {
+     NormalHead
+  },
   created() {
   },
   mounted() {

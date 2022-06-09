@@ -51,7 +51,6 @@ export default {
       isLogin : false
     }
   },
-  name: "header",
   methods:{
     bthClick(address) {
       this.$router.replace(address)
@@ -69,6 +68,8 @@ export default {
       }
     },
     logout:function () {
+      // location.reload()
+      this.$router.push("/volunteer_login")
       localStorage.clear()
       if (this.$route.path === "/volunteer_login") {
         location.reload()
@@ -79,6 +80,7 @@ export default {
   },
   mounted: function () {
     this.checkLoginUser()
+    // console.log(this.isLogin);
   }
 };
 </script>
