@@ -95,7 +95,7 @@ export default {
         if (res.data !== -1) {
           localStorage.setItem("username", username)
           localStorage.setItem("perId", res.data)
-          this.$router.push("/user")
+          this.$router.push("/volunteer_center")
         }else {
           localStorage.clear()
           location.reload()

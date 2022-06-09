@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import volunteer_program from '../views/volunteer_program.vue'
 import volunteer_team from '../components/volunteer_team.vue'
-import user from '../components/user.vue'
 import program from '../components/program.vue'
 import team from '../components/team.vue'
 import media from '../components/media.vue'
@@ -19,7 +18,6 @@ const routes = [
     { path: '/default_index', component: default_index },
     {path:'/volunteer_program',component:volunteer_program },
     {path:'/volunteer_team',component:volunteer_team },
-    {path:'/user',component:user},
     {path:'/team',component:team},
     {path:'/program',component:program},
     {path:'/media',component:media},
