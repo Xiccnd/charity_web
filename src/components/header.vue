@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div id="header" class="js-top-bar header" style="padding-bottom: 15px">
     <div class="mid row">
       <div class="col t-l">
@@ -18,9 +18,10 @@
             <a href="https://chinavolunteer.mca.gov.cn" target="_blank">中国志愿服务网</a>
           </span>
           <div style="display: inline-block"></div>
-          <span class="red" @click="bthClick('/volunteer_login')" style="cursor:pointer">请登录</span>
-          <a href="javascript:void(0);" class="a" @click="bthClick('/volunteer_register')">志愿者注册</a> <span>|</span>
-          <a href="javascript:void(0);" >志愿队伍注册</a>
+          <span class="red" id="login_username" @click="bthClick('/volunteer_login')" style="cursor: pointer">请登录</span>
+          <a href="javascript:void(0);" class="a" v-show="!isLogin" @click="bthClick('/volunteer_register')">志愿者注册</a> <span v-show="!isLogin">|</span>
+          <a href="javascript:void(0);" v-show="!isLogin">志愿队伍注册</a>
+          <a href="javascript:void(0);" v-show="isLogin" v-on:click="logout()">注销</a>
           <img src="../assets/images/header/font.png" alt="" style="margin-bottom: 13px"/>
         </div>
         <div class="js-search" style="margin-top: -20px;overflow: visible;background: rgb(255, 255, 255);">
@@ -44,11 +45,35 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isLogin : false
+    }
+  },
   name: "header",
   methods:{
-    bthClick(adress){
-      this.$router.replace(adress)
+    bthClick(address) {
+      this.$router.replace(address)
+    },
+    checkLoginUser: function () {
+      const username = localStorage.getItem("username")
+      let login_username = document.getElementById("login_username")
+      if(username != null) {
+        login_username.innerHTML = '你好！' + username
+        this.isLogin = true
+      } else {
+        login_username.innerHTML = '请登录'
+        this.isLogin = false
+      }
+    },
+    logout:function () {
+      localStorage.clear()
+      location.reload()
     }
+  },
+  mounted: function () {
+    this.checkLoginUser()
+    console.log(this.isLogin);
   }
 };
 </script>
