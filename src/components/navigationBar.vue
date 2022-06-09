@@ -10,9 +10,6 @@
 
 <script>
 export default {
-  props:{
-    path:String
-  },
   data(){
     return{
       tags:["首页","志愿项目","志愿队伍","志愿风采","信息动态","媒体报道","研究培训","政策文件","通知公告","使用指南"],
@@ -24,16 +21,18 @@ export default {
   methods:{
   changcolor(index) {
       this.type = index
+      console.log("changecolor:"+this.type)
       this.$router.replace(this.paths[index])
     },
   checkindex(index){
+    console.log("checkindex:"+this.type)
     return this.type === index ? "active":""
   }
   }
 };
 </script>
 
-<style>
+<style scoped>
 .js-nav .active {
     background: #fff;
     color: #e60012;

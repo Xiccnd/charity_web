@@ -434,4 +434,14 @@ p{
     line-height: 24px;
     text-indent: 2em;
 }
+
+.form .form-error {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 330px;
+    position: absolute;
+    left: 100%;
+    padding-left: 30px;
+}
 </style>
