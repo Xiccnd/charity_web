@@ -325,6 +325,7 @@ return{
                  alert("注册成功"); 
                 this.$router.push("/volunteer_login")
                   }else {
+                window.scrollTo(0,0)
                 alert("注册失败"); 
                  location. reload(),this.$router.go(0) 
                  }
@@ -403,42 +404,7 @@ return{
 p{
     font-size: 14px;
 }
-.form-label em {
-    color: #f00;
-}
-.form input[type="text"] {
-    height: 42px !important;
-}
-.form input{
-    height: 42px;
-    line-height: 42px;
-}
-.form input, .form textarea, .input, .textarea {
-    width: 100%;
-    font-size: 14px;
-    color: #333;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 4px;
-    background: #fff;
-    border: 1px solid #dfdfdf;
-    padding-left: 15px;
-    transition: 0.3s;
-    box-sizing: border-box;
-}
-.form .form-error {
-    display: inline-block;
-    font-size: 14px;
-    margin-top: 10px;
-    width: 330px;
-    position: absolute;
-    left: 100%;
-    padding-left: 30px;
-}
-.warn-tip{
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMBAMAAACkW0HUAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAbUExURf+mOf+nOEdwTP+nOP+vMP+nOP+mOf+nOP+nOfJbFKsAAAAIdFJOU8/QAF0QQHDg0JdO1AAAAExJREFUCNdjUFLjaDBSYlDh6OhocGJQ7GiX6GBiyOho1ehoZpAAUQ0MHSCqA0ZJdLRzdDQClTR7AJUognhCDCoSHR2NTgxKyhKNRkoALAgZncZKVlgAAAAASUVORK5CYII=) 10px no-repeat;
-    color: #666;
-}
+
 
 .pwd_img{
     bottom: 8px;

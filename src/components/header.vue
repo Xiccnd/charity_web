@@ -21,6 +21,7 @@
           <span class="red" id="login_username" @click="bthClick('/volunteer_login')" style="cursor: pointer">请登录</span>
           <a href="javascript:void(0);" class="a" v-show="!isLogin" @click="bthClick('/volunteer_register')">志愿者注册</a> <span v-show="!isLogin">|</span>
           <a href="javascript:void(0);" v-show="!isLogin">志愿队伍注册</a>
+          <a href="javascript:void(0);" v-show="isLogin" v-on:click="logout()">注销</a>
           <img src="../assets/images/header/font.png" alt="" style="margin-bottom: 13px"/>
         </div>
         <div class="js-search" style="margin-top: -20px;overflow: visible;background: rgb(255, 255, 255);">
@@ -60,11 +61,15 @@ export default {
       if(username != null) {
         login_username.innerHTML = '你好！' + username
         this.isLogin = true
-        login_username.click=bthClick('/user')
       } else {
         login_username.innerHTML = '请登录'
         this.isLogin = false
       }
+    },
+    logout:function () {
+      // location.reload()
+      this.$router.push("/volunteer_login")
+      localStorage.clear()
     }
   },
   mounted: function () {

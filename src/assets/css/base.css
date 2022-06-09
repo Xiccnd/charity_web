@@ -2,6 +2,9 @@ img {
   vertical-align: middle;
   border: 0;
 }
+p {
+  margin: 0;
+}
 body {
   padding: 0;
   margin: 0;
@@ -40,4 +43,9 @@ b {
 .main {
   background: url(../images/background/banner.1e1ab6c.png) no-repeat top center;
   min-height: 530px;
+}
+.grid {
+  font-size: 0;
+  margin: 0;
+  padding: 0;
 }
