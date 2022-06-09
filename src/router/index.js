@@ -10,6 +10,7 @@ import volunteer_team_details from '../components/volunteer_team_details.vue'
 import default_index from '../views/default_index.vue'
 const login = () => import("../views/volunteer_login.vue")
 const register = () => import("../views/volunteer_register.vue")
+const center = () => import("../views/volunteer_center.vue")
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
@@ -31,6 +32,10 @@ const routes = [
     {
         path: '/volunteer_register',
         component: register
+    },
+    {
+        path: '/volunteer_center',
+        component: center
     }
 ]
 

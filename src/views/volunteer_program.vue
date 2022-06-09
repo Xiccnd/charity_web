@@ -375,27 +375,7 @@ export default {
   background: url(../assets/images/background/tj-bg-img.c47e13c.png) no-repeat
     center top;
 }
-.tabbar {
-  background: #fff0f1;
-  height: 50px;
-}
-.tabbar span.active,
-.tabbar a.active {
-  color: #cc0000;
-  font-weight: bold;
-  border-bottom: 3px solid #cc0000;
-}
-.tabbar span,
-.tabbar a {
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  color: #333;
-  padding-top: 15px;
-  padding-bottom: 5px;
-  margin: 0 20px;
-  transition: 0.3s;
-}
+
 .protabbar span.active:before {
   background: -webkit-linear-gradient(to right, #fff, #cc0000);
   background: linear-gradient(to right, #fff, #cc0000);
@@ -423,6 +403,9 @@ export default {
   height: 2px;
   width: 46%;
   right: 0;
+}
+.tabbar-tight span, .tabbar-tight a {
+    padding-top: 10px;
 }
 .panel-list {
   font-size: 0;
@@ -690,5 +673,14 @@ export default {
   left: -1px;
   top: 50%;
   margin-top: -6px;
+}
+.form .form-error {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 330px;
+    position: absolute;
+    left: 100%;
+    padding-left: 30px;
 }
 </style>
