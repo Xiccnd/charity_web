@@ -18,7 +18,8 @@
             <a href="https://chinavolunteer.mca.gov.cn" target="_blank">中国志愿服务网</a>
           </span>
           <div style="display: inline-block"></div>
-          <span class="red" id="login_username" @click="bthClick('/volunteer_login')" style="cursor: pointer">请登录</span>
+          <span class="red" @click="bthClick('/volunteer_login')" style="cursor: pointer" v-show="!isLogin">请登录</span>
+          <span class="red" id="login_username" @click="bthClick('/volunteer_center')" style="cursor: pointer" v-show="isLogin"></span>
           <a href="javascript:void(0);" class="a" v-show="!isLogin" @click="bthClick('/volunteer_register')">志愿者注册</a> <span v-show="!isLogin">|</span>
           <a href="javascript:void(0);" v-show="!isLogin">志愿队伍注册</a>
           <a href="javascript:void(0);" v-show="isLogin" v-on:click="logout()">注销</a>
@@ -59,15 +60,25 @@ export default {
       let login_username = document.getElementById("login_username")
       if(username != null) {
         login_username.innerHTML = '你好！' + username
+        // login_username.setAttribute("@click", "bthClick('/volunteer_center')")
         this.isLogin = true
       } else {
-        login_username.innerHTML = '请登录'
+        login_username.innerHTML = ''
         this.isLogin = false
       }
     },
     logout:function () {
+      // location.reload()
+      this.$router.push("/volunteer_login")
       localStorage.clear()
-      location.reload()
+<<<<<<< HEAD
+=======
+      if (this.$route.path === "/volunteer_login") {
+        location.reload()
+      } else {
+        this.$router.push("/volunteer_login")
+      }
+>>>>>>> 01169f562df0d4caadad5707214b6ed7e7339de8
     }
   },
   mounted: function () {

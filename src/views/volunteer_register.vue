@@ -42,13 +42,13 @@
                     <p  class="form-label">
                       <em >*</em>用户名：
                     </p>
-                    <input
-                      
+                    <input  
                       type="text"
                       id="username"
                       maxlength="20"
                       oninput="this.value=this.value.replace(/[^\w_.]/g,'').slice(0,20);"
                       placeholder="请输入用户名"
+                      v-model="user.name"
                     />
                     <p
                       
@@ -69,6 +69,7 @@
                       id="password"
                       maxlength="20"
                       placeholder="请输入密码"
+                      v-model="user.password"
                     />
                     <img
                       
@@ -102,6 +103,7 @@
                       id="repeatpw"
                       maxlength="20"
                       placeholder="请输入确认密码"
+                      v-model="password1"
                     />
                     <img
                       
@@ -133,6 +135,7 @@
                       oninput="value=value.replace(/[^\d]/g,'').slice(0,11);"
                       maxlength="11"
                       placeholder="请输入手机号码"
+                      v-model="user.telephone"
                     />
                     <p
                       
@@ -164,6 +167,7 @@
                 href="javascript:void(0);"
                 id="register"
                 class="button"
+                v-on:click="register()"
                 >申请成为实名注册志愿者</a
               >
             </div>
@@ -293,7 +297,48 @@ export default {
     Head,
     Guidebar,
   },
-};
+data(){
+return{
+  user:{
+    name:"",
+    password:"",
+    telephone:""
+ },
+  password1:""
+}
+  
+
+},
+  methods:{
+    register:function(){
+        const _this = this
+        this.$http({
+                  method:"post",
+                  url:"/user/Add",
+                data:{
+                user:this.user,
+                password1:this.password1
+                }
+               })
+              .then(res => {
+               if (res.data !== -1) {
+                 alert("注册成功"); 
+                this.$router.push("/volunteer_login")
+                  }else {
+                window.scrollTo(0,0)
+                alert("注册失败"); 
+                 location. reload(),this.$router.go(0) 
+                 }
+              })
+              .catch(err => {
+                console.error(err); 
+              })
+      },
+      
+    }
+ 
+}
+
 </script>
 
 <style scoped>

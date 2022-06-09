@@ -73,8 +73,8 @@
 <script>
 import Head from '../components/login_head.vue'
 import guidebar from "../components/guidebar.vue";
-
 export default {
+
   components: {
     guidebar,
     Head
@@ -95,6 +95,7 @@ export default {
         if (res.data !== -1) {
           localStorage.setItem("username", username)
           localStorage.setItem("perId", res.data)
+          document.getElementById('password').value = ''
           this.$router.push("/volunteer_center")
         }else {
           localStorage.clear()

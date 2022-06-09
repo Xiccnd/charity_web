@@ -17,29 +17,30 @@
           <div class="category">
             <h2 class="category__title">项目区域</h2>
             <div class="category__content">
-              <a href="javascript:void(0);" class="category__item active"
-                >全部</a
-              >
-              <a href="javascript:void(0);" class="category__item">北京市</a>
-              <a href="javascript:void(0);" class="category__item">重庆市</a>
+               <a href="javascript:void(0);" class="category__item active">全部</a>
+               <a class="category__item" v-for="(ter,i) in territory" :key="i">
+                {{ter.territorydes}}
+              </a>
+           
+      
             </div>
             <div class="category__wrap" style="display: none">
               <div class="category__content">
-                <a href="javascript:void(0); " class="category__item active"
-                  >全部</a
-                >
+                <a href="javascript:void(0); " class="category__item active">全部</a>
               </div>
             </div>
           </div>
           <div class="category">
             <h2 class="category__title">服务类别</h2>
             <div class="category__content">
-              <a href="javascript:void(0);" class="category__item active"
-                >全部</a
-              >
-              <a href="javascript:void(0);" class="category__item">社区服务</a>
+              <a href="javascript:void(0);" class="category__item active">全部</a>
+               <a href="javascript:void(0);" v-for="(item,i) in class_of_service" :key="i"
+                class="category__item ">{{item.serviceName}}</a>
+              
+              
+              <!-- <a href="javascript:void(0);" class="category__item">社区服务</a>
               <a href="javascript:void(0);" class="category__item">扶贫减贫</a>
-              <a href="javascript:void(0);" class="category__item">其他</a>
+              <a href="javascript:void(0);" class="category__item">其他</a> -->
             </div>
           </div>
           <div class="category">
@@ -63,28 +64,19 @@
           </div>
           <ul class="row w">
             <li class="col v-m" style="width: 90%">
+               <form @submit.prevent="search()">
               <span class="label">项目起止日期</span>
               <div slot="" class="mx-datepicker" style="width: 120px">
                 <div class="mx-input-wrapper">
                   <input
                     name="date"
-                    type="text"
+                    type="date"
                     autocomplete="off"
                     placeholder=""
                     class="mx-input"
+                    v-model="releaseDate"
                   />
-                  <i class="mx-icon-calendar">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 1024 1024"
-                      width="1em"
-                      height="1em"
-                    >
-                      <path
-                        d="M940.218182 107.054545h-209.454546V46.545455h-65.163636v60.50909H363.054545V46.545455H297.890909v60.50909H83.781818c-18.618182 0-32.581818 13.963636-32.581818 32.581819v805.236363c0 18.618182 13.963636 32.581818 32.581818 32.581818h861.090909c18.618182 0 32.581818-13.963636 32.581818-32.581818V139.636364c-4.654545-18.618182-18.618182-32.581818-37.236363-32.581819zM297.890909 172.218182V232.727273h65.163636V172.218182h307.2V232.727273h65.163637V172.218182h176.872727v204.8H116.363636V172.218182h181.527273zM116.363636 912.290909V442.181818h795.927273v470.109091H116.363636z"
-                      ></path>
-                    </svg>
-                  </i>
+                  
                 </div>
               </div>
               <span class="label">至</span>
@@ -92,23 +84,13 @@
                 <div class="mx-input-wrapper">
                   <input
                     name="date"
-                    type="text"
+                    type="date"
                     autocomplete="off"
                     placeholder=""
                     class="mx-input"
+                    v-model="recruitDate"
                   />
-                  <i class="mx-icon-calendar">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 1024 1024"
-                      width="1em"
-                      height="1em"
-                    >
-                      <path
-                        d="M940.218182 107.054545h-209.454546V46.545455h-65.163636v60.50909H363.054545V46.545455H297.890909v60.50909H83.781818c-18.618182 0-32.581818 13.963636-32.581818 32.581819v805.236363c0 18.618182 13.963636 32.581818 32.581818 32.581818h861.090909c18.618182 0 32.581818-13.963636 32.581818-32.581818V139.636364c-4.654545-18.618182-18.618182-32.581818-37.236363-32.581819zM297.890909 172.218182V232.727273h65.163636V172.218182h307.2V232.727273h65.163637V172.218182h176.872727v204.8H116.363636V172.218182h181.527273zM116.363636 912.290909V442.181818h795.927273v470.109091H116.363636z"
-                      ></path>
-                    </svg>
-                  </i>
+                 
                 </div>
               </div>
               <span class="label">项目编号</span>
@@ -117,6 +99,7 @@
                 maxlength="18"
                 class="input"
                 style="width: 180px; height: 34px"
+                 v-model="searchid" name="searchid"
               />
               <span class="label">项目名称</span>
               <input
@@ -124,24 +107,27 @@
                 maxlength="30"
                 class="input"
                 style="width: 180px; height: 34px"
+                v-model="searchpname" name="searchpname"
               />
-              <a
+              <button
                 href="javascript:void(0);"
                 class="button button-small"
+                type="submit"
                 style="height: 34px; line-height: 34px"
-                >搜索</a
-              >
-              <a
+                >搜索</button>
+              <button
                 href="javascript:void(0);"
                 class="button button-small"
+                type="reset"
                 style="
                   margin-left: 6px;
                   background-color: rgb(204, 204, 204);
                   height: 34px;
                   line-height: 34px;
                 "
-                >重置</a
-              >
+                >重置</button>
+              
+              </form>
             </li>
             <li class="col v-m t-r">
               <div class="text-tab" style="margin-right: -10px">
@@ -150,29 +136,31 @@
               </div>
             </li>
           </ul>
-          <div  id="getList">
+          <div  id="getList" >
             <ul  class="panel-list">
-              <li class="panel-list__item" style="width: 25%">
+              <li class="panel-list__item" style="width: 25%" v-for="(item,i) in volunteer_program_details" :key="i">
                 <div class="panel-card">
+                  <router-link :to="{path:'/volunteer_program_details',query:{id:item.pid}}">
                   <img src="../assets/images/program/1.png" alt="" style="width: 260px; height: 170px"/>
+                  </router-link>
                   <p  class="t-c">
-                    <a href="javascript:void(0);" class="button button-small success round">招募中</a>
+                    <a href="javascript:void(0);" class="button button-small success round">{{item.projectStatus}}</a>
                   </p>
                   <h2 class="panel-card__name">
-                    <a href="javascript:void(0);" title="给外卖骑手送温暖">给外卖骑手送温暖</a>
+                    <a href="javascript:void(0);" title="给外卖骑手送温暖">{{item.pname}}</a>
                   </h2>
                   <ul  class="row w panel-card__info">
                     <li  class="col v-m">
                       <h2 >岗位</h2>
-                      <p >1个</p>
+                      <p >{{item.posts}}个</p>
                     </li>
                     <li  class="col v-m">
                       <h2 >目标</h2>
-                      <p >10个</p>
+                      <p >{{item.targetNumber}}个</p>
                     </li>
                     <li  class="col v-m">
                       <h2 >报名</h2>
-                      <p >0个</p>
+                      <p >{{item.enrolledNumber}}个</p>
                     </li>
                   </ul>
                   <div class="progress" style="text-align: left">
@@ -182,7 +170,9 @@
                     <span  class="col v-m">项目进度：
                       <b >0%</b>
                     </span>
-                    <span class="col v-m t-r"><em  class="danger">离招募结束：</em><b >3天</b></span>
+                    <span class="col v-m t-r"><em  class="danger">截止日期：</em><b >
+                      {{item.recruitDate.substring(0,10)}}
+                    </b></span>
                   </p>
                 </div>
               </li>   
@@ -321,6 +311,22 @@ import Pages from "@/components/pages"
 export default {
   data() {
     return {
+      //项目
+    volunteer_program_details:[
+      {
+        pid:0,
+        pname:"汛期安全知识”志愿宣讲活动 ",
+        projectStatus:"招募中",
+        posts:1,
+        targetNumber:3,
+        enrolledNumber:2,
+        recruitDate:"2022-6-9"
+      }],
+    territory:[
+      {territoryid:0,territorydes:"全部"},
+      {territoryid:1,territorydes:"万州区"},
+      {territoryid:2,territorydes:"永川区"}
+    ],
       class_of_service: [
         { sid: 0, serviceName: "全部" },
         { sid: 1, serviceName: "社区服务" },
@@ -342,7 +348,8 @@ export default {
   },
   props: [],
   created() {
-    // this.queryList();
+    this.proList();
+     this.territorylist();
   },
   mounted() {},
   components: {
@@ -350,7 +357,35 @@ export default {
     Guidebar,
     Pages
   },
-  methods: {
+  methods: { 
+     proList:function(){
+        const _this = this
+        this.$http({
+                  method:"get",
+                  url:"/volunteerProgramDetails/selectAll"
+               })
+              .then(res => {
+                console.log(res.data)
+                _this.volunteer_program_details=res.data
+              })
+              .catch(err => {
+                console.error(err); 
+              })
+      },
+    territorylist:function(){
+        const _this = this
+        this.$http({
+                  method:"get",
+                  url:"/territory/selectAll"
+               })
+              .then(res => {
+                console.log(res.data)
+                _this.territory=res.data
+              })
+              .catch(err => {
+                console.error(err); 
+              })
+      },
     queryList: function () {
       const _this = this;
       this.$http({
@@ -365,6 +400,28 @@ export default {
           console.error(err);
         });
     },
+     search:function(){
+
+        const _this = this
+        this.$http({
+                  method:"get",
+                  url:"/volunteerProgramDetails/selectAll",
+                  params:{
+                  pid:_this.searchid,
+                  pname:_this.searchpname,
+                  releaseDate:_this.releaseDate,
+                  recruitDate:_this.recruitDate
+                   }
+               })
+              .then(res => {
+                console.log(res.data)
+                 _this.volunteer_program_details=res.data
+              })
+              .catch(err => {
+                console.error(err); 
+              })
+      
+      },
   },
 };
 </script>
