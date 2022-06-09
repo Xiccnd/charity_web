@@ -60,6 +60,7 @@ export default {
       if(username != null) {
         login_username.innerHTML = '你好！' + username
         this.isLogin = true
+        login_username.click=bthClick('/user')
       } else {
         login_username.innerHTML = '请登录'
         this.isLogin = false

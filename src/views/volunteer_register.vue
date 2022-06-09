@@ -48,7 +48,7 @@
                       maxlength="20"
                       oninput="this.value=this.value.replace(/[^\w_.]/g,'').slice(0,20);"
                       placeholder="请输入用户名"
-                      v-model="user.username"
+                      v-model="user.name"
                     />
                     <p
                       
@@ -300,7 +300,7 @@ export default {
 data(){
 return{
   user:{
-    username:"",
+    name:"",
     password:"",
     telephone:""
  },
@@ -313,17 +313,21 @@ return{
     register:function(){
         const _this = this
         this.$http({
-                  method:"get",
-                  url:"/volunteerProgramDetails/selectAll11",
-                  params:{
-                  user,
-                  password1,
+                  method:"post",
+                  url:"/user/Add",
+                data:{
+                user:this.user,
+                password1:this.password1
                 }
                })
               .then(res => {
-                console.log(res.data)
-                //  this.tableData=res.data.data
-                 console.log(this.tableData)
+               if (res.data !== -1) {
+                 alert("注册成功"); 
+                this.$router.push("/volunteer_login")
+                  }else {
+                alert("注册失败"); 
+                 location. reload(),this.$router.go(0) 
+                 }
               })
               .catch(err => {
                 console.error(err); 
