@@ -179,6 +179,16 @@ em, i {
 .pl-10 {
     padding-left: 10px;
 }
+.form-label em {
+    color: #f00;
+}
+.form input[type="text"] {
+    height: 42px !important;
+}
+.form input{
+    height: 42px;
+    line-height: 42px;
+}
 .button-line {
     border: 1px solid #e60012;
     color: #e60012;
