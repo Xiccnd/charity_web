@@ -50,7 +50,6 @@ export default {
       isLogin : false
     }
   },
-  name: "header",
   methods:{
     bthClick(address) {
       this.$router.replace(address)
@@ -73,7 +72,7 @@ export default {
   },
   mounted: function () {
     this.checkLoginUser()
-    console.log(this.isLogin);
+    // console.log(this.isLogin);
   }
 };
 </script>
