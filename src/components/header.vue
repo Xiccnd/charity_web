@@ -72,14 +72,12 @@ export default {
       // location.reload()
       this.$router.push("/volunteer_login")
       localStorage.clear()
-<<<<<<< HEAD
-=======
       if (this.$route.path === "/volunteer_login") {
         location.reload()
       } else {
         this.$router.push("/volunteer_login")
       }
->>>>>>> 01169f562df0d4caadad5707214b6ed7e7339de8
+
     }
   },
   mounted: function () {

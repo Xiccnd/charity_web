@@ -144,7 +144,7 @@
                   <img src="../assets/images/program/1.png" alt="" style="width: 260px; height: 170px"/>
                   </router-link>
                   <p  class="t-c">
-                    <a href="javascript:void(0);" class="button button-small success round">{{item.projectStatus}}</a>
+                    <a href="javascript:void(0);" class="button button-small success round">{{item.statusName}}</a>
                   </p>
                   <h2 class="panel-card__name">
                     <a href="javascript:void(0);" title="给外卖骑手送温暖">{{item.pname}}</a>
@@ -320,7 +320,8 @@ export default {
         posts:1,
         targetNumber:3,
         enrolledNumber:2,
-        recruitDate:"2022-6-9"
+        recruitDate:"2022-6-9",
+        statusName:""
       }],
     territory:[
       {territoryid:0,territorydes:"全部"},
