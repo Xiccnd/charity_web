@@ -32,7 +32,7 @@
                 </div>
                 <div  class="col v-t">
                   <h2  class="h2">
-                    渝西小家爱心课堂（6/11）
+                    {{ volunteer[0].pname }}
                     <span
                       
                       class="button button-small success round"
@@ -48,16 +48,14 @@
                     <tr >
                       <th >项目编号：</th>
                       <td >
-                        <em >P50010720220610516</em>
+                        <em >{{ volunteer[0].pid }}</em>
                       </td>
                     </tr>
                     <tr >
                       <th >服务类别：</th>
-                      <td >
+                      <td v-for="(item, index) in classs" :key="index">
                         <span  class="button outline"
-                          >社区服务</span
-                        ><span  class="button outline"
-                          >关爱特殊群体</span
+                          >{{item.serviceName}}</span
                         >
                       </td>
                     </tr>
@@ -98,22 +96,22 @@
                   <tr >
                     <th >项目地点：</th>
                     <td >
-                      九龙坡杨家坪正街43号渝西医院住院部
+                      {{volunteer[0].location}}
                     </td>
                     <th >发布日期：</th>
-                    <td >2022-06-09</td>
+                    <td >{{volunteer[0].releaseDate}}</td>
                   </tr>
                   <tr >
                     <th >项目日期：</th>
-                    <td >2022-06-08 至 2022-06-11</td>
+                    <td >{{volunteer[0].projectDate}}</td>
                     <th >招募日期：</th>
-                    <td >2022-06-08 至 2022-06-10</td>
+                    <td >{{volunteer[0].recruitDate}}</td>
                   </tr>
                   <tr >
                     <th >服务对象：</th>
-                    <td >儿童</td>
+                    <td >{{volunteer[0].serviceObject}}</td>
                     <th >志愿者保障：</th>
-                    <td >志愿服务证书</td>
+                    <td >{{volunteer[0].volunteerUpport}}</td>
                   </tr>
                 </table>
                 <div
@@ -128,22 +126,22 @@
                   <span
                     
                     style="color: rgb(51, 51, 51); padding-left: 13px"
-                    >2022年6月11日19:30-20：30</span
+                    >{{volunteer[0].serviceDescription}}</span
                   >
                 </div>
               </div>
-              <table  class="table-list grid">
+              <table  class="table-list grid" v-for="(item, index) in volunteer" :key="index">
                 <thead >
                   <tr >
                     <th  colspan="2" align="left">
                       <span  class="item"
-                        >岗位1：<i >陪伴志愿者</i></span
+                        >岗位{{index+1}}：<i >{{ item.postName }}</i></span
                       >
                       <span  class="item"
-                        >计划招募：<i >15</i></span
+                        >计划招募：<i >{{ item.targetNum }}</i></span
                       >
                       <span  class="item"
-                        >已招募：<i >0</i></span
+                        >已招募：<i >{{item.enrolledNum}}</i></span
                       >
                     </th>
                     <th  align="right">
@@ -153,6 +151,7 @@
                         id="871661babe0c4b23844467a9cef5e8eb"
                         class="button"
                         style="background: rgb(255, 148, 0)"
+                        v-on:click="myfun(index+2)"
                         >我要报名</a
                       >
                     </th>
@@ -166,19 +165,17 @@
                   </tr>
                   <tr >
                     <td  class="left">
-                      P50010720220610516-01
+                      {{ index }}
                     </td>
                     <td  class="left">
-                      布置场地、陪伴孩子参与爱心课堂
+                      {{ item.postDesc }}
                     </td>
                     <td
                       
                       class="left"
                       style="word-break: break-all; overflow: hidden"
                     >
-                      1、喜欢孩子，尊重特殊儿童； 2、有耐心、爱心、责任心；
-                      3、愿意花自己的宝贵时间为这群特殊需要的儿童做陪伴服务；
-                      4、戴好口罩、提供双码；
+                      {{ item.postCondition }}
                     </td>
                   </tr>
                 </tbody>
@@ -196,20 +193,7 @@
                   
                   style="padding: 18px; word-break: break-all"
                 >
-                  【服务对象】： 特殊患病儿童 【招募要求】：
-                  1、喜欢孩子，尊重特殊儿童； 2、有耐心、爱心、责任心；
-                  3、愿意花自己的宝贵时间为这群特殊需要的儿童做陪伴服务；
-                  4、戴好口罩、提供双码； 【领队】
-                  主要负责志愿者和家长签到、安排志愿者布置场地、摄影、写作新闻稿等工作，全盘把控现场活动的执行及资料收集整理，并按要求提交给活动召集人；
-                  【领队要求】： 领队需参与过渝西小家的志愿活动 【陪伴志愿者】：
-                  布置场地、陪伴孩子参与爱心课堂 【爱心小老师】：
-                  每次活动1主教1助教，均需提前准备教学内容，并把教学内容提交给活动召集人；组织孩子进行教学内容的实施，可以是唱歌、做手工、做游戏等趣味性学习和活动为主；活动结束后，填写教学总结表
-                  【服务时间】： 2022年6月11日19:30-20：30 【集合时间】：
-                  2022年6月11日18：45-19：00 【服务地点】：
-                  九龙坡杨家坪正街43号渝西医院住院部 【工作福利】：
-                  1、收获一群可爱的孩子，给你不一样的人身体验；
-                  2、记录记录志愿服务时数2小时； 3、提供志愿服务证明；
-                  4、可以参加优秀志愿者资格评选。
+                  {{volunteer[0].projectDetails}}
                 </p>
               </div>
               <div  class="tabbar-down" style="display: none">
@@ -375,10 +359,10 @@
                       
                       href="javascript:void(0);"
                       style="color: rgb(44, 90, 189)"
-                      >重庆山城志愿服务中心</a
+                      >{{team.teamName}}</a
                     >
                   </h2>
-                  <p >地址：沙坪坝区天星桥街道电台村3号</p>
+                  <p >地址：{{team.address}}</p>
                 </div>
               </div>
               <h2
@@ -388,8 +372,8 @@
                 项目联系人
               </h2>
               <div  class="link-info">
-                <h2 >雷瑶</h2>
-                <p >手机：18306002752</p>
+                <h2 >{{team.contact}}</h2>
+                <p >手机：{{team.telephone}}</p>
                 <!---->
                 <!---->
                 <p  class="row w">
@@ -425,7 +409,7 @@
               </h2>
               <div  class="link-info">
                 <p  if="九龙坡杨家坪正街43号渝西医院住院部">
-                  九龙坡杨家坪正街43号渝西医院住院部
+                  {{team.detailedAddress}}
                 </p>
                 <p  class="row w">
                   <span
@@ -458,9 +442,92 @@
 import Guidebar from "@/components/guidebar";
 import LoginHead from "@/components/login_head";
 export default {
+  data() {
+    return {
+      volunteer:[
+        {
+          pid: "",
+          pname: "\t\n" +
+              "珍爱生命传递真情无偿献血志愿活动",
+          location: "",
+          releaseDate: "",
+          projectDate: "",
+          recruitDate: "",
+          serviceObject: "",
+          volunteerUpport: "",
+          serviceDescription: "",
+          projectDetails:"",
+          teamid:"",
+          projectStatus:"",
+          postid:"",
+          postDesc:"",
+          postCondition:"",
+          postName:"",
+          targetNum:"",
+          enrolledNum:""
+        }
+      ],
+      team:{
+        teamName:"",
+        address:"",
+        contact:"",
+        telephone:"",
+        detailedAddress:""
+      },
+      classs:[
+        {
+          sid:"",
+          serviceName:""
+        }
+      ],
+      pid:"",
+    };
+  },
+  props: ['id'],
   components: {
     Guidebar,
     LoginHead,
+  },
+  created() {
+    this.pid=this.$route.query.id
+    const _this = this
+    this.$http.get("http://localhost:8088/volunteerProgramDetails/volunterProgramPost",
+        {
+          params:{
+            id:this.pid
+          }
+        })
+        .then(res =>{
+          _this.volunteer = res.data
+          this.$http.get("http://localhost:8088/volunteerTeam/selectOne",
+              {
+                params:{
+                  id:this.volunteer[0].teamid
+                }
+              })
+              .then(res =>{
+                _this.team = res.data
+              })
+          this.$http.get("http://localhost:8088/volunteerProgramDetails/classOfServices",
+              {
+                params:{
+                  id:this.volunteer[0].pid
+                },
+              })
+              .then(res =>{
+                _this.classs = res.data
+              })
+        })
+
+
+  },
+  mounted() {
+  },
+  methods: {
+    myfun:function (index){
+      var btn = document.getElementsByClassName("button")[index];
+      btn.innerHTML="申请成功"
+    }
   },
 };
 </script >
