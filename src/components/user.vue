@@ -1,4 +1,5 @@
 <template>
+  <normal-head></normal-head>
   <div class="container">
     <div class="row clearfix">
       <div class="col-md-12 column">
@@ -76,7 +77,11 @@
   </div>
 </template>
 <script>
+import NormalHead from "@/components/normal_head";
 export default {
+   components: {
+    NormalHead,
+  },
   methods: {
     checkUser: function () {
       if (localStorage.getItem('username') != null) {

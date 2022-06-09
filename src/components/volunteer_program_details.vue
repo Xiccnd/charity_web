@@ -1,5 +1,6 @@
 <!--  -->
 <template>
+<normal-head></normal-head>
   <div id="all">
     <div class="container">
       <div class="row" style="margin-top:30px">
@@ -114,40 +115,56 @@
   </div>
 </template>
 <script>
+import NormalHead from "@/components/normal_head";
 export default {
   data() {
     return {
-      volunteer: {
+        volunteer: {
         pid: 1,
         pname: "小太阳特教助教志愿活动",
         Project_status: "招募中",
         location: "	重庆市渝北区西南政法大学(渝北校区)",
-        Release_date: "2022-06-06",
-        Project_date: "	2022-06-05 至 2023-01-01",
-        Recruit_date: "	2022-06-05 至 2023-01-01",
-        Service_object: "贫困家庭,农村居民,其他,儿童",
-        Volunteer_upport: "志愿服务工具,志愿服务证书,志愿者服装,专项培训",
-        Service_description:
-            "2022年6月5日到2023年1月1日，周一至周四上午8:40-12:00，下午2:00-5:10，周五上午8:40-12:00，周五1:00-4:10。开展义工活动，助教服务分为每天分为上午段和下午段，每个时间段招募1人，每天合计需要2人。全周合计招募10人次。",
-        Project_details: "小太阳特教中心每周常规陪伴助教活动恢复招募，周一至周四上午8:40-12:00，下午2:00-5:10，周五上午8:40-12:00，周五1:00-4:10。开展义工活动，助教服务分为每天分为上午段和下午段，每个时间段招募1人，每天合计需要2人。全周合计招募10人次。 岗位描述: 辅助特教老师，帮助孩子们完成老师教授的内容，促进孩子们的成长。 岗位条件: 人品正直诚信，有善心，不歧视特殊儿童。 岗位内容： 志愿者到达后参与集体课，辅助特教老师，帮助孩子们完成老师教授的内容，促进孩子们的成长。 仅限QQ群内报名人员，联系QQ群：118269827 （志汇秀山4群）",
-        Team_name: "秀山团团青年志愿服务队",
-        address: "秀山土家族苗族自治县",
-        contact: "马云",
-        telephone: "123456789",
-        Detailed_address: "重庆市渝北区西南政法大学(渝北校区)",
+        releaseDate: "2022-06-06",
+        projectDate: "	2022-06-05 至 2023-01-01",
+        recruitDate: "	2022-06-05 至 2023-01-01",
+        serviceObject: "贫困家庭,农村居民,其他,儿童",
+        volunteerUpport: "志愿服务工具,志愿服务证书,志愿者服装,专项培训",
+        serviceDescription:
+          "2022年6月5日到2023年1月1日，周一至周四上午8:40-12:00，下午2:00-5:10，周五上午8:40-12:00，周五1:00-4:10。开展义工活动，助教服务分为每天分为上午段和下午段，每个时间段招募1人，每天合计需要2人。全周合计招募10人次。",
+        projectDetails:"小太阳特教中心每周常规陪伴助教活动恢复招募，周一至周四上午8:40-12:00，下午2:00-5:10，周五上午8:40-12:00，周五1:00-4:10。开展义工活动，助教服务分为每天分为上午段和下午段，每个时间段招募1人，每天合计需要2人。全周合计招募10人次。 岗位描述: 辅助特教老师，帮助孩子们完成老师教授的内容，促进孩子们的成长。 岗位条件: 人品正直诚信，有善心，不歧视特殊儿童。 岗位内容： 志愿者到达后参与集体课，辅助特教老师，帮助孩子们完成老师教授的内容，促进孩子们的成长。 仅限QQ群内报名人员，联系QQ群：118269827 （志汇秀山4群）",
+        Team_name:"秀山团团青年志愿服务队",
+        address:"秀山土家族苗族自治县",
+        contact:"马云",
+        telephone:"123456789",
+        Detailed_address:"重庆市渝北区西南政法大学(渝北校区)",
       },
-      btn: "我要报名"
+      btn:"我要报名",
+      sid:""
     };
   },
-  props: [],
-  components: {},
+  components: {
+     NormalHead
+  },
+   props: ['id'],
   created() {
+    this.sid=this.$route.query.id
+    const _this = this
+    this.$http.get("/volunteerProgramDetails/selectOne",
+        {
+          params:{
+            id:this.sid
+          }
+        })
+        .then(res =>{
+          console.log(res)
+          _this.volunteer = res.data
+        })
   },
   mounted() {
   },
   methods: {
-    myfun: function () {
-      this.btn = "申请成功"
+    myfun:function (){
+      this.btn="申请成功"
     }
   },
 };

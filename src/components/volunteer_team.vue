@@ -1,6 +1,7 @@
 <!--  -->
 <!--  -->
 <template>
+  <normal-head></normal-head>
   <div class="container">
     <div class="row clearfix">
       <div class="col-md-12 column">
@@ -133,6 +134,7 @@
 
 </template>
 <script>
+import NormalHead from "@/components/normal_head";
 export default {
   data() {
     return {
@@ -157,7 +159,9 @@ export default {
     }
   },
   props: [],
-  components: {},
+  components: {
+     NormalHead
+  },
   created() {
     this.queryList();
   },

@@ -1,4 +1,5 @@
 <template>
+<normal-head></normal-head>
   <div class="container">
     <div class="row clearfix">
       <div class="col-md-12 column">
@@ -92,7 +93,12 @@
   </div>
 </template>
 <script>
-export default {}
+import NormalHead from "@/components/normal_head";
+export default {
+   components: {
+    NormalHead,
+  },
+  }
 </script>
 <style>
 .left_nav {
