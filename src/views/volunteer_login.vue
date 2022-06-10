@@ -88,9 +88,6 @@ export default {
             name:username,
             password:password
           },
-          {
-
-          },
       ).then(res => {
         if (res.data !== -1) {
           localStorage.setItem("username", username)
