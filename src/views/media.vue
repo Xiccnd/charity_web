@@ -1,14 +1,17 @@
 <template>
-
+<search @father="father" ></search>
 </template>
 
 <script>
-import guidebar from "@/components/guidebar";
+
 
 export default {
-  components: {
-    guidebar
-  }
+  
+  methods: {
+    father(){
+      console.log("father")
+    }
+  },
 }
 </script>
 

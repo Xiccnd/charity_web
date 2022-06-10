@@ -3,7 +3,7 @@
   <program>
     <template v-slot:catagory>
           <div class="category" >
-            <h2 class="category__title">项目区域</h2>
+            <h2 class="category__title">服务类别</h2>
             <div class="category__content">
                <a href="javascript:void(0);" class="category__item active">全部</a>
                <a class="category__item" v-for="(ter,i) in territory" :key="i">
@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="category">
-            <h2 class="category__title">服务类别</h2>
+            <h2 class="category__title">队伍类型</h2>
             <div class="category__content">
               <a href="javascript:void(0);" class="category__item active">全部</a>
                <a href="javascript:void(0);" v-for="(item,i) in class_of_service" :key="i"
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="category">
-            <h2 class="category__title">项目状态</h2>
+            <h2 class="category__title">队伍人数</h2>
             <div class="category__content">
               <a href="javascript:void(0);" class="category__item active"
                 >全部</a
@@ -94,7 +94,7 @@ import NormalHead from "@/components/normal_head";
 import Guidebar from "@/components/guidebar";
 import Pages from "@/components/pages"
 import Program from "@/components/program"
-import Search from "@/components/program_search"
+import Search from "@/components/team_search"
 export default {
   data() {
     return {

@@ -1,94 +1,36 @@
 <template>
 <normal-head></normal-head>
-  <div class="container">
-    <div class="row clearfix">
-      <div class="col-md-12 column">
-        <div style="width:220px;height: 60px;">
-          <ul class="breadcrumb">
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">Library</a>
-            </li>
-            <li class="active">
-              我的首页
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="left_nav">
-        <ul>
-          <li>
-            <router-link to="/user">个人资料</router-link>
-          </li>
-          <li>
-            <router-link to="/program">我的项目</router-link>
-          </li>
-          <li>
-            <router-link to="/team">我的队伍</router-link>
+<div id="project">
+    <div class="main bannerimg">
+      <div class="mid">
+        <ul class="row w">
+          <li class="col">
+            <div class="router">
+              <span>当前位置：</span>
+              <a href="#/home" class="">首页</a>
+              <span>志愿项目</span>
+            </div>
           </li>
         </ul>
-      </div>
-
-      <div style="float:right; width: 1000px;">
-
-        <div class="col-md-12 column">
-          <div class="row clearfix">
-            <table class="table table-hover">
-              <thead>
-              <tr>
-                <th>
-                  项目名称
-                </th>
-                <th>
-                  联系方式
-                </th>
-                <th>
-                  加入时间
-                </th>
-                <th>
-                  岗位
-                </th>
-                <th>
-                  状态
-                </th>
-                <th>
-                  操作
-                </th>
-
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>
-                  1
-                </td>
-                <td>
-                  TB - Monthly
-                </td>
-                <td>
-                  01/04/2012
-                </td>
-                <td>
-                  Default
-                </td>
-                <td>
-                  Default
-                </td>
-                <td>
-                  Default
-                </td>
-              </tr>
-
-              </tbody>
-            </table>
+        <div class="section">
+          <slot name="catagory"></slot>
+          <ul class="row w">
+            <slot name="search"></slot>
+            <li class="col v-m t-r">
+              <div class="text-tab" style="margin-right: -10px">
+                <a href="javascript:void(0);" id="list" class="active">列表</a>
+                <a href="javascript:void(0);" id="map">地图</a>
+              </div>
+            </li>
+          </ul>
+          <div  id="getList" >
+            <ul  class="panel-list">
+             <slot name="panel"></slot> 
+            </ul>
+            <Pages></Pages>
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
 </template>
@@ -100,23 +42,45 @@ export default {
   },
   }
 </script>
-<style>
-.left_nav {
-  width: 120px;
-  float: left;
+<style scoped>
+.protabbar span.active:before {
+  background: -webkit-linear-gradient(to right, #fff, #cc0000);
+  background: linear-gradient(to right, #fff, #cc0000);
+}
+.protabbar span:before {
+  content: "";
+  position: absolute;
+  top: 62%;
+  height: 2px;
+  width: 46%;
+  left: 0;
+}
+.protabbar span.active:after {
+  background: -webkit-linear-gradient(to right, #cc0000, #fff);
+  background: linear-gradient(to right, #cc0000, #fff);
+}
+.protabbar span.active:after {
+  background: -webkit-linear-gradient(to right, #cc0000, #fff);
+  background: linear-gradient(to right, #cc0000, #fff);
+}
+.protabbar span:after {
+  content: "";
+  position: absolute;
+  top: 62%;
+  height: 2px;
+  width: 46%;
+  right: 0;
+}
+.tabbar-tight span, .tabbar-tight a {
+    padding-top: 10px;
+}
+.panel-list {
+  font-size: 0;
+  margin: 20px -15px;
 }
 
-.left_nav ul {
-  width: 120px;
-}
-
-.left_nav ul li {
-  height: 45px;
-  line-height: 45px;
-}
-
-.table th {
-  text-align: center;
+.section {
+  padding: 20px;
 }
 
 </style>
