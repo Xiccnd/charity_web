@@ -3,7 +3,7 @@ import volunteer_program from '../views/volunteer_program.vue'
 import volunteer_team from '../components/volunteer_team.vue'
 import program from '../components/program.vue'
 import team from '../components/team.vue'
-import media from '../components/media.vue'
+import media from '../views/media.vue'
 import volunteer_team_details from '../components/volunteer_team_details.vue'
 import default_index from '../views/default_index.vue'
 const login = () => import("../views/volunteer_login.vue")
