@@ -35,6 +35,7 @@ export default {
   table-layout: fixed;
   box-sizing: border-box;
 }
+
 .mid {
   width: 1200px;
   margin-left: auto;

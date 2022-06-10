@@ -5,7 +5,7 @@
 
 <script>
 import Header from "./header.vue";
-import NavigationBar from './navigationBar.vue';
+import NavigationBar from './navigation_bar.vue';
 export default {
  components:{
    Header,
