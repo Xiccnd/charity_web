@@ -11,6 +11,9 @@
             <template v-slot:cp>
               <span> 用户中心</span>
             </template>
+            <template v-slot:tp>
+              <span> 修改资料</span>
+            </template>
           </guidebar>
         </li>
       </ul>
@@ -25,12 +28,21 @@
               <em>用户中心<i>&gt;</i></em>
               <div>
                 <a
+<<<<<<< Updated upstream
                     href="javascript:void(0);"
                     class="router-link-exact-active router-link-active active"
                     aria-current="page"
                 >修改资料</a>
                 <a href="javascript:void(0);" class="">我的项目</a>
                 <a href="javascript:void(0);" class="">我的队伍</a>
+=======
+                  href="javascript:void(0);"
+                  class="router-link-exact-active router-link-active active"
+                  aria-current="page"
+                  >修改资料</a>
+                 <a href="javascript:void(0);" v-on:click="myProject" class="">我的项目</a>
+                 <a href="javascript:void(0);" v-on:click="myTeam" class="">我的队伍</a>
+>>>>>>> Stashed changes
               </div>
             </li>
           </ul>
@@ -605,6 +617,7 @@ export default {
     Guidebar,
     LoginHead,
   },
+<<<<<<< Updated upstream
   data() {
     return {
       userInfo: {
@@ -737,6 +750,16 @@ export default {
     }
     this.getInfo()
   }
+=======
+  methods: {
+    myTeam: function (){
+      this.$router.push("/myTeam")
+    },
+    myProject: function (){
+      this.$router.push("/myProject")
+    }
+  },
+>>>>>>> Stashed changes
 };
 </script>
 
