@@ -417,6 +417,7 @@ export default {
               .then(res => {
                 console.log(res.data)
                  _this.volunteer_program_details=res.data
+                 console.log(_this.volunteer_program_details)
               })
               .catch(err => {
                 console.error(err); 
