@@ -11,26 +11,30 @@
             <template v-slot:cp>
               <span> 用户中心</span>
             </template>
+            <template v-slot:tp>
+              <span> 修改资料</span>
+            </template>
           </guidebar>
         </li>
       </ul>
       <ul class="row w">
         <li class="col v-t" style="width: 130px !important">
           <ul
-            id="usermenu"
-            class="navbar"
-            style="background: rgb(255, 255, 255)"
+              id="usermenu"
+              class="navbar"
+              style="background: rgb(255, 255, 255)"
           >
             <li class="active">
               <em>用户中心<i>&gt;</i></em>
               <div>
                 <a
-                  href="javascript:void(0);"
-                  class="router-link-exact-active router-link-active active"
-                  aria-current="page"
-                  >修改资料</a>
-                 <a href="javascript:void(0);" class="">我的项目</a>
-                 <a href="javascript:void(0);" class="">我的队伍</a>
+                    href="javascript:void(0);"
+                    class="router-link-exact-active router-link-active active"
+                    aria-current="page"
+                >修改资料</a>
+
+                 <a href="javascript:void(0);" v-on:click="myProject" class="">我的项目</a>
+                 <a href="javascript:void(0);" v-on:click="myTeam" class="">我的队伍</a>
               </div>
             </li>
           </ul>
@@ -39,10 +43,10 @@
           <li class="col v-t white tab-container">
             <div id="updatemenu" class="tabbar tabbar-tight mb-30">
               <a
-                href="#/chongqing/updatedata"
-                aria-current="page"
-                class="router-link-exact-active router-link-active active"
-                >基本信息</a
+                  href="#/chongqing/updatedata"
+                  aria-current="page"
+                  class="router-link-exact-active router-link-active active"
+              >基本信息</a
               >
               <a href="#/chongqing/updateiden" class="">修改密码</a>
             </div>
@@ -51,13 +55,13 @@
                 <div class="grid-item g-12">
                   <div class="form">
                     <p
-                      class="form-label"
-                      style="position: relative; top: -20px; margin-bottom: 0px"
+                        class="form-label"
+                        style="position: relative; top: -20px; margin-bottom: 0px"
                     >
-                      <span>用户名：cherry_hj</span>
+                      <span style="margin-top: 30px">用户名：{{userInfo.uname}}</span>
                     </p>
                   </div>
-                  <div class="form">
+                  <div class="form" style="margin-top: 32px">
                     <p class="form-label">国家/地区：</p>
                     <div class="select">
                       <select id="countrySelect">
@@ -398,9 +402,9 @@
                       </select>
                     </div>
                     <p
-                      id="politicsTips"
-                      class="form-error"
-                      style="color: red"
+                        id="politicsTips"
+                        class="form-error"
+                        style="color: red"
                     ></p>
                   </div>
                   <div class="form">
@@ -429,32 +433,21 @@
                   <div class="form">
                     <p class="form-label">电子邮箱：</p>
                     <input
-                      type="text"
-                      id="email"
-                      maxlength="50"
-                      placeholder="请输入电子邮箱"
+                        type="text"
+                        id="email"
+                        maxlength="50"
+                        placeholder="请输入电子邮箱"
                     />
                     <p id="emailTips" class="form-error"></p>
                   </div>
                   <div class="form">
-                    <p class="form-label">固定电话：(格式如XXXX-XXXXXXXX)</p>
-                    <input
-                      type="text"
-                      id="telephone"
-                      maxlength="13"
-                      oninput="this.value=this.value.replace(/[^\d-]/g,'')"
-                      placeholder="请输入固定电话"
-                    />
-                    <p id="telephoneTips" class="form-error"></p>
-                  </div>
-                  <div class="form">
                     <p class="form-label">微信：</p>
                     <input
-                      type="text"
-                      id="weixin"
-                      maxlength="20"
-                      placeholder="请输入微信"
-                      oninput="this.value=this.value.replace(/[\u4e00-\u9fa5]/g, '')"
+                        type="text"
+                        id="weixin"
+                        maxlength="20"
+                        placeholder="请输入微信"
+                        oninput="this.value=this.value.replace(/[\u4e00-\u9fa5]/g, '')"
                     />
                     <p class="form-error"></p>
                   </div>
@@ -484,97 +477,52 @@
                 <div class="grid-item g-12 mt-neg19">
                   <div class="form p-rel" style="margin-bottom: 2px">
                     <div
-                      id="upimage"
-                      imgfile=""
-                      style="position: relative; left: -100px; bottom: -7px"
+                        id="upimage"
+                        imgfile=""
+                        style="position: relative; bottom: -7px"
                     >
                       <div
-                        class="avatar-upload avatar-upload-small"
-                        style="margin-bottom: 0px"
+                          class="avatar-upload avatar-upload-small"
+                          style="margin-bottom: 0px"
                       >
                         <div
-                          id="photo"
-                          class="avatar-upload-wrap"
-                          style="width: 110px"
+                            id="photo"
+                            class="avatar-upload-wrap"
+                            style="width: 150px"
                         >
                           <img
-                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG4AAACWBAMAAADNtKC8AAAAKlBMVEX3uXDwjoP86ertdmfV4nD+/v7d2HDsx3D60bT739D5xpD0pXTwiWz0po58+8b5AAADJklEQVRo3u2XvWsUQRjGRzlu76Ma0xhJIAwEdgOCMGWusBj2+kAKU6U4sL3iONtwImiwOhA88OA8ELQzWIlN4ErTaJoU5n9xbtfbne95dxBE2KdJ2OH3vs/7zEyyi1CtWrVq1fqf1b3AeIteff9cDeMUxjuU66oC2cW44GgPDH7DIkfpZaVuJQcDC4znshHEKjZwPWCSKkcP4S4xXpWcd0Rs4TxO74gcFfUI3E7mKLjdjsxdwsKU4vRM2JVsfqHQhheO8Vx7iJ0cBaWixuIwKtvcolCjss0VBRrtesazGfWNZztr8njXBu4QMN7cwFH/eA+IIRfj3wuZu0feAYORY5mSBBiMFMt9QshzWDAS95NzMYyTbJK19Al7Hm4745JVVW6SceQhZAOVVDK99nNdvR3XtXfju4Z2fMStClzZTgNd3DYRlVwDuV2i6BeMm6gcma8ceXbmNox7fZ+Tva8LnSPzH3j3hlj08vb29mZCdA4RiNDf46YALAnkYgM3CeSWAO7AwN0FcHsGrgXgzgK5BQrbQOP/h0lQnJBA94xcOyiW9Y0IisV/0mLLe8EyaDz/Dp7ZXnymlS8RxOielWuFpOk7MrHjvbUdkoo7mdj5Xt4Oa2dvGHu+O1ph7Wx7eOD9rupMKx0V53VKFpAPx1aVk+IAEyCmzBiDMa5PBXZe7cO/83E2nSWz80VFihznIhXIzqv9Y0FvgWRHoriOQOB4+ELhTqKnACxVGx4hxLzgmKX8FkocvwoDHzhmrM9/fBBdojXnBpss5wSnT1DOucCI/eEEp9mFHTEXGK3LrucTnJ6gTT/GTi1cVjXvh9D+JsuSY0NbJmU/1CpdFpwRjJjEoSXHNn9WBsqaKG3tTZ7lWmyjvs0lV3FOy3NZrGnZREzj0DPDYjo0uxSGbxbFBU5x2mQax3dzU1zkZKcDfWFUFherSpsx1guOhd8bEic4lZ4/Fq0Ny4OkOx3p9aTdVLjU2C57PJKqMGZs2FAeD5V4I5VL9TCzcpH4JB02mbGh/lgulGrrecMBq65TpLuHqK+nAlOYTc4F2eRcI5AbBXKs5mqu5v4Rl/4Gv4OOISyx/ysAAAAASUVORK5CYII="
-                            alt=""
-                            class="w"
-                            style="width: 100%; height: 100%"
+                              src=""
+                              alt=""
+                              class="w"
+                              style="width: 100%; height: 100%"
                           />
                         </div>
-                        <div class="upload">
-                          <a
-                            href="javascript:void(0);"
-                            id="picker"
-                            class="button button-line"
-                            >选择上传头像</a
-                          >
-                        </div>
-                        <div id="overlay"></div>
-                        <div class="lightbox cropperBox">
-                          <div class="cropperInner"><img id="img" /></div>
-                          <div>
-                            <button type="button" class="btnCropper">
-                              确 定
-                            </button>
-                            <button type="button" class="btnCancel">
-                              取 消
-                            </button>
-                            <span class="introjs-tips"
-                              >鼠标滚轮可缩放图片尺寸</span
-                            >
-                          </div>
-                          <div class="jcrop-preview" style="top: 100px">
-                            <div
-                              class="preview"
-                              style="width: 110px; height: 110px"
-                            ></div>
-                          </div>
-                        </div>
+                      </div>
+                    </div>
+                    <p class="form-error"></p>
+                  </div>
+                  <div id="profile_div" class="form" style="">
+                    <p class="form-label">头像地址：</p>
+                    <div class="row w">
+                      <div class="col v-m">
                         <input
-                          id="file"
-                          type="file"
-                          accept="image/*"
-                          hidden="hidden"
-                          style="visibility: hidden"
+                            type="text"
+                            id="profile"
+                            placeholder="请输入头像地址"
                         />
                       </div>
                     </div>
-                    <div
-                      style="
-                        width: 209px;
-                        font-size: 13px;
-                        text-align: left;
-                        position: absolute;
-                        top: 50%;
-                        right: 40px;
-                        transform: translateY(-50%);
-                      "
-                    >
-                      宽110像素 X 高150像素，支持JPG,GIF,PNG格式大小不超过2M
-                    </div>
-                    <p class="form-error"></p>
+                    <p id="nativeTips" class="form-error"></p>
                   </div>
                   <div id="nativeChoose_div" class="form" style="">
                     <p class="form-label">籍贯：</p>
                     <div class="row w">
                       <div class="col v-m">
                         <input
-                          type="text"
-                          id="nativeVal"
-                          readonly="readonly"
-                          placeholder="请选择籍贯"
+                            type="text"
+                            id="nativeVal"
+                            placeholder="请输入籍贯"
                         />
-                      </div>
-                      <div class="col v-m pl-10" style="width: 90px">
-                        <a
-                          href="javascript:void(0);"
-                          id="chooseNative"
-                          class="button button-line"
-                          >选择</a
-                        >
                       </div>
                     </div>
                     <p id="nativeTips" class="form-error"></p>
@@ -584,16 +532,11 @@
                     <div class="row w">
                       <div class="col v-m">
                         <input
-                          type="text"
-                          id="mobile"
-                          maxlength="11"
-                          readonly="readonly"
+                            type="text"
+                            id="mobile"
+                            maxlength="11"
+                            placeholder="请输入手机号码"
                         />
-                      </div>
-                      <div class="col v-m pl-10" style="width: 90px">
-                        <a href="javascript:void(0);" class="button button-line"
-                          >修改</a
-                        >
                       </div>
                     </div>
                     <p class="form-error"></p>
@@ -601,47 +544,21 @@
                   <div class="form">
                     <p class="form-label">QQ：</p>
                     <input
-                      type="text"
-                      id="qq"
-                      maxlength="15"
-                      oninput="this.value=this.value.replace(/^[1-9]\\d{4,10}/g,'')"
-                      placeholder="请输入QQ"
+                        type="text"
+                        id="qq"
+                        maxlength="15"
+                        oninput="this.value=this.value.replace(/^[1-9]\\d{4,10}/g,'')"
+                        placeholder="请输入QQ"
                     />
                     <p id="qqTips" class="form-error"></p>
                   </div>
                   <div class="form">
-                    <p class="form-label"><em>*</em>居住区域：</p>
-                    <div class="row w">
-                      <div class="col v-m">
-                        <input
-                          type="text"
-                          id="liveAddress"
-                          readonly="readonly"
-                          placeholder="请选择居住区域"
-                        />
-                      </div>
-                      <div class="col v-m pl-10" style="width: 90px">
-                        <a
-                          href="javascript:void(0);"
-                          id="chooseLive"
-                          class="button button-line"
-                          >选择</a
-                        >
-                      </div>
-                    </div>
-                    <p
-                      id="liveAddressTips"
-                      class="form-error"
-                      style="color: red"
-                    ></p>
-                  </div>
-                  <div class="form">
                     <p class="form-label">详细地址：</p>
                     <input
-                      type="text"
-                      id="detailedAddress"
-                      maxlength="50"
-                      placeholder="请输入详细地址"
+                        type="text"
+                        id="detailedAddress"
+                        maxlength="50"
+                        placeholder="请输入详细地址"
                     />
                     <p id="detailedAddressTips" class="form-error"></p>
                   </div>
@@ -650,35 +567,26 @@
                     <div class="row w">
                       <div class="col v-m">
                         <input
-                          type="text"
-                          id="serviceArea"
-                          readonly="readonly"
-                          placeholder="请选择服务区域"
+                            type="text"
+                            id="serviceArea"
+                            placeholder="请输入服务区域"
                         />
-                      </div>
-                      <div class="col v-m pl-10" style="width: 90px">
-                        <a
-                          href="javascript:void(0);"
-                          id="choose"
-                          class="button button-line"
-                          >选择</a
-                        >
                       </div>
                     </div>
                     <p
-                      id="serviceAreaTips"
-                      class="form-error"
-                      style="color: red"
+                        id="serviceAreaTips"
+                        class="form-error"
+                        style="color: red"
                     ></p>
                   </div>
                 </div>
-                <div  class="pt-30 t-c">
+                <div class="pt-30 t-c">
                   <a
-                    
-                    href="javascript:void(0);"
-                    class="button"
-                    style="width: 200px"
-                    >保存修改</a
+                      href="javascript:void(0);"
+                      class="button"
+                      style="width: 200px"
+                      v-on:click="submitChange()"
+                  >保存修改</a
                   >
                 </div>
               </div>
@@ -693,27 +601,171 @@
 <script>
 import Guidebar from "@/components/guidebar";
 import LoginHead from "@/components/login_head";
+import {toRaw} from "vue";
+import defaultProfile from '../assets/images/profile/default.png'
+
 export default {
   components: {
     Guidebar,
     LoginHead,
   },
+  data() {
+    return {
+      userInfo: {
+        address: "",
+        area: "",
+        country: "",
+        education: "",
+        employment: "",
+        mailbox: "",
+        nation: "",
+        nativeplace: "",
+        political: "",
+        profile: "",
+        qq: "",
+        telephone: "",
+        uname: "",
+        weixin: "",
+      }
+    }
+  },
+  methods: {
+    getInfo: function () {
+      this.$http.post("personalData/getMyMessages",
+          {
+            uname: localStorage.getItem("username")
+          },
+      ).then(res => {
+        this.userInfo = {
+          address: res.data.address,
+          area: res.data.area,
+          country: res.data.country,
+          education: res.data.education,
+          employment: res.data.employment,
+          mailbox: res.data.mailbox,
+          nation: res.data.nation,
+          nativeplace: res.data.nativeplace,
+          political: res.data.political,
+          profile: res.data.profile,
+          qq: res.data.qq,
+          telephone: res.data.telephone,
+          uname: res.data.uname,
+          weixin: res.data.weixin
+        }
+        let options = document.getElementById('countrySelect').options
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value === toRaw(this.userInfo).country) {
+            options[i].selected = true;
+            break;
+          }
+        }
+        options = document.getElementById('nationSelect').options
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value === toRaw(this.userInfo).nation) {
+            options[i].selected = true;
+            break;
+          }
+        }
+        options = document.getElementById('politicsSelect').options
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value === toRaw(this.userInfo).political) {
+            options[i].selected = true;
+            break;
+          }
+        }
+        options = document.getElementById('educationSelect').options
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value === toRaw(this.userInfo).education) {
+            options[i].selected = true;
+            break;
+          }
+        }
+        options = document.getElementById('jobSelect').options
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value === toRaw(this.userInfo).employment) {
+            options[i].selected = true;
+            break;
+          }
+        }
+        document.getElementById('email').value = toRaw(this.userInfo).mailbox
+        document.getElementById('weixin').value = toRaw(this.userInfo).weixin
+        if (toRaw(this.userInfo).profile === "") {
+          document.getElementById('photo').firstElementChild.src = defaultProfile
+        } else {
+          document.getElementById('photo').firstElementChild.src = toRaw(this.userInfo).profile
+        }
+        document.getElementById('profile').value = toRaw(this.userInfo).profile
+        document.getElementById('nativeVal').value = toRaw(this.userInfo).nativeplace
+        document.getElementById('mobile').value = toRaw(this.userInfo).telephone
+        document.getElementById('qq').value = toRaw(this.userInfo).qq
+        document.getElementById('detailedAddress').value = toRaw(this.userInfo).address
+        document.getElementById('serviceArea').value = toRaw(this.userInfo).area
+      }).then(err => {
+        // console.log(err);
+      })
+    },
+    submitChange :function () {
+      let changeInfo = {
+        uname: this.userInfo.uname,
+        mailbox: document.getElementById('email').value,
+        weixin: document.getElementById('weixin').value,
+        profile: document.getElementById('profile').value,
+        nativeplace: document.getElementById('nativeVal').value,
+        telephone: document.getElementById('mobile').value,
+        qq: document.getElementById('qq').value,
+        address: document.getElementById('detailedAddress').value,
+        area: document.getElementById('serviceArea').value,
+        country: document.getElementById('countrySelect').options[document.getElementById('countrySelect').selectedIndex].value,
+        nation: document.getElementById('nationSelect').options[document.getElementById('nationSelect').selectedIndex].value,
+        political: document.getElementById('politicsSelect').options[document.getElementById('politicsSelect').selectedIndex].value,
+        education: document.getElementById('educationSelect').options[document.getElementById('educationSelect').selectedIndex].value,
+        employment: document.getElementById('jobSelect').options[document.getElementById('jobSelect').selectedIndex].value
+      }
+      // console.log(changeInfo);
+      this.$http({
+        url: "personalData/upData",
+        method: "POST",
+        data: changeInfo
+      }).then(res => {
+        console.log(res);
+        location.reload();
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    myTeam: function (){
+      this.$router.push("/myTeam")
+    },
+    myProject: function (){
+      this.$router.push("/myProject")
+    }
+  },
+  mounted: function () {
+    if (localStorage.getItem("username") != null) {
+    } else {
+      this.$router.push("/volunteer_login")
+    }
+    this.getInfo()
+  }
 };
-</script >
+</script>
 
 <style scoped>
 #usermenu {
   width: 90%;
   opacity: 0.74;
 }
+
 .navbar {
   text-align: center;
   width: 110px;
   border: 1px solid #f0f0f0;
 }
+
 .navbar > .active em {
   font-weight: 700;
 }
+
 .navbar em {
   display: block;
   font-size: 14px;
@@ -722,12 +774,14 @@ export default {
   line-height: 40px;
   font-weight: normal;
 }
+
 .navbar > .active em i {
   -webkit-transform: rotateZ(-90deg);
   transform: rotateZ(-90deg);
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
+
 .navbar em i {
   margin-left: 5px;
   -webkit-transform: rotateZ(90deg);
@@ -735,28 +789,34 @@ export default {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
+
 .navbar > .active > div {
   display: block;
 }
+
 .navbar a.active,
 .navbar a:hover {
   background: linear-gradient(
-    90deg,
-    rgba(255, 211, 211, 1) 0%,
-    rgba(255, 246, 246, 1) 100%
+      90deg,
+      rgba(255, 211, 211, 1) 0%,
+      rgba(255, 246, 246, 1) 100%
   );
   border-color: #cc0000;
 }
+
 .navbar a.active {
   font-weight: bold;
 }
+
 .navbar a.active,
 .navbar a:hover {
   color: #e60012;
 }
+
 .navbar a {
   border-left: 4px solid transparent;
 }
+
 .navbar a {
   display: block;
   font-size: 14px;
@@ -764,36 +824,44 @@ export default {
   line-height: 45px;
   position: relative;
 }
+
 .tab-container {
   padding: 0 36px;
 }
+
 .tabbar.tabbar-tight {
   /* display: none; */
   margin: 36px 0;
 }
+
 .tabbar-tight span,
 .tabbar-tight a {
   padding-top: 10px;
 }
+
 .grid-item {
   display: inline-block;
   height: 100%;
   vertical-align: top;
   box-sizing: border-box;
 }
+
 .form {
   padding: 5px 0 0 20px;
   position: relative;
 }
+
 p {
   font-size: 14px;
 }
+
 .select {
   border: 1px solid #dfdfdf;
   border-radius: 4px;
   overflow: hidden;
   position: relative;
 }
+
 .select select {
   -webkit-appearance: none;
   display: inline-block;
@@ -809,6 +877,7 @@ p {
   line-height: 40px;
   box-sizing: border-box;
 }
+
 .select:after {
   content: "";
   display: inline-block;
@@ -820,22 +889,26 @@ p {
   top: 50%;
   margin-top: -4px;
 }
+
 .form .button-line {
   width: 80px;
   margin-top: 0;
   padding: 0;
 }
+
 .grid-item {
   display: inline-block;
   height: 100%;
   vertical-align: top;
   box-sizing: border-box;
 }
+
 .upload {
   position: relative;
   overflow: hidden;
   display: inline-block;
 }
+
 .avatar-upload-small .button-line {
   width: 130px;
   padding: 0;
@@ -843,23 +916,28 @@ p {
   height: 30px;
   line-height: 28px;
 }
+
 .avatar-upload {
   text-align: center;
   margin-bottom: 40px;
 }
+
 .avatar-upload-small .avatar-upload-wrap {
   width: 110px;
   height: 150px;
   margin-top: 0;
 }
+
 .avatar-upload-wrap {
   width: 158px;
   height: 196px;
   margin: 20px auto;
 }
+
 .avatar-upload-wrap img {
   border: 1px solid #ededed;
 }
+
 .cropperBox,
 .cropperBox1,
 .cropperBox2,
@@ -877,11 +955,13 @@ p {
   -moz-transition: margin-top 1s, opacity 1s, -moz-transform 1s;
   z-index: 9999;
 }
+
 .cropperInner {
   width: 800px;
   height: 520px;
   padding: 10px;
 }
+
 .btnCropper,
 .btnCancel {
   width: 70px;
@@ -894,10 +974,12 @@ p {
   font-size: 14px;
   cursor: pointer;
 }
+
 .btnCancel {
   background-color: #ccc;
   border-color: #ccc;
 }
+
 .btnCropper,
 .btnCancel {
   width: 70px;
@@ -910,25 +992,30 @@ p {
   font-size: 14px;
   cursor: pointer;
 }
+
 .introjs-tips {
   margin-left: 10px;
   color: #999;
   font-size: 13px;
 }
+
 .jcrop-preview,
 .preview {
   background-color: #fff;
   overflow: hidden;
 }
+
 .jcrop-preview {
   position: fixed;
   right: 20px;
   top: 20px;
 }
+
 .form .form-error {
   padding-top: 5px;
   height: 17px;
 }
+
 .grid-item:nth-child(2) .form {
   margin-right: 0;
 }
