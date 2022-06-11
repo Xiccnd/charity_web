@@ -14,6 +14,8 @@ const media = () => import("../views/media.vue")
 const myProject = () => import("../views/myProject.vue")
 const myTeam = () => import("../views/myTeam.vue")
 const updatePassword = () => import("../views/updatePassword.vue")
+const waitProject = () => import("../views/waitProject.vue")
+const waitTeam = () => import("../views/waitTeam.vue")
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
@@ -29,6 +31,8 @@ const routes = [
     {path:'/myProject',component:myProject},
     {path:'/myTeam',component:myTeam},
     {path:'/updatePassword',component:updatePassword},
+    {path:'/waitProject',component:waitProject},
+    {path:'/waitTeam',component:waitTeam},
     {
      path: '/volunteer_login', 
      component: login

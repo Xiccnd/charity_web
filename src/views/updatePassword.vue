@@ -12,7 +12,7 @@
               <span> 用户中心</span>
             </template>
             <template v-slot:tp>
-              <span> 修改资料</span>
+              <span> 修改密码</span>
             </template>
           </guidebar>
         </li>
