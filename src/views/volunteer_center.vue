@@ -728,6 +728,7 @@ export default {
         data: changeInfo
       }).then(res => {
         console.log(res);
+        window.scrollTo(0,0);
         location.reload();
       }).catch(err => {
         console.log(err);

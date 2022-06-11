@@ -57,31 +57,25 @@
                        <p data-v-596866b0="" class="form-label">
                            <em data-v-596866b0="">*</em>原密码：
                         </p> 
-                        <input data-v-596866b0="" type="password" id="oldPw" maxlength="20" placeholder="请输入原密码" style="opacity:0.7"> 
-                        <p data-v-596866b0="" id="oldPwTips" class="form-error" style="color: red;">原密码不能为空</p> 
-                        <img data-v-596866b0="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAwUExURUdwTBAQEBIUFRIUFBASFBMTFBAQEBITFBITFBISFBMTExITExMTExIUFRITFRMUFURZzp4AAAAPdFJOUwAQz4A3vCDg8G9gkFDQoA0DOqMAAACKSURBVCjPY2AYwkBSAMFmNAQS6xURAkJ/gITsJ7gSNv2LIGX3O2ECM76C5bj/V4Jpxun/DcDiLP//f7VycVms//+HA8Skn371/4Hg+xZ7BbDA/gAG9s+hofsVGFh/gwU6BBjyCxgY2D8ysPWCBdKAbnnAwMD3C8yEAPsDDAxcn5GcLwMiDg7uIAYAWu0nL21VmUgAAAAASUVORK5CYII=" alt="" class="pwd_img" style="" id="NoLook"> 
-                        <img data-v-596866b0="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANtBLioAAAAQdFJOUwAgwNBghz8Q8HCgsFDg3zDmODcFAAAAs0lEQVQ4y91T0QKDIAhMS0RNu///2iFa26rN93xBvYNDwGl63tooBNp+ocYV6CrO3MA+Voyt5WqjP+Or3OegniZkYa7fuLjz8j4uQo+f4e0e1BM1mwB7yPgZCLpzVd/pNgCzP/AeXnDmnSEynZHA7eleA4lruycgKRPo6RG4Ggb1VBsyJIgEbiXWLjFOcvjMVqj0p1A9+KnU7tqssjerXJs1brcOTG4Dk28HpnHqyJkH/qUXcr8LSlumRioAAAAASUVORK5CYII=" alt="" class="pwd_img" id="Look" style="display: none;">
+                        <input data-v-596866b0="" type="password" id="oldPw" maxlength="20" placeholder="请输入原密码" style="opacity:0.7"  v-on:blur="oldPasswordFunc()">
+                        <p data-v-596866b0="" id="oldPwTips" class="form-error" style="color: red;" v-show="oldPassword">原密码不能为空</p>
                     </div> 
                         <div data-v-596866b0="" class="form">
                             <p data-v-596866b0="" class="form-label">
                                 <em data-v-596866b0="">*</em>新密码：
                             </p> 
-                            <input data-v-596866b0="" type="password" id="newPw" maxlength="20" placeholder="请输入新密码" style="opacity:0.7"> 
-                            <p data-v-596866b0="" id="newPwTips" class="form-error" style="color: red;">新密码不能为空</p> 
-                            <img data-v-596866b0="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAwUExURUdwTBAQEBIUFRIUFBASFBMTFBAQEBITFBITFBISFBMTExITExMTExIUFRITFRMUFURZzp4AAAAPdFJOUwAQz4A3vCDg8G9gkFDQoA0DOqMAAACKSURBVCjPY2AYwkBSAMFmNAQS6xURAkJ/gITsJ7gSNv2LIGX3O2ECM76C5bj/V4Jpxun/DcDiLP//f7VycVms//+HA8Skn371/4Hg+xZ7BbDA/gAG9s+hofsVGFh/gwU6BBjyCxgY2D8ysPWCBdKAbnnAwMD3C8yEAPsDDAxcn5GcLwMiDg7uIAYAWu0nL21VmUgAAAAASUVORK5CYII=" alt="" class="pwd_img"> 
-                            <img data-v-596866b0="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANtBLioAAAAQdFJOUwAgwNBghz8Q8HCgsFDg3zDmODcFAAAAs0lEQVQ4y91T0QKDIAhMS0RNu///2iFa26rN93xBvYNDwGl63tooBNp+ocYV6CrO3MA+Voyt5WqjP+Or3OegniZkYa7fuLjz8j4uQo+f4e0e1BM1mwB7yPgZCLpzVd/pNgCzP/AeXnDmnSEynZHA7eleA4lruycgKRPo6RG4Ggb1VBsyJIgEbiXWLjFOcvjMVqj0p1A9+KnU7tqssjerXJs1brcOTG4Dk28HpnHqyJkH/qUXcr8LSlumRioAAAAASUVORK5CYII=" alt="" class="pwd_img" style="display: none;">
+                            <input data-v-596866b0="" type="password" id="newPw" maxlength="20" placeholder="请输入新密码" style="opacity:0.7" v-on:blur="newPasswordFunc()">
+                            <p data-v-596866b0="" id="newPwTips" class="form-error" style="color: red;" v-show="newPassword">新密码不能为空</p>
                         </div> 
                         <div data-v-596866b0="" class="form">
                             <p data-v-596866b0="" class="form-label">
                                 <em data-v-596866b0="">*</em>确认新密码：
                             </p> 
-                            <input data-v-596866b0="" type="password" id="confirmPw" maxlength="20" placeholder="请输入确认新密码" style="opacity:0.7"> 
-                            <p data-v-596866b0="" id="confirmPwTips" class="form-error" style="color: red;">确认新密码不能为空</p> 
-                            <img data-v-596866b0="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAwUExURUdwTBAQEBIUFRIUFBASFBMTFBAQEBITFBITFBISFBMTExITExMTExIUFRITFRMUFURZzp4AAAAPdFJOUwAQz4A3vCDg8G9gkFDQoA0DOqMAAACKSURBVCjPY2AYwkBSAMFmNAQS6xURAkJ/gITsJ7gSNv2LIGX3O2ECM76C5bj/V4Jpxun/DcDiLP//f7VycVms//+HA8Skn371/4Hg+xZ7BbDA/gAG9s+hofsVGFh/gwU6BBjyCxgY2D8ysPWCBdKAbnnAwMD3C8yEAPsDDAxcn5GcLwMiDg7uIAYAWu0nL21VmUgAAAAASUVORK5CYII=" alt="" class="pwd_img"> 
-                            <img data-v-596866b0="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANtBLioAAAAQdFJOUwAgwNBghz8Q8HCgsFDg3zDmODcFAAAAs0lEQVQ4y91T0QKDIAhMS0RNu///2iFa26rN93xBvYNDwGl63tooBNp+ocYV6CrO3MA+Voyt5WqjP+Or3OegniZkYa7fuLjz8j4uQo+f4e0e1BM1mwB7yPgZCLpzVd/pNgCzP/AeXnDmnSEynZHA7eleA4lruycgKRPo6RG4Ggb1VBsyJIgEbiXWLjFOcvjMVqj0p1A9+KnU7tqssjerXJs1brcOTG4Dk28HpnHqyJkH/qUXcr8LSlumRioAAAAASUVORK5CYII=" alt="" class="pwd_img" style="display: none;">
+                            <input data-v-596866b0="" type="password" id="confirmPw" maxlength="20" placeholder="请输入确认新密码" style="opacity:0.7" v-on:blur="checkPasswordFunc()">
+                            <p data-v-596866b0="" id="confirmPwTips" class="form-error" style="color: red;" v-show="checkPassword">确认新密码不能为空</p>
                         </div> 
                         <div data-v-596866b0="" class="pt-30 pb-40 t-c">
-                            <a data-v-596866b0="" href="javascript:void(0);" class="button" style="width: 200px;">修改密码</a>
+                            <a data-v-596866b0="" href="javascript:void(0);" class="button" style="width: 200px; margin-top: 10px" v-on:click="updatePassword()">修改密码</a>
                         </div>
                 </div>
             </form>
@@ -103,10 +97,92 @@ export default {
   },
   data() {
     return {
-  
+      oldPassword: false,
+      newPassword: false,
+      checkPassword: false,
     }
   },
   methods: {
+    oldPasswordFunc: function () {
+      let oldPasswordText = document.getElementById('oldPw').value;
+      this.oldPassword = oldPasswordText === "";
+      if (document.getElementById('newPw').value !== "" && document.getElementById('newPw').value !== oldPasswordText) {
+        this.newPassword = false;
+      } else if (document.getElementById('newPw').value !== "" && document.getElementById('newPw').value === oldPasswordText) {
+        this.newPassword = true;
+      }
+    },
+    newPasswordFunc: function () {
+      let newPasswordText = document.getElementById('newPw').value;
+      if (newPasswordText === "") {
+        document.getElementById('newPwTips').innerHTML = "新密码不能为空";
+        this.newPassword = true;
+      } else if (newPasswordText === document.getElementById('oldPw').value) {
+        document.getElementById('newPwTips').innerHTML = "新密码不能和原密码相同";
+        this.newPassword = true;
+      } else {
+        this.newPassword = false;
+      }
+      if (document.getElementById('confirmPw').value !== "" && document.getElementById('confirmPw').value === newPasswordText) {
+        this.checkPassword = false;
+      } else if (document.getElementById('confirmPw').value !== "" && document.getElementById('confirmPw').value !== newPasswordText){
+        this.checkPassword = true;
+      }
+    },
+    checkPasswordFunc: function () {
+      let checkPasswordText = document.getElementById('confirmPw').value;
+      if (checkPasswordText === "") {
+        document.getElementById('confirmPwTips').innerHTML = "确认新密码不能为空";
+        this.checkPassword = true;
+      } else if (checkPasswordText !== document.getElementById('newPw').value) {
+        document.getElementById('confirmPwTips').innerHTML = "确认新密码和新密码不匹配";
+        this.checkPassword = true;
+      } else {
+        this.checkPassword = false;
+      }
+    },
+    updatePassword: function () {
+      if (document.getElementById('oldPw').value === "") {
+        alert('原密码不能为空');
+      } else if (document.getElementById('newPw').value === "") {
+        alert('新密码不能为空');
+      } else if (this.newPassword) {
+        alert('新密码不能和原密码相同');
+      } else if (document.getElementById('confirmPw').value === "") {
+        alert('确认新密码不能为空');
+      } else if (this.checkPassword) {
+        alert('确认新密码和新密码不匹配');
+      } else {
+        this.$http({
+          url: "/user/update",
+          method: "POST",
+          data: {
+            user: {
+              name: localStorage.getItem("username"),
+              password: document.getElementById('oldPw').value,
+            },
+            newPasswordValue: document.getElementById('confirmPw').value
+          }
+        }).then(res => {
+          console.log(res);
+          if (res.data === 1) {
+            alert('修改密码成功');
+            localStorage.clear();
+            this.$router.push("/volunteer_login")
+          } else if (res.data === -1) {
+            alert('原密码错误');
+            document.getElementById('oldPw').value = "";
+          } else {
+            alert('修改失败');
+            location.reload();
+          }
+        }).catch(err => {
+          alert('修改失败');
+          location.reload();
+          console.log(err);
+        })
+      }
+    },
     volunteer_center: function (){
       console.log("tiaotiaotiao")
       this.$router.push("/volunteer_center")
@@ -116,7 +192,7 @@ export default {
     },
     myTeam: function (){
       this.$router.push("/myTeam")
-    },
+    }
   },
   mounted: function () {
     // eslint-disable-next-line no-empty
@@ -126,9 +202,6 @@ export default {
     }
   }
 };
-</script>
-<script>
-  
 </script>
 <style scoped>
 #usermenu {
