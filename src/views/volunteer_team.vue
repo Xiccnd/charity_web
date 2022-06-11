@@ -114,17 +114,6 @@ export default {
         { sid: 2, serviceName: "扶贫减贫" },
       ],
 
-      volunteer_program_details: [
-        {
-          pid: 0,
-          pname: "汛期安全知识”志愿宣讲活动 ",
-          Project_status: "招募中",
-          posts: 1,
-          targetNumber: 3,
-          enrolledNumber: 2,
-          recruitDate: "2022-6-9",
-        },
-      ],
     };
   },
   props: [],

@@ -27,7 +27,7 @@
                     <em data-v-18d5a56f="">*</em><span data-v-18d5a56f="" id="orgname">用户名：</span>
                     <span data-v-18d5a56f="" id="orgtip" style="font-size: 14px; color: rgb(102, 102, 102);"></span>
                   </p>
-                  <input type="text" id="groupName" maxlength="50" placeholder="请输入用户名" v-model="team.name"></div>
+                  <input type="text" id="groupName" maxlength="50" placeholder="请输入用户名" v-model="user.name"></div>
                 <span data-v-18d5a56f="" id="groupNameTips" class="form-error down-tip" style="color: red;"></span>
               </li>
 
@@ -37,7 +37,7 @@
                     <em data-v-18d5a56f="">*</em><span data-v-18d5a56f="" id="orgname">密码：</span>
                     <span data-v-18d5a56f="" id="orgtip" style="font-size: 14px; color: rgb(102, 102, 102);"></span>
                   </p>
-                  <input type="text" id="groupName" maxlength="50" placeholder="请输入密码" v-model="team.password"></div>
+                  <input type="text" id="groupName" maxlength="50" placeholder="请输入密码" v-model="user.password"></div>
                 <span data-v-18d5a56f="" id="groupNameTips" class="form-error down-tip" style="color: red;"></span>
               </li>
 
@@ -110,7 +110,7 @@
                   <p data-v-18d5a56f="" class="form-label">成立日期：</p>
                   <div data-v-18d5a56f="" class="mx-datepicker" style="width: 100%;">
                     <div class="mx-input-wrapper">
-                      <input name="date" type="date" autocomplete="off" placeholder="请输入成立日期" class="mx-input" v-model="team.registerData">
+                      <input name="date" type="date" autocomplete="off" placeholder="请输入成立日期" class="mx-input" v-model="team.registerDate">
                       <i class="mx-icon-calendar">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1em" height="1em">
                         <path
@@ -182,7 +182,7 @@
                   <div data-v-18d5a56f="" class="checkbox-fixed" v-for="(item,index) in service" :key="index">
 
                     <label data-v-18d5a56f="" for="afc01caad28b4c2e93bb0b7ac1840a6a" class="checkbox">
-                      <input data-v-18d5a56f="" type="checkbox" name="checkbox" id="afc01caad28b4c2e93bb0b7ac1840a6a" value="0001" v-model="item.sid" v-on:click="myFun(item.sid,index)">
+                      <input data-v-18d5a56f="" type="checkbox"  name="checkbox" :value="item.sid" v-model="classs" >
                       <span data-v-18d5a56f=""></span>
                       <i data-v-18d5a56f="">{{ item.serviceName }}</i>
                     </label>
@@ -195,7 +195,6 @@
               <a data-v-18d5a56f="" href="javascript:void(0);" class="button" v-on:click="btn()">注册</a>
             </div>
           </div>
-
         </li>
       </ul>
     </div>
@@ -210,37 +209,38 @@ import Guidebar from "../components/guidebar.vue";
 export default {
   data() {
     return {
-      team:{
+      all:{
+
+      },
+      service:[
+        {
+          sid:"1",
+          serviceName:"其他",
+        }
+      ],
+      user:{
         name:"",
         password:"",
+      },
+      team:{
         contact:"",
         teamName: "",
         address:"",
         regisDepartment:"",
         registrationAuthority:"",
         telephone:"",
-        registerData:"",
+        registerDate:"",
         detailedAddress:"",
         liaisonOrganization:"",
         teamProfile:"",
       },
-      service:[
-        {
-          sid:"",
-          serviceName:""
-        }
-      ],
-      classs:[
-        {
-          sid:"",
-        }
-      ]
+      classs:[]
     };
   },
   props: [],
   created() {
     const _this = this
-    this.$http.get("http://192.168.1.147:8088/classOfService/queryAll")
+    this.$http.post("http://192.168.1.147:8088/classOfService/queryAll")
         .then(res => {
           _this.service = res.data
         })
@@ -252,15 +252,11 @@ export default {
     Guidebar,
   },
   methods: {
-    myFun:function (e,s){
-      this.classs[s].sid=e
-      console.log(this.classs)
-    },
     btn:function (){
-      this.$http.get("",{
-        data:{
-          team:this.team,
-          classs:this.classs
+      this.$http.post("http://localhost:8088/volunteerTeam/insVolunteerTeam",{
+        data: {
+          user:this.user,
+          team:this.team
         }
       })
     }
