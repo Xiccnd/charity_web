@@ -506,5 +506,15 @@ p{
 }.right2-tip {
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMBAMAAACkW0HUAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAkUExURRqsGUdwTBitGBCvEBmrGRqsGfP780W7RKbfpiixJ1PBUozVi9d6Gv0AAAAFdFJOU9AAYBBwGY7RpQAAAEpJREFUCNdjEBRhDVAUZBBmDQ0NMGQQCAUCRgZXIDk1iAEoFp4VwBA6O7SsNZQhtKw9IzSUgTU8rTU0AKikIjQ0CKYBql1QCGQYADHME4V7yK+MAAAAAElFTkSuQmCC) 10px no-repeat;
     color: #666;
+}.subtitle:before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    background: #cc0000;
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    margin-top: -10px;
 }
 </style>

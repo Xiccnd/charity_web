@@ -48,31 +48,6 @@
       <search @searchdata="getdata"></search>
     </template>
     <template v-slot:panel>
-      <li  class="panel-list__item" style="width: 25%" v-for="(item,i) in volunteer_program_details" :key="i">
-        <div class="panel-card">
-          <router-link :to="{path:'/volunteer_program/volunteer_program_details',query:{id:item.pid}}">
-          <img src="../assets/images/program/1.png" alt="" style="width: 260px; height: 170px"/>
-          </router-link>
-          <p  class="t-c">
-            <a href="javascript:void(0);" class="button button-small success round">{{item.projectStatus}}</a>
-          </p>
-          <h2 class="panel-card__name">
-            <a href="javascript:void(0);" title="给外卖骑手送温暖">{{item.pname}}</a>
-          </h2>
-          <ul  class="row w panel-card__info">
-            <li  class="col v-m">
-              <h2 >岗位</h2>
-              <p >{{item.posts}}个</p>
-            </li>
-            <li  class="col v-m">
-              <h2 >目标</h2>
-              <p >{{item.targetNumber}}个</p>
-            </li>
-            <li  class="col v-m">
-              <h2 >报名</h2>
-              <p >{{item.enrolledNumber}}个</p>
-            </li>
-          </ul>
           <div  id="getList" >
             <ul  class="panel-list">
               <li class="panel-list__item" style="width: 25%" v-for="(item,i) in volunteer_program_details" :key="i">
@@ -114,22 +89,11 @@
                 </div>
               </li>   
             </ul>
-            <Pages></Pages>
-
-          <div class="progress" style="text-align: left">
-            <span class="bar" style="width: 0%"></span>
-          </div>
-
-          <p class="row w">
-            <span  class="col v-m">项目进度：
-              <b >0%</b>
-            </span>
-            <span class="col v-m t-r"><em  class="danger">截止日期：</em><b >
-              {{item.recruitDate.substring(0,10)}}
-            </b></span>
-          </p>
+           
         </div>
-      </li>
+       
+ <Pages></Pages>
+
     </template>
   </program>
 </template>

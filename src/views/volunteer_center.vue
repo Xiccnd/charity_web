@@ -48,7 +48,7 @@
                   class="router-link-exact-active router-link-active active"
               >基本信息</a
               >
-              <a href="#/chongqing/updateiden" class="">修改密码</a>
+              <a href="javascript:void(0);" class="" v-on:click="updatePassword">修改密码</a>
             </div>
             <div class="tabbar-down">
               <div class="grid g-width">
@@ -732,6 +732,9 @@ export default {
       }).catch(err => {
         console.log(err);
       })
+    },
+    updatePassword: function (){
+      this.$router.push("/updatePassword")
     },
     myTeam: function (){
       this.$router.push("/myTeam")
