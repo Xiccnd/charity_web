@@ -48,44 +48,51 @@
       <search @searchdata="getdata"></search>
     </template>
     <template v-slot:panel>
-      <li  class="panel-list__item" style="width: 25%" v-for="(item,i) in volunteer_program_details" :key="i">
-        <div class="panel-card">
-          <router-link :to="{path:'/volunteer_program/volunteer_program_details',query:{id:item.pid}}">
-          <img src="../assets/images/program/1.png" alt="" style="width: 260px; height: 170px"/>
-          </router-link>
-          <p  class="t-c">
-            <a href="javascript:void(0);" class="button button-small success round">{{item.projectStatus}}</a>
-          </p>
-          <h2 class="panel-card__name">
-            <a href="javascript:void(0);" title="给外卖骑手送温暖">{{item.pname}}</a>
-          </h2>
-          <ul  class="row w panel-card__info">
-            <li  class="col v-m">
-              <h2 >岗位</h2>
-              <p >{{item.posts}}个</p>
-            </li>
-            <li  class="col v-m">
-              <h2 >目标</h2>
-              <p >{{item.targetNumber}}个</p>
-            </li>
-            <li  class="col v-m">
-              <h2 >报名</h2>
-              <p >{{item.enrolledNumber}}个</p>
-            </li>
-          </ul>
-          <div class="progress" style="text-align: left">
-            <span class="bar" style="width: 0%"></span>
-          </div>
-          <p class="row w">
-            <span  class="col v-m">项目进度：
-              <b >0%</b>
-            </span>
-            <span class="col v-m t-r"><em  class="danger">截止日期：</em><b >
-              {{item.recruitDate.substring(0,10)}}
-            </b></span>
-          </p>
+          <div  id="getList" >
+            <ul  class="panel-list">
+              <li class="panel-list__item" style="width: 25%" v-for="(item,i) in volunteer_program_details" :key="i">
+                <div class="panel-card">
+                  <router-link :to="{path:'/volunteer_program/volunteer_program_details',query:{id:item.pid}}">
+                  <img src="../assets/images/program/1.png" alt="" style="width: 260px; height: 170px"/>
+                  </router-link>
+                  <p  class="t-c">
+                    <a href="javascript:void(0);" class="button button-small success round">{{item.statusName}}</a>
+                  </p>
+                  <h2 class="panel-card__name">
+                    <a href="javascript:void(0);" title="给外卖骑手送温暖">{{item.pname}}</a>
+                  </h2>
+                  <ul  class="row w panel-card__info">
+                    <li  class="col v-m">
+                      <h2 >岗位</h2>
+                      <p >{{item.posts}}个</p>
+                    </li>
+                    <li  class="col v-m">
+                      <h2 >目标</h2>
+                      <p >{{item.targetNumber}}个</p>
+                    </li>
+                    <li  class="col v-m">
+                      <h2 >报名</h2>
+                      <p >{{item.enrolledNumber}}个</p>
+                    </li>
+                  </ul>
+                  <div class="progress" style="text-align: left">
+                    <span class="bar" style="width: 0%"></span>
+                  </div>
+                  <p class="row w">
+                    <span  class="col v-m">项目进度：
+                      <b >0%</b>
+                    </span>
+                    <span class="col v-m t-r"><em  class="danger">截止日期：</em><b >
+                      {{item.recruitDate.substring(0,10)}}
+                    </b></span>
+                  </p>
+                </div>
+              </li>   
+            </ul>
         </div>
-      </li>
+       
+ <Pages></Pages>
+
     </template>
   </program>
 </template>
@@ -101,13 +108,14 @@ export default {
       //项目
     volunteer_program_details:[
       {
-        pid:0,
+        pid:1,
         pname:"汛期安全知识”志愿宣讲活动 ",
         projectStatus:"招募中",
         posts:1,
         targetNumber:3,
         enrolledNumber:2,
-        recruitDate:"2022-6-9"
+        recruitDate:"2022-6-9",
+        statusName:""
       }],
     territory:[
       {territoryid:0,territorydes:"全部"},
@@ -118,18 +126,6 @@ export default {
         { sid: 0, serviceName: "全部" },
         { sid: 1, serviceName: "社区服务" },
         { sid: 2, serviceName: "扶贫减贫" },
-      ],
-
-      volunteer_program_details: [
-        {
-          pid: 0,
-          pname: "汛期安全知识”志愿宣讲活动 ",
-          Project_status: "招募中",
-          posts: 1,
-          targetNumber: 3,
-          enrolledNumber: 2,
-          recruitDate: "2022-6-9",
-        },
       ],
     };
   },
@@ -179,16 +175,37 @@ export default {
     queryList: function () {
         const _this = this;
         this.$http({
-          method: "get",
-          url: "/volunteerProgramDetails/selectOne?id=1",
-        })
-          .then((res) => {
-            console.log(res.data);
-            _this.volunteer_program_details[0] = res.data;
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+
+                  method:"get",
+                  url:"/volunteerProgramDetails/selectAll",
+                  params:{
+                  pid:_this.searchid,
+                  pname:_this.searchpname,
+                  releaseDate:_this.releaseDate,
+                  recruitDate:_this.recruitDate
+                   }
+               })
+              .then(res => {
+                console.log(res.data)
+                 _this.volunteer_program_details=res.data
+                 console.log(_this.volunteer_program_details)
+              })
+              .catch(err => {
+                console.error(err); 
+              })
+      
+// =======
+//           method: "get",
+//           url: "/volunteerProgramDetails/selectOne?id=1",
+//         })
+//           .then((res) => {
+//             console.log(res.data);
+//             _this.volunteer_program_details[0] = res.data;
+//           })
+//           .catch((err) => {
+//             console.error(err);
+//           });
+// >>>>>>> 41380502cb2a2c64464c772cb9d04585cc857a4f
       },
   },
 };

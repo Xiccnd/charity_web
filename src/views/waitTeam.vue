@@ -12,7 +12,7 @@
               <span> 用户中心</span>
             </template>
             <template v-slot:tp>
-              <span> 我的队伍</span>
+              <span> 待定队伍</span>
             </template>
           </guidebar>
         </li>
@@ -48,8 +48,8 @@
               <a href="#/chongqing/updateiden" class="">待定项目</a>
             </div> -->
             <div data-v-154d252a="" class="tabbar tabbar-tight mb-20 row w">
-                <span data-v-154d252a="" data-a="1" class="col v-m  active">我的队伍</span> 
-                <span data-v-154d252a="" data-a="2" class="col v-m" v-on:click="waitTeam">待定队伍</span> 
+                <span data-v-154d252a="" data-a="1" class="col v-m" v-on:click="myTeam">我的队伍</span> 
+                <span data-v-154d252a="" data-a="2" class="col v-m active">待定队伍</span> 
                 <div data-v-154d252a="" class="col v-m t-r twoIteam">
                     <a data-v-154d252a="" href="javascript:void(0);" class="button button-normal">队伍同步</a> 
                     <a data-v-154d252a="" href="javascript:void(0);" class="button button-normal">参加更多队伍</a>
@@ -66,7 +66,7 @@
                 <tr data-v-aff75a3c="" class="iteamName">
                     <th data-v-aff75a3c="">队伍名称</th> 
                     <th data-v-aff75a3c="">联系方式</th> 
-                    <th data-v-aff75a3c="">加入时间</th> 
+                    <th data-v-aff75a3c="">申请时间</th> 
                     <th data-v-aff75a3c="">状态</th> 
                     <th data-v-aff75a3c="">操作</th>
                 </tr>
@@ -97,8 +97,8 @@ export default {
     myProject: function (){
       this.$router.push("/myProject")
     },
-    waitTeam: function (){
-      this.$router.push("/waitTeam")
+    myTeam: function (){
+      this.$router.push("/myTeam")
     }
   },
 };

@@ -15,6 +15,40 @@
             <a href="javascript:void(0); " class="category__item active"
               >全部</a
             >
+          <div class="category" >
+            <h2 class="category__title">服务类别</h2>
+            <div class="category__content">
+               <a href="javascript:void(0);" class="category__item active">全部</a>
+               <a class="category__item" v-for="(ter,i) in territory" :key="i">
+                {{ter.territorydes}}
+              </a>
+            </div>
+            <div class="category__wrap" style="display: none">
+              <div class="category__content">
+                <a href="javascript:void(0); " class="category__item active">全部</a>
+              </div>
+            </div>
+          </div>
+          <div class="category">
+            <h2 class="category__title">队伍类型</h2>
+            <div class="category__content">
+              <a href="javascript:void(0);" class="category__item active">全部</a>
+               <a href="javascript:void(0);" v-for="(item,i) in class_of_service" :key="i"
+                class="category__item ">{{item.serviceName}}</a>
+            </div>
+          </div>
+          <div class="category">
+            <h2 class="category__title">队伍人数</h2>
+            <div class="category__content">
+              <a href="javascript:void(0);" class="category__item active">全部</a>
+              <a href="javascript:void(0);" class="category__item">招募待启动</a>
+              <a href="javascript:void(0);" class="category__item">招募中</a>
+              <a href="javascript:void(0);" class="category__item">招募已结束</a>
+            </div>
+          </div>
+          <div class="category-handle">
+            <span class="hidden">收起</span>
+            <span class="">更多条件</span>
           </div>
         </div>
       </div>
@@ -139,17 +173,6 @@ export default {
         { sid: 2, serviceName: "扶贫减贫" },
       ],
 
-      volunteer_program_details: [
-        {
-          pid: 0,
-          pname: "汛期安全知识”志愿宣讲活动 ",
-          Project_status: "招募中",
-          posts: 1,
-          targetNumber: 3,
-          enrolledNumber: 2,
-          recruitDate: "2022-6-9",
-        },
-      ],
     };
   },
   props: [],

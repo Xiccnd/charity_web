@@ -1,6 +1,7 @@
 <template>
 <normal-head></normal-head>
-  <div class="container">
+123
+  <!-- <div class="container">
     <div class="row clearfix">
       <div class="col-md-12 column">
         <div style="width:220px;height: 60px; margin-top: 5px;">
@@ -133,7 +134,7 @@
 
 
     </div>
-  </div>
+  </div> -->
 </template>
 <script>
 import NormalHead from "@/components/normal_head";

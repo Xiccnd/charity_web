@@ -49,7 +49,7 @@
             </div> -->
             <div data-v-154d252a="" class="tabbar tabbar-tight mb-20 row w">
                 <span data-v-154d252a="" data-a="1" class="col v-m  active">我的项目</span> 
-                <span data-v-154d252a="" data-a="2" class="col v-m">待定项目</span> 
+                <span data-v-154d252a="" data-a="2" class="col v-m" v-on:click="waitProject">待定项目</span> 
                 <div data-v-154d252a="" class="col v-m t-r twoIteam">
                     <a data-v-154d252a="" href="javascript:void(0);" class="button button-normal">项目同步</a> 
                     <a data-v-154d252a="" href="javascript:void(0);" class="button button-normal">参加更多项目</a>
@@ -59,18 +59,18 @@
                 <colgroup data-v-154d252a="">
                 <col data-v-154d252a="" width="25%"> 
                 <col data-v-154d252a="" width="18%"> 
-                <col data-v-154d252a="" width="10%"> 
                 <col data-v-154d252a="" width="15%"> 
-                <col data-v-154d252a="" width="10%"> 
-                <col data-v-154d252a="" width="8%"> 
-                <col data-v-154d252a="" width="14%">
+                <col data-v-154d252a="" width="12%"> 
+                <!-- <col data-v-154d252a="" width="10%">  -->
+                <col data-v-154d252a="" width="13%"> 
+                <col data-v-154d252a="" width="19%">
                 </colgroup> 
                 <tr data-v-154d252a="" class="iteamName">
                     <th data-v-154d252a="">项目名称</th> 
                     <th data-v-154d252a="">联系方式</th> 
                     <th data-v-154d252a="">加入时间</th> 
                     <th data-v-154d252a="">岗位</th> 
-                    <th data-v-154d252a="">服务时长</th> 
+                    <!-- <th data-v-154d252a="">服务时长</th>  -->
                     <th data-v-154d252a="">状态</th> 
                     <th data-v-154d252a="">操作</th>
                 </tr> 
@@ -95,6 +95,9 @@ export default {
     LoginHead,
   },
   methods: {
+    waitProject: function (){
+      this.$router.push("/waitProject")
+    },
     myTeam: function (){
       this.$router.push("/myTeam")
     },
