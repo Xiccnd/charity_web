@@ -27,16 +27,10 @@
           <div class="category">
             <h2 class="category__title">队伍人数</h2>
             <div class="category__content">
-              <a href="javascript:void(0);" class="category__item active"
-                >全部</a
-              >
-              <a href="javascript:void(0);" class="category__item"
-                >招募待启动</a
-              >
+              <a href="javascript:void(0);" class="category__item active">全部</a>
+              <a href="javascript:void(0);" class="category__item">招募待启动</a>
               <a href="javascript:void(0);" class="category__item">招募中</a>
-              <a href="javascript:void(0);" class="category__item"
-                >招募已结束</a
-              >
+              <a href="javascript:void(0);" class="category__item">招募已结束</a>
             </div>
           </div>
           <div class="category-handle">
