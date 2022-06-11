@@ -44,20 +44,23 @@
                     </p>
                     <input  
                       type="text"
+                      name="userName"
                       id="username"
                       maxlength="20"
                       oninput="this.value=this.value.replace(/[^\w_.]/g,'').slice(0,20);"
                       placeholder="请输入用户名"
                       v-model="user.name"
+                      v-on:blur="checkNum"
                     />
+                   
                     <p
-                      
                       id="usernameTips"
                       class="form-error warn-tip"
                       style="margin-top: 0px"
                     >
                       用户名长度6～20个字符，以字母a～z开头，且只能由字母、数字0～9和下划线组成
                     </p>
+                    
                   </div>
                   <div  class="form g-12">
                     <p  class="form-label">
@@ -85,7 +88,6 @@
                       style="display: none"
                     />
                     <p
-                      
                       id="passwordTips"
                       class="form-error warn-tip"
                       style="margin-top: 0px"
@@ -138,7 +140,6 @@
                       v-model="user.telephone"
                     />
                     <p
-                      
                       id="phonenumTips"
                       class="form-error warn-tip"
                     >
@@ -304,7 +305,8 @@ return{
     password:"",
     telephone:""
  },
-  password1:""
+  password1:"",
+  
 }
   
 
@@ -334,11 +336,60 @@ return{
                 console.error(err); 
               })
       },
-      
-    }
- 
+    checkNum(){
+      const _this = this
+        this.$http({
+                method:"post",
+                url:"/user/RegistrationVerification",
+                data:{
+                  name:this.user.name
+                }
+               })
+              .then(res => {
+               if (res.data == true) {
+                document.getElementById('usernameTips').innerHTML="用户名已存在"
+                document.getElementById('usernameTips').classList.remove('right-tip');
+                document.getElementById('usernameTips').classList.remove ('right2-tip');
+                document.getElementById('usernameTips').classList.add('warn-tip');
+                  }else if(this.user.name==''){
+                 document.getElementById('usernameTips').innerHTML="用户名不可为空"
+                   document.getElementById('usernameTips').classList.remove('right-tip');
+                   document.getElementById('usernameTips').classList.remove ('right2-tip');
+                   document.getElementById('usernameTips').classList.add('warn-tip');
+                 }else{
+                   document.getElementById('usernameTips').innerHTML="用户名可用"
+                   document.getElementById('usernameTips').classList.add('right-tip');
+                   document.getElementById('usernameTips').classList.add ('right2-tip');
+                   document.getElementById('usernameTips').classList.remove('warn-tip');
+                 }
+              })
+              .catch(err => {
+                console.error(err); 
+              })
+ }
+    },
+
 }
 
+
+
+  // $(function () {
+  //  $("[name=userName]").blur(function () {
+  //   $.ajax({
+  //    type:"get",
+  //    url:"/user/RegistrationVerification?name="+$("[name=userName]").val(),
+  //    dataType:"text",
+  //    success:function (data) {
+  //     alert(data);
+  //     // if (data=="1"){
+  //     //  $("#show").html("用户已存在！！！")
+  //     // }else {
+  //     //  $("#show").html("用户名可用")
+  //     // }
+  //    }
+  //   })
+  //  })
+  // });
 </script>
 
 <style scoped>
@@ -443,5 +494,17 @@ p{
     position: absolute;
     left: 100%;
     padding-left: 30px;
+}
+.form .right-tip {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 330px;
+    position: absolute;
+    left: 100%;
+    padding-left: 30px;
+}.right2-tip {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMBAMAAACkW0HUAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAkUExURRqsGUdwTBitGBCvEBmrGRqsGfP780W7RKbfpiixJ1PBUozVi9d6Gv0AAAAFdFJOU9AAYBBwGY7RpQAAAEpJREFUCNdjEBRhDVAUZBBmDQ0NMGQQCAUCRgZXIDk1iAEoFp4VwBA6O7SsNZQhtKw9IzSUgTU8rTU0AKikIjQ0CKYBql1QCGQYADHME4V7yK+MAAAAAElFTkSuQmCC) 10px no-repeat;
+    color: #666;
 }
 </style>
