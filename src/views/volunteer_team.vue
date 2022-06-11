@@ -3,7 +3,7 @@
   <program>
     <template v-slot:catagory>
           <div class="category" >
-            <h2 class="category__title">项目区域</h2>
+            <h2 class="category__title">服务类别</h2>
             <div class="category__content">
                <a href="javascript:void(0);" class="category__item active">全部</a>
                <a class="category__item" v-for="(ter,i) in territory" :key="i">
@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="category">
-            <h2 class="category__title">服务类别</h2>
+            <h2 class="category__title">队伍类型</h2>
             <div class="category__content">
               <a href="javascript:void(0);" class="category__item active">全部</a>
                <a href="javascript:void(0);" v-for="(item,i) in class_of_service" :key="i"
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="category">
-            <h2 class="category__title">项目状态</h2>
+            <h2 class="category__title">队伍人数</h2>
             <div class="category__content">
               <a href="javascript:void(0);" class="category__item active"
                 >全部</a
@@ -73,53 +73,9 @@
               <p >{{item.enrolledNumber}}个</p>
             </li>
           </ul>
-          <div  id="getList" >
-            <ul  class="panel-list">
-              <li class="panel-list__item" style="width: 25%" v-for="(item,i) in volunteer_program_details" :key="i">
-                <div class="panel-card">
-                  <router-link :to="{path:'/volunteer_program/volunteer_program_details',query:{id:item.pid}}">
-                  <img src="../assets/images/program/1.png" alt="" style="width: 260px; height: 170px"/>
-                  </router-link>
-                  <p  class="t-c">
-                    <a href="javascript:void(0);" class="button button-small success round">{{item.statusName}}</a>
-                  </p>
-                  <h2 class="panel-card__name">
-                    <a href="javascript:void(0);" title="给外卖骑手送温暖">{{item.pname}}</a>
-                  </h2>
-                  <ul  class="row w panel-card__info">
-                    <li  class="col v-m">
-                      <h2 >岗位</h2>
-                      <p >{{item.posts}}个</p>
-                    </li>
-                    <li  class="col v-m">
-                      <h2 >目标</h2>
-                      <p >{{item.targetNumber}}个</p>
-                    </li>
-                    <li  class="col v-m">
-                      <h2 >报名</h2>
-                      <p >{{item.enrolledNumber}}个</p>
-                    </li>
-                  </ul>
-                  <div class="progress" style="text-align: left">
-                    <span class="bar" style="width: 0%"></span>
-                  </div>
-                  <p class="row w">
-                    <span  class="col v-m">项目进度：
-                      <b >0%</b>
-                    </span>
-                    <span class="col v-m t-r"><em  class="danger">截止日期：</em><b >
-                      {{item.recruitDate.substring(0,10)}}
-                    </b></span>
-                  </p>
-                </div>
-              </li>   
-            </ul>
-            <Pages></Pages>
-
           <div class="progress" style="text-align: left">
             <span class="bar" style="width: 0%"></span>
           </div>
-
           <p class="row w">
             <span  class="col v-m">项目进度：
               <b >0%</b>
@@ -138,7 +94,7 @@ import NormalHead from "@/components/normal_head";
 import Guidebar from "@/components/guidebar";
 import Pages from "@/components/pages"
 import Program from "@/components/program"
-import Search from "@/components/program_search"
+import Search from "@/components/team_search"
 export default {
   data() {
     return {
@@ -151,8 +107,7 @@ export default {
         posts:1,
         targetNumber:3,
         enrolledNumber:2,
-        recruitDate:"2022-6-9",
-        statusName:""
+        recruitDate:"2022-6-9"
       }],
     territory:[
       {territoryid:0,territorydes:"全部"},
@@ -224,37 +179,16 @@ export default {
     queryList: function () {
         const _this = this;
         this.$http({
-
-                  method:"get",
-                  url:"/volunteerProgramDetails/selectAll",
-                  params:{
-                  pid:_this.searchid,
-                  pname:_this.searchpname,
-                  releaseDate:_this.releaseDate,
-                  recruitDate:_this.recruitDate
-                   }
-               })
-              .then(res => {
-                console.log(res.data)
-                 _this.volunteer_program_details=res.data
-                 console.log(_this.volunteer_program_details)
-              })
-              .catch(err => {
-                console.error(err); 
-              })
-      
-// =======
-//           method: "get",
-//           url: "/volunteerProgramDetails/selectOne?id=1",
-//         })
-//           .then((res) => {
-//             console.log(res.data);
-//             _this.volunteer_program_details[0] = res.data;
-//           })
-//           .catch((err) => {
-//             console.error(err);
-//           });
-// >>>>>>> 41380502cb2a2c64464c772cb9d04585cc857a4f
+          method: "get",
+          url: "/volunteerProgramDetails/selectOne?id=1",
+        })
+          .then((res) => {
+            console.log(res.data);
+            _this.volunteer_program_details[0] = res.data;
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       },
   },
 };
