@@ -56,9 +56,9 @@
                     <p
                       id="usernameTips"
                       class="form-error warn-tip"
-                      style="margin-top: 0px"
+                      style="margin-top: 10px"
                     >
-                      用户名长度6～20个字符，以字母a～z开头，且只能由字母、数字0～9和下划线组成
+                      用户名长度6～16个字符
                     </p>
                     
                   </div>
@@ -73,6 +73,7 @@
                       maxlength="20"
                       placeholder="请输入密码"
                       v-model="user.password"
+                      v-on:blur="checkpawd"
                     />
                     <img
                       
@@ -90,9 +91,9 @@
                     <p
                       id="passwordTips"
                       class="form-error warn-tip"
-                      style="margin-top: 0px"
+                      style="margin-top: 10px"
                     >
-                      密码长度为8-20个字符，且必须同时包含数字、大写字母和小写字母
+                      8-16个字符,⾄少1个⼤写字母,1个⼩写字母和1个数字
                     </p>
                   </div>
                   <div  class="form g-12">
@@ -106,6 +107,7 @@
                       maxlength="20"
                       placeholder="请输入确认密码"
                       v-model="password1"
+                      v-on:blur="checkrepawd"
                     />
                     <img
                       
@@ -121,23 +123,22 @@
                       style="display: none"
                     />
                     <p
-                      
                       id="repeatpwTips"
                       class="form-error warn-tip"
-                    ></p>
+                    >请再次输入密码</p>
                   </div>
                   <div  class="form g-12">
                     <p  class="form-label">
                       <em >*</em>手机号码：
                     </p>
                     <input
-                      
                       type="text"
                       id="phonenum"
                       oninput="value=value.replace(/[^\d]/g,'').slice(0,11);"
                       maxlength="11"
                       placeholder="请输入手机号码"
                       v-model="user.telephone"
+                      v-on:blur="checkPhone"
                     />
                     <p
                       id="phonenumTips"
@@ -338,6 +339,8 @@ return{
       },
     checkNum(){
       const _this = this
+      var numReg = /^\w{6,16}$/
+      var numRe = new RegExp(numReg)
         this.$http({
                 method:"post",
                 url:"/user/RegistrationVerification",
@@ -352,10 +355,15 @@ return{
                 document.getElementById('usernameTips').classList.remove ('right2-tip');
                 document.getElementById('usernameTips').classList.add('warn-tip');
                   }else if(this.user.name==''){
-                 document.getElementById('usernameTips').innerHTML="用户名不可为空"
+                  document.getElementById('usernameTips').innerHTML="用户名不可为空"
                    document.getElementById('usernameTips').classList.remove('right-tip');
                    document.getElementById('usernameTips').classList.remove ('right2-tip');
                    document.getElementById('usernameTips').classList.add('warn-tip');
+                 }else if(!numRe.test(this.user.name)){
+                    document.getElementById('usernameTips').innerHTML="用户名不规范(用户名长度6～16个字符)"
+                   document.getElementById('usernameTips').classList.remove('right-tip');
+                   document.getElementById('usernameTips').classList.remove ('right2-tip');
+                   document.getElementById('usernameTips').classList.add('warn-tip'); 
                  }else{
                    document.getElementById('usernameTips').innerHTML="用户名可用"
                    document.getElementById('usernameTips').classList.add('right-tip');
@@ -366,30 +374,96 @@ return{
               .catch(err => {
                 console.error(err); 
               })
- }
+ },
+   checkpawd(){
+      const _this = this
+      var numReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/
+      var numRe = new RegExp(numReg)
+              if(this.user.password==''){
+                   document.getElementById('passwordTips').innerHTML="密码不可为空"
+                   document.getElementById('passwordTips').classList.remove('right-tip');
+                   document.getElementById('passwordTips').classList.remove ('right2-tip');
+                   document.getElementById('passwordTips').classList.add('warn-tip');
+                 }else if(!numRe.test(this.user.password)){
+                   document.getElementById('passwordTips').innerHTML=" 8-16个字符,⾄少1个⼤写字母,1个⼩写字母和1个数字"
+                   document.getElementById('passwordTips').classList.remove('right-tip');
+                   document.getElementById('passwordTips').classList.remove ('right2-tip');
+                   document.getElementById('passwordTips').classList.add('warn-tip'); 
+                 }else{
+                   document.getElementById('passwordTips').innerHTML="   &nbsp;"
+                   document.getElementById('passwordTips').classList.add('right-tip');
+                   document.getElementById('passwordTips').classList.add ('right2-tip');
+                   document.getElementById('passwordTips').classList.remove('warn-tip');
+                 }
+             
+ },
+   checkrepawd(){
+      const _this = this
+      var numReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/
+      var numRe = new RegExp(numReg)
+              if(this.password1==''){
+                   document.getElementById('repeatpwTips').innerHTML="密码不可为空"
+                   document.getElementById('repeatpwTips').classList.remove('right-tip');
+                   document.getElementById('repeatpwTips').classList.remove ('right2-tip');
+                   document.getElementById('repeatpwTips').classList.add('warn-tip');
+                 }else if(this.password1 != this.user.password){
+                   document.getElementById('repeatpwTips').innerHTML="密码不一致"
+                   document.getElementById('repeatpwTips').classList.remove('right-tip');
+                   document.getElementById('repeatpwTips').classList.remove ('right2-tip');
+                   document.getElementById('repeatpwTips').classList.add('warn-tip'); 
+                 }else{
+                   document.getElementById('repeatpwTips').innerHTML="   &nbsp;"
+                   document.getElementById('repeatpwTips').classList.add('right-tip');
+                   document.getElementById('repeatpwTips').classList.add ('right2-tip');
+                   document.getElementById('repeatpwTips').classList.remove('warn-tip');
+                 }
+             
+ },
+//  checkPhone(){
+//       const _this = this
+//       var numReg = /^1[3|4|5|7|8|9][0-9]\d{4,11}$/
+//       var numRe = new RegExp(numReg)
+//         this.$http({
+//                 method:"post",
+//                 // url:"/user/RegistrationVerification",
+//                 data:{
+//                   telephone:this.user.telephone
+//                 }
+//                })
+//               .then(res => {
+//                if (res.data == true) {
+//                 document.getElementById('phonenumTips').innerHTML="手机号码已存在"
+//                 document.getElementById('phonenumTips').classList.remove('right-tip');
+//                 document.getElementById('phonenumTips').classList.remove ('right2-tip');
+//                 document.getElementById('phonenumTips').classList.add('warn-tip');
+//                   }else if(this.user.telephone==''){
+//                   document.getElementById('phonenumTips').innerHTML="用户名不可为空"
+//                    document.getElementById('phonenumTips').classList.remove('right-tip');
+//                    document.getElementById('phonenumTips').classList.remove ('right2-tip');
+//                    document.getElementById('phonenumTips').classList.add('warn-tip');
+//                  }else if(!numRe.test(this.user.telephone)){
+//                     document.getElementById('phonenumTips').innerHTML="用户名不规范(用户名长度6～16个字符)"
+//                    document.getElementById('phonenumTips').classList.remove('right-tip');
+//                    document.getElementById('phonenumTips').classList.remove ('right2-tip');
+//                    document.getElementById('phonenumTips').classList.add('warn-tip'); 
+//                  }else{
+//                    document.getElementById('phonenumTips').innerHTML="用户名可用"
+//                    document.getElementById('phonenumTips').classList.add('right-tip');
+//                    document.getElementById('phonenumTips').classList.add ('right2-tip');
+//                    document.getElementById('phonenumTips').classList.remove('warn-tip');
+//                  }
+//               })
+//               .catch(err => {
+//                 console.error(err); 
+//               })
+//  },
     },
 
 }
 
 
 
-  // $(function () {
-  //  $("[name=userName]").blur(function () {
-  //   $.ajax({
-  //    type:"get",
-  //    url:"/user/RegistrationVerification?name="+$("[name=userName]").val(),
-  //    dataType:"text",
-  //    success:function (data) {
-  //     alert(data);
-  //     // if (data=="1"){
-  //     //  $("#show").html("用户已存在！！！")
-  //     // }else {
-  //     //  $("#show").html("用户名可用")
-  //     // }
-  //    }
-  //   })
-  //  })
-  // });
+
 </script>
 
 <style scoped>
@@ -516,5 +590,9 @@ p{
     left: 6px;
     top: 50%;
     margin-top: -10px;
+}
+.wrong-tip[data-v-1bc8dd97] {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMBAMAAACkW0HUAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAbUExURf9HIf9HIUdwTP9IIP9IIf9HIf9AIP9IIv9IImdOsMsAAAAIdFJOU3DQAGCdzxCAW+XOTAAAAFBJREFUCNdjUFKIaGVSYlCL6OhoTWJQ7ACCIAaOFo4Gj2YGiQZlo4pWho4OI5WODhClDKQkGlSMOBqBSjxASsAahBjUJDo6GpMYlJQlGo2UAAhNGExrdLylAAAAAElFTkSuQmCC) 10px no-repeat;
+    color: #c00;
 }
 </style>
