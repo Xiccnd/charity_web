@@ -27,7 +27,7 @@
                     <em data-v-18d5a56f="">*</em><span data-v-18d5a56f="" id="orgname">用户名：</span>
                     <span data-v-18d5a56f="" id="orgtip" style="font-size: 14px; color: rgb(102, 102, 102);"></span>
                   </p>
-                  <input type="text" id="groupName" maxlength="50" placeholder="请输入用户名" v-model="user.name"></div>
+                  <input type="text" id="groupName" maxlength="50" placeholder="请输入用户名" v-model="all.user.name"></div>
                 <span data-v-18d5a56f="" id="groupNameTips" class="form-error down-tip" style="color: red;"></span>
               </li>
 
@@ -37,7 +37,7 @@
                     <em data-v-18d5a56f="">*</em><span data-v-18d5a56f="" id="orgname">密码：</span>
                     <span data-v-18d5a56f="" id="orgtip" style="font-size: 14px; color: rgb(102, 102, 102);"></span>
                   </p>
-                  <input type="text" id="groupName" maxlength="50" placeholder="请输入密码" v-model="user.password"></div>
+                  <input type="text" id="groupName" maxlength="50" placeholder="请输入密码" v-model="all.user.password"></div>
                 <span data-v-18d5a56f="" id="groupNameTips" class="form-error down-tip" style="color: red;"></span>
               </li>
 
@@ -47,7 +47,7 @@
                     <em data-v-18d5a56f="">*</em><span data-v-18d5a56f="" id="orgname">队伍名称：</span>
                     <span data-v-18d5a56f="" id="orgtip" style="font-size: 14px; color: rgb(102, 102, 102);">（请与统一社会信用代码证书机构名称保持一致）</span>
                   </p>
-                  <input type="text" id="groupName" maxlength="50" placeholder="请输入队伍名称" v-model="team.teamName"></div>
+                  <input type="text" id="groupName" maxlength="50" placeholder="请输入队伍名称" v-model="all.volunteerTeam.teamName"></div>
                 <span data-v-18d5a56f="" id="groupNameTips" class="form-error down-tip" style="color: red;"></span>
               </li>
 
@@ -58,7 +58,7 @@
                   </p>
                   <div data-v-18d5a56f="" class="row w">
                     <div data-v-18d5a56f="" class="col v-m">
-                      <input type="text" id="address" maxlength="50"  placeholder="请选择详细地址" v-model="team.detailedAddress">
+                      <input type="text" id="address" maxlength="50"  placeholder="请选择详细地址" v-model="all.volunteerTeam.detailedAddress">
                     </div>
                     <div data-v-18d5a56f="" class="col v-m pl-10" style="width: 90px;">
                       <a data-v-18d5a56f="" href="javascript:void(0);" class="button button-line">选择</a>
@@ -74,7 +74,7 @@
                     <em data-v-18d5a56f="">*</em>项目联系人：</p>
                   <div data-v-18d5a56f="" class="row w">
                     <div data-v-18d5a56f="" class="col v-m">
-                      <input type="text" id="orgArea" placeholder="请输入项目联系人" v-model="team.contact"></div>
+                      <input type="text" id="orgArea" placeholder="请输入项目联系人" v-model="all.volunteerTeam.contact"></div>
                   </div>
                 </div>
                 <span data-v-18d5a56f="" id="orgAreaTips" class="form-error down-tip"></span>
@@ -84,7 +84,7 @@
                 <div data-v-18d5a56f="" class="form">
                   <p data-v-18d5a56f="" class="form-label">
                     <em data-v-18d5a56f="">*</em>手机号码：</p>
-                  <input type="text" id="volNum" v-model="team.telephone" maxlength="6" oninput="this.value=this.value.replace(/[^\d]/g,'');if(this.value==0)value='';" placeholder="请输入手机号码">
+                  <input type="text" id="volNum" v-model="all.volunteerTeam.telephone" maxlength="6" oninput="this.value=this.value.replace(/[^\d]/g,'');if(this.value==0)value='';" placeholder="请输入手机号码">
                 </div>
                 <span data-v-18d5a56f="" id="volNumTips" class="form-error down-tip" style="color: red;"></span>
               </li>
@@ -92,7 +92,7 @@
               <li data-v-18d5a56f="" class="grid-item g-12">
                 <div data-v-18d5a56f="" class="form"><p data-v-18d5a56f="" class="form-label">
                   <em data-v-18d5a56f="">*</em> <span data-v-18d5a56f="">地址：</span></p>
-                  <input type="text" id="orgUnit" maxlength="50" placeholder="请输入地址" v-model="team.address">
+                  <input type="text" id="orgUnit" maxlength="50" placeholder="请输入地址" v-model="all.volunteerTeam.address">
                 </div>
                 <span data-v-18d5a56f="" id="orgUnitTips" class="form-error down-tip" style="color: red;"></span>
               </li>
@@ -100,7 +100,7 @@
               <li data-v-18d5a56f="" class="grid-item g-12">
                 <div data-v-18d5a56f="" class="form"><p data-v-18d5a56f="" class="form-label">
                   <em data-v-18d5a56f="">*</em>联络组织：</p>
-                  <input type="text" id="tyCode" maxlength="18" placeholder="请输入联络组织" v-model="team.liaisonOrganization">
+                  <input type="text" id="tyCode" maxlength="18" placeholder="请输入联络组织" v-model="all.volunteerTeam.liaisonOrganization">
                 </div>
                 <span data-v-18d5a56f="" class="form-error down-tip" id="tyCodeTips"></span>
               </li>
@@ -110,7 +110,7 @@
                   <p data-v-18d5a56f="" class="form-label">成立日期：</p>
                   <div data-v-18d5a56f="" class="mx-datepicker" style="width: 100%;">
                     <div class="mx-input-wrapper">
-                      <input name="date" type="date" autocomplete="off" placeholder="请输入成立日期" class="mx-input" v-model="team.registerDate">
+                      <input name="date" type="date" autocomplete="off" placeholder="请输入成立日期" class="mx-input" v-model="all.volunteerTeam.registerDate">
                       <i class="mx-icon-calendar">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1em" height="1em">
                         <path
@@ -130,7 +130,7 @@
                       <span data-v-18d5a56f="" style="font-size: 14px; color: rgb(102, 102, 102);"></span>
                     </span>
                   </p>
-                  <input type="text" maxlength="250" placeholder="请输入队伍简介" v-model="team.teamProfile">
+                  <input type="text" maxlength="250" placeholder="请输入队伍简介" v-model="all.volunteerTeam.teamProfile">
                 </div>
                 <span data-v-18d5a56f="" class="form-error down-tip" id="albe0040Tips"></span>
               </li>
@@ -149,7 +149,7 @@
                 <div data-v-18d5a56f="" class="form">
                   <p data-v-18d5a56f="" class="form-label">
                     <em data-v-18d5a56f="">*</em>登记部门：</p>
-                  <input type="text" id="loginDepart" maxlength="20" placeholder="请选择登记部门" v-model="team.regisDepartment">
+                  <input type="text" id="loginDepart" maxlength="20" placeholder="请选择登记部门" v-model="all.volunteerTeam.regisDepartment">
                 </div>
                 <span data-v-18d5a56f="" id="loginDepartTips" class="form-error down-tip"></span>
               </li>
@@ -161,7 +161,7 @@
                   </p>
                   <div data-v-18d5a56f="" class="row w">
                     <div data-v-18d5a56f="" class="col v-m">
-                      <input type="text" id="loginOrg" maxlength="20" placeholder="请选择登记机关" v-model="team.registrationAuthority">
+                      <input type="text" id="loginOrg" maxlength="20" placeholder="请选择登记机关" v-model="all.volunteerTeam.registrationAuthority">
                     </div>
                     <div data-v-18d5a56f="" class="col v-m pl-10" style="width: 90px;">
                       <a data-v-18d5a56f="" href="javascript:void(0);" class="button button-line">选择</a>
@@ -179,14 +179,14 @@
                     <em data-v-18d5a56f="">*</em>服务类别：
                     <em data-v-18d5a56f="">（最多选择4项）</em>
                   </p>
-                  <div data-v-18d5a56f="" class="checkbox-fixed" v-for="(item,index) in service" :key="index">
-
+                  <div data-v-18d5a56f="" class="checkbox-fixed">
+                    <span v-for="(item,index) in service" :key="index">
                     <label data-v-18d5a56f="" for="afc01caad28b4c2e93bb0b7ac1840a6a" class="checkbox">
-                      <input data-v-18d5a56f="" type="checkbox"  name="checkbox" :value="item.sid" v-model="classs" >
+                      <input data-v-18d5a56f="" type="checkbox"  name="checkbox" :value="item.sid" v-model="all.classs" >
                       <span data-v-18d5a56f=""></span>
                       <i data-v-18d5a56f="">{{ item.serviceName }}</i>
                     </label>
-
+                    </span>
                   </div>
                 </div>
                 <span data-v-18d5a56f="" id="serviceTypeTips" class="form-error down-tip"></span></li>
@@ -210,31 +210,63 @@ export default {
   data() {
     return {
       all:{
-
+        user:{
+          name:"",
+          password:"",
+        },
+        volunteerTeam:{
+          contact:"",
+          teamName: "",
+          address:"",
+          regisDepartment:"",
+          registrationAuthority:"",
+          telephone:"",
+          registerDate:"",
+          detailedAddress:"",
+          liaisonOrganization:"",
+          teamProfile:"",
+        },
+        classs:[]
       },
       service:[
         {
           sid:"1",
           serviceName:"其他",
+        },
+        {
+          sid:"2",
+          serviceName:"其他",
+        },
+        {
+          sid:"3",
+          serviceName:"其他",
+        },
+        {
+          sid:"4",
+          serviceName:"其他",
+        },
+        {
+          sid:"5",
+          serviceName:"其他",
+        },
+        {
+          sid:"6",
+          serviceName:"其他",
+        },
+        {
+          sid:"7",
+          serviceName:"其他",
+        },
+        {
+          sid:"8",
+          serviceName:"其他",
+        },
+        {
+          sid:"9",
+          serviceName:"其他",
         }
       ],
-      user:{
-        name:"",
-        password:"",
-      },
-      team:{
-        contact:"",
-        teamName: "",
-        address:"",
-        regisDepartment:"",
-        registrationAuthority:"",
-        telephone:"",
-        registerDate:"",
-        detailedAddress:"",
-        liaisonOrganization:"",
-        teamProfile:"",
-      },
-      classs:[]
+
     };
   },
   props: [],
@@ -253,12 +285,8 @@ export default {
   },
   methods: {
     btn:function (){
-      this.$http.post("http://localhost:8088/volunteerTeam/insVolunteerTeam",{
-        data: {
-          user:this.user,
-          team:this.team
-        }
-      })
+      this.$http.post("http://localhost:8088/volunteerTeam/insVolunteerTeam",this.all
+      )
     }
   },
 };
@@ -285,7 +313,17 @@ export default {
   padding-left: 16px;
   margin: 0;
 }
-
+.subtitle:before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: #cc0000;
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  margin-top: -10px;
+}
 h2 {
   display: block;
   font-size: 1.5em;

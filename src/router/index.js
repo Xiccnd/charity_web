@@ -3,6 +3,7 @@ import volunteer_program from '../views/volunteer_program.vue'
 import program from '../components/program.vue'
 import volunteer_team_details from '../components/volunteer_team_details.vue'
 import default_index from '../views/default_index.vue'
+import volunteer_team_register from '../views/volunteer_team_register.vue'
 const login = () => import("../views/volunteer_login.vue")
 const register = () => import("../views/volunteer_register.vue")
 const center = () => import("../views/volunteer_center.vue")
@@ -30,6 +31,7 @@ const routes = [
     {path:'/center',component:center},
     {path:'/myProject',component:myProject},
     {path:'/myTeam',component:myTeam},
+    {path:'/volunteer_team_register',component:volunteer_team_register},
     {path:'/updatePassword',component:updatePassword},
     {path:'/waitProject',component:waitProject},
     {path:'/waitTeam',component:waitTeam},
