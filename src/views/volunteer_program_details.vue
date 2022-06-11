@@ -184,13 +184,13 @@
                 </tbody>
               </table>
               <div  class="tabbar" style="margin-top: 20px">
-                <span  class="active">项目详情</span>
-                <span >报名信息</span>
-                <span >讨论区</span>
-                <span >项目动态</span>
-                <span >时长公示</span>
+                <span  :class="{active:cur==0}" @click="cur=0">项目详情</span>
+                <span :class="{active:cur==1}" @click="cur=1">报名信息</span>
+                <span :class="{active:cur==2}" @click="cur=2">讨论区</span>
+                <span :class="{active:cur==3}" @click="cur=3">项目动态</span>
+                <span :class="{active:cur==4}" @click="cur=4">时长公示</span>
               </div>
-              <div  class="tabbar-down">
+              <div  class="tabbar-down" v-show="cur==0">
                 <!---->
                 <p
                   
@@ -212,7 +212,7 @@
                   4、可以参加优秀志愿者资格评选。
                 </p>
               </div>
-              <div  class="tabbar-down" style="display: none">
+              <div  class="tabbar-down" v-show="cur==1">
                 <table  class="table-list">
                   <colgroup >
                     <col  width="15%" />
@@ -247,7 +247,7 @@
                   </tbody>
                 </table>
               </div>
-              <div  class="tabbar-down" style="display: none">
+              <div  class="tabbar-down" v-show="cur==2">
                 <div  class="load">
                   <textarea
                     
@@ -276,7 +276,7 @@
                   <ul  class="activity"></ul>
                 </div>
               </div>
-              <div  class="tabbar-down" style="display: none">
+              <div  class="tabbar-down" v-show="cur==3">
                 <div  class="load">
                   <textarea
                     
@@ -313,7 +313,7 @@
                   <!---->
                 </div>
               </div>
-              <div  class="tabbar-down" style="display: none">
+              <div  class="tabbar-down" v-show="cur==4">
                 <table  class="table-list">
                   <colgroup >
                     <col  width="15%" />
@@ -462,6 +462,11 @@ export default {
     Guidebar,
     LoginHead,
   },
+  data () {
+           return {
+             cur: 0,// 默认选中第一个值
+         }
+   }
 };
 </script >
 
@@ -617,5 +622,17 @@ table tr:first-child {
     width: 100%;
     height: 30px;
     line-height: 28px;
+}
+.table-list tbody th {
+    color: #808080;
+    font-weight: normal;
+    padding: 18px;
+    border-bottom: 1px solid #f6f3f7;
+}
+.table-list tbody td {
+    padding: 18px;
+}
+.tabbar-down tr {
+    border: 0;
 }
 </style>
