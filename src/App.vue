@@ -210,5 +210,10 @@ em, i {
     font-size: 16px;
     font-weight: bold;
 }
-
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    table-layout: fixed;
+}
 </style>

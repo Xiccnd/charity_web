@@ -2,6 +2,19 @@
 <template>
   <program>
     <template v-slot:catagory>
+      <div class="category">
+        <h2 class="category__title">服务类别</h2>
+        <div class="category__content">
+          <a href="javascript:void(0);" class="category__item active">全部</a>
+          <a class="category__item" v-for="(ter, i) in territory" :key="i">
+            {{ ter.territorydes }}
+          </a>
+        </div>
+        <div class="category__wrap" style="display: none">
+          <div class="category__content">
+            <a href="javascript:void(0); " class="category__item active"
+              >全部</a
+            >
           <div class="category" >
             <h2 class="category__title">服务类别</h2>
             <div class="category__content">
@@ -37,47 +50,92 @@
             <span class="hidden">收起</span>
             <span class="">更多条件</span>
           </div>
+        </div>
+      </div>
+      <div class="category">
+        <h2 class="category__title">队伍类型</h2>
+        <div class="category__content">
+          <a href="javascript:void(0);" class="category__item active">全部</a>
+          <a
+            href="javascript:void(0);"
+            v-for="(item, i) in class_of_service"
+            :key="i"
+            class="category__item"
+            >{{ item.serviceName }}</a
+          >
+        </div>
+      </div>
+      <div class="category">
+        <h2 class="category__title">队伍人数</h2>
+        <div class="category__content">
+          <a href="javascript:void(0);" class="category__item active">全部</a>
+          <a href="javascript:void(0);" class="category__item">招募待启动</a>
+          <a href="javascript:void(0);" class="category__item">招募中</a>
+          <a href="javascript:void(0);" class="category__item">招募已结束</a>
+        </div>
+      </div>
+      <div class="category-handle">
+        <span class="hidden">收起</span>
+        <span class="">更多条件</span>
+      </div>
     </template>
     <template v-slot:search>
       <search @searchdata="getdata"></search>
     </template>
     <template v-slot:panel>
-      <li  class="panel-list__item" style="width: 25%" v-for="(item,i) in volunteer_program_details" :key="i">
+      <li
+        class="panel-list__item"
+        style="width: 25%"
+        v-for="(item, i) in volunteer_program_details"
+        :key="i"
+      >
         <div class="panel-card">
-          <router-link :to="{path:'/volunteer_program/volunteer_program_details',query:{id:item.pid}}">
-          <img src="../assets/images/program/1.png" alt="" style="width: 260px; height: 170px"/>
+          <router-link
+            :to="{
+              path: '/volunteer_team/volunteer_team_details',
+              query: { id: item.pid },
+            }"
+          >
+            <img
+              src="../assets/images/program/11.e6f7787.png"
+              alt=""
+              style="width: 260px; height: 170px"
+            />
           </router-link>
-          <p  class="t-c">
-            <a href="javascript:void(0);" class="button button-small success round">{{item.projectStatus}}</a>
-          </p>
           <h2 class="panel-card__name">
-            <a href="javascript:void(0);" title="给外卖骑手送温暖">{{item.pname}}</a>
+            <a href="javascript:void(0);" title="给外卖骑手送温暖">{{
+              item.pname
+            }}</a>
           </h2>
+          <p  class="row w">
+            <span  class="col v-m">队伍人数：0</span>
+            <span  class="col v-m t-r">分项满意度</span>
+          </p>
           <ul  class="row w panel-card__info">
             <li  class="col v-m">
-              <h2 >岗位</h2>
-              <p >{{item.posts}}个</p>
+              <img style="margin-right: 5px;" src="../assets/images/program/team_02.png" alt=""/>
+              <h2 >培训</h2>
+              <p >5.0</p>
             </li>
             <li  class="col v-m">
-              <h2 >目标</h2>
-              <p >{{item.targetNumber}}个</p>
+              <img style="margin-right: 5px;"
+                
+                src="../assets/images/program/team_03.png"
+                alt=""
+              />
+              <h2 >合作</h2>
+              <p >5.0</p>
             </li>
             <li  class="col v-m">
-              <h2 >报名</h2>
-              <p >{{item.enrolledNumber}}个</p>
+              <img style="margin-right: 5px;"
+                
+                src="../assets/images/program/team_04.png"
+                alt=""
+              />
+              <h2 >计划</h2>
+              <p >5.0</p>
             </li>
           </ul>
-          <div class="progress" style="text-align: left">
-            <span class="bar" style="width: 0%"></span>
-          </div>
-          <p class="row w">
-            <span  class="col v-m">项目进度：
-              <b >0%</b>
-            </span>
-            <span class="col v-m t-r"><em  class="danger">截止日期：</em><b >
-              {{item.recruitDate.substring(0,10)}}
-            </b></span>
-          </p>
         </div>
       </li>
     </template>
@@ -86,28 +144,29 @@
 <script >
 import NormalHead from "@/components/normal_head";
 import Guidebar from "@/components/guidebar";
-import Pages from "@/components/pages"
-import Program from "@/components/program"
-import Search from "@/components/team_search"
+import Pages from "@/components/pages";
+import Program from "@/components/program";
+import Search from "@/components/team_search";
 export default {
   data() {
     return {
       //项目
-    volunteer_program_details:[
-      {
-        pid:0,
-        pname:"汛期安全知识”志愿宣讲活动 ",
-        projectStatus:"招募中",
-        posts:1,
-        targetNumber:3,
-        enrolledNumber:2,
-        recruitDate:"2022-6-9"
-      }],
-    territory:[
-      {territoryid:0,territorydes:"全部"},
-      {territoryid:1,territorydes:"万州区"},
-      {territoryid:2,territorydes:"永川区"}
-    ],
+      volunteer_program_details: [
+        {
+          pid: 0,
+          pname: "汛期安全知识”志愿宣讲活动 ",
+          projectStatus: "招募中",
+          posts: 1,
+          targetNumber: 3,
+          enrolledNumber: 2,
+          recruitDate: "2022-6-9",
+        },
+      ],
+      territory: [
+        { territoryid: 0, territorydes: "全部" },
+        { territoryid: 1, territorydes: "万州区" },
+        { territoryid: 2, territorydes: "永川区" },
+      ],
       class_of_service: [
         { sid: 0, serviceName: "全部" },
         { sid: 1, serviceName: "社区服务" },
@@ -127,52 +186,52 @@ export default {
     Guidebar,
     Pages,
     Program,
-    Search
+    Search,
   },
-  methods: { 
-    getdata(data){
-      this.volunteer_program_details = data
-     },
-    proList:function(){
-        const _this = this
-        this.$http({
-                  method:"get",
-                  url:"/volunteerProgramDetails/selectAll"
-               })
-              .then(res => {
-                _this.volunteer_program_details=res.data
-              })
-              .catch(err => {
-                console.error(err); 
-              })
-      },
-    territorylist:function(){
-        const _this = this
-        this.$http({
-                  method:"get",
-                  url:"/territory/selectAll"
-               })
-              .then(res => {
-                _this.territory=res.data
-              })
-              .catch(err => {
-                console.error(err); 
-              })
-      },
-    queryList: function () {
-        const _this = this;
-        this.$http({
-          method: "get",
-          url: "/volunteerProgramDetails/selectOne?id=1",
+  methods: {
+    getdata(data) {
+      this.volunteer_program_details = data;
+    },
+    proList: function () {
+      const _this = this;
+      this.$http({
+        method: "get",
+        url: "/volunteerProgramDetails/selectAll",
+      })
+        .then((res) => {
+          _this.volunteer_program_details = res.data;
         })
-          .then((res) => {
-            console.log(res.data);
-            _this.volunteer_program_details[0] = res.data;
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      },
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    territorylist: function () {
+      const _this = this;
+      this.$http({
+        method: "get",
+        url: "/territory/selectAll",
+      })
+        .then((res) => {
+          _this.territory = res.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    queryList: function () {
+      const _this = this;
+      this.$http({
+        method: "get",
+        url: "/volunteerProgramDetails/selectOne?id=1",
+      })
+        .then((res) => {
+          console.log(res.data);
+          _this.volunteer_program_details[0] = res.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
   },
 };
 </script>
@@ -189,11 +248,6 @@ export default {
   transition: 0.3s;
   cursor: pointer;
   width: 260px;
-}
-.panel-card .t-c {
-  margin-top: -20px;
-  margin-bottom: 20px;
-  height: 24px;
 }
 .button.success {
   background: #1cac1f;
@@ -226,13 +280,26 @@ export default {
   padding: 0 10px;
   box-sizing: border-box;
 }
-.panel-card__info {
-  font-size: 12px;
-  color: #333;
+.panel-lists .panel-card p.row {
+    margin: 0;
+    padding: 14px 10px 14px 10px;
+    background: url(../assets/images/program/team_01.png) no-repeat left bottom;
+    border: 0;
+}
+.panel-lists .panel-card__info {
+    padding: 10px;
 }
 .panel-card__info .col {
   position: relative;
 }
+.panel-lists .panel-card__info h2, .panel-lists .panel-card__info p {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    margin-right: 5px;
+    width: auto;
+}
+
 .panel-card__info h2 {
   text-align: center;
 }
@@ -249,53 +316,6 @@ export default {
 
 .panel-card__info .col {
   position: relative;
-}
-.panel-card__info .col:before {
-  content: "";
-  width: 1px;
-  height: 34px;
-  background: #f0f0f0;
-  position: absolute;
-  left: 0;
-  top: 55%;
-  margin-top: -17px;
-}
-.panel-card .progress {
-  margin-top: 16px;
-  margin-bottom: 6px;
-}
-.panel-card .progress {
-  margin: 10px;
-}
-.progress {
-  height: 6px;
-  background: #f0f0f0;
-  border-radius: 4px;
-  position: relative;
-}
-.progress .bar {
-  height: 6px;
-  background: #ee7767;
-  border-radius: 4px;
-}
-.panel-card p.row {
-  margin-top: 0;
-}
-.panel-card p.row {
-  margin: 15px 0;
-}
-.panel-card .row {
-  font-size: 12px;
-  color: #808080;
-  padding: 0 10px;
-  box-sizing: border-box;
-}
-.panel-card b {
-  font-weight: bold;
-  color: #333;
-}
-.panel-card em.danger {
-  color: #cc0000;
 }
 .category {
   font-size: 0;
