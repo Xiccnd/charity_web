@@ -24,7 +24,7 @@
             </li>
           </ul>
           <div  id="getList" >
-            <ul  class="panel-list">
+            <ul  class="panel-list panel-lists">
              <slot name="panel"></slot> 
             </ul>
             <Pages></Pages>
