@@ -55,29 +55,26 @@
                     <a class="button button-normal" v-on:click="moreProject()">参加更多项目</a>
                 </div>
             </div>
-            <table class="user-table" >
-                <colgroup>
-                <col width="25%">
-                <col width="18%">
-                <col width="15%">
-                <col width="12%">
-                <!-- <col width="10%">  -->
-                <col width="13%">
-                <col width="19%">
-                </colgroup> 
-                <tr class="iteamName">
-                    <th>项目名称</th>
-                    <th>联系方式</th>
-                    <th>申请时间</th>
-                    <th>岗位</th>
-                    <!-- <th>服务时长</th>  -->
-                    <th>状态</th>
-                    <th>操作</th>
-                </tr> 
-                <tr>
-                    <td colspan="7" style="text-align: center; border-bottom: 1px rgb(246, 243, 247);"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAATlBMVEVHcEzv7+/l5eX19fXm5ubk5OTy8vLy8vLo6Ojl5eXo6Ojj4+Pk5OTu7u7p6enp6enn5+f29vb29vb////k5OTh4eHe3t7a2trs7Oz7+/tIfX9+AAAAEnRSTlMAQGbLpOIQ/L1+MPDPyCCKT+GZrxW5AAAEX0lEQVRo3u2Z65KrKhCFo1HBS6Jpuej7v+jpBoyoGMnE/Nh10lM1M5UMfKxe3UCcy+UXv/jFL37xb0bRFF9nVE36dUaSV19npM3963bw7Ot+dHn3bcT9+zKKMk++jyi30oqzEdsJq/zEQquyEAIZpzVMkTY82OGnMe4pirjvNOUZjHvX5rysJhoXWerh2k83ySJJy6zmbVdMhEbYaBzn3rQfdHTGeSN4VqbPXFQtEZQSCqQ0nApT9UnH3JPl6KrNiSDGvheq7/sRf8eoz+vKLkOCVBIJvYPQT3xFiLytTiHUQkol+iksZFBqoN+RU2fdZ62BBFzx0HshVY+m6Ikq9B84rfACJSwJNk1agv/KQHqwsKNruaOppy8lV4RBaiXWL5o3tHqDkwrpVCh/ucOAmpTWWoyT8esAqUxhR3CK2iiRi4Sgy1rqASZP9gKMnDizqeOkgp2Z9pQgQppmjeqdRgyAeRFqCM4VVmK6UyqGWcujXNG0LHIyiAkpMfVl9oO+V6KMMMXZMWIvCC2Oldg0PU0cVX14TmZCzovW1CrjKyUuTb7kY+8TocdF/ct1DfhKKE3SpWmOXe/T0ga6HkoGBJSs0uR3TH6wmeht4WBZCj0slQTS5EsJeu+2KiFlqD1MDUwbMSkJp8lbVtD7/KlkZ9xANWBmxX4zTQf9foS9rxqrZH/LcKsH83c7aYrwnnqdvRpJTs9N9zLAbrOBS3PqtchOsilpfUwoa3Id6PXDJeICj/9o2o8pAkI0vB5rfNOHCDEhAv6XtVB6PEgC7c+vU0q3Mm5buwt+MECM2scw3Mz0EO4lrwbr7PU1qchwrXJfCCYL072XMLMN5BEH8D0LbvDGTdzDEAI6XGGmwnXEaULBhb9VLYRYCAsljPKk9CCiIea4GraOKjAQ2FTYKE1JMHxf5JzztkwPIQNQcjVb1692kFXCbJ4kvQF2l8Vv6TEEzC1q0TZYmmyCMCXZnCcnwkFc8BgIgLkYjUshDoJz2XcoT3irhGe4y6eQWRwE6MYyH/FaDjMEE4YbNrNmgxfWk6Y+emQxQ4DREW8xg51eOgiQTBSnGMASEltd3toMRtgdBTwlJi/O7I8hAPZMZJMZEwTkMk+fQSaMXEHC8WcITS0UnArJcMrtYDYl6SWDqUhIcqNNZW+lryDUl5EPWq5wy7Fy2LsQutLmN4j5EHRpaQCn0ys00266HAIj5kPQwyaXi5A1e0pmBMRIuU/jHjxkTVCJj8CBb0AArs3WmoCSJSIKcvFnxQpYWbNRskagn7HGP+v+VovFDrVSskXEGY8l7MfKmoWSECKuhC/FkgLXm2eNp4QQzRoRyaCH/Ytho62AlRJC3PimCspLdHSP5dARrVHSU2IQ1w3i9t4TtnSFMRUgHGQP8f7Dwm6Viwfdx+gQDiNY9rfnhEXKNxVgbvUbxOOzJ4RJy9miOTeIR1ae8ayzSNr25mqVzwh2w+vo+f9JSeb4/j/mfvGLX/zifxH/AbaECw5U0cxRAAAAAElFTkSuQmCC">
-                    </td>
-                </tr> 
+            <table class="user-table" style="text-align: center">
+              <tr class="iteamName">
+                <th style="width: 20%">项目名称</th>
+                <th style="width: 20%">联系方式</th>
+                <th style="width: 20%">申请时间</th>
+                <th style="width: 20%">岗位</th>
+                <th style="width: 10%">状态</th>
+                <th style="width: 10%">操作</th>
+              </tr>
+              <tr v-for="item in allProject" style="height: 50px;">
+                <td><a v-on:click="toDetail(item.pid)">{{item.pname}}</a></td>
+                <td>{{item.telephone}}</td>
+                <td>{{item.joinTime}}</td>
+                <td>{{item.postName}}</td>
+                <td>{{item.statusName}}</td>
+                <td>
+                  <a v-if="item.statusName === '审核中'" v-on:click="cancelApply(item.pid)">取消申请</a>
+                  <a v-if="item.statusName === '取消中'" v-on:click="reApply(item.pid)">重新申请</a>
+                </td>
+              </tr>
             </table>
           </li>
         </div>
@@ -94,7 +91,67 @@ export default {
     Guidebar,
     LoginHead,
   },
+  data() {
+    return {
+      allProject: [
+        {
+          pid: "",
+          pname: "",
+          telephone: "",
+          joinTime: "",
+          postName: "",
+          statusName: "",
+        }
+      ]
+    }
+  },
   methods: {
+    cancelApply: function (id) {
+      this.$http({
+        url: "/volunteersProject/upData",
+        method: "GET",
+        params: {
+          name: localStorage.getItem("username"),
+          pid: id
+        }
+      }).then(res => {
+        location.reload();
+      }).catch(err => {
+        console.log(err);
+        // location.reload();
+      })
+    },
+    reApply: function (id) {
+      this.$http({
+        url: "/volunteersProject/upData2",
+        method: "GET",
+        params: {
+          name: localStorage.getItem("username"),
+          pid: id
+        }
+      }).then(res => {
+        location.reload()
+      }).catch(err => {
+        console.log(err);
+        // location.reload();
+      })
+    },
+    toDetail: function (id) {
+      this.$router.push("/volunteer_program/volunteer_program_details?id=" + id)
+    },
+    getProject: function () {
+      this.$http({
+        url: "/volunteersProject/myJoinInProject",
+        method: "POST",
+        data: {
+          name: localStorage.getItem("username")
+        }
+      }).then(res =>{
+        this.allProject = res.data;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     refresh: function () {
       location.reload();
     },
@@ -111,6 +168,9 @@ export default {
       this.$router.push("/volunteer_center")
     }
   },
+  mounted() {
+    this.getProject();
+  }
 };
 </script >
 
@@ -370,5 +430,8 @@ p {
 .grid-item:nth-child(2) .form {
   margin-right: 0;
 }
-
+table tr td a:hover{
+  color: red;
+  cursor: pointer;
+}
 </style>
