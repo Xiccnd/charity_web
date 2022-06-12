@@ -91,7 +91,10 @@
             </ul>
         </div>
        
- <Pages></Pages>
+ <Pages @changePage="jumpPage"
+        :totalCount="totalCount"
+        :pageNumber="queryParams.p"
+        :pageSize="queryParams.pageSize"></Pages>
 
     </template>
   </program>
@@ -105,6 +108,12 @@ import Search from "@/components/program_search"
 export default {
   data() {
     return {
+    totalCount: 0,
+    queryParams: {
+        pageSize: 10,
+        p: 1,
+        mod: 'search'
+    },
       //项目
     volunteer_program_details:[
       {
@@ -146,6 +155,12 @@ export default {
     getdata(data){
       this.volunteer_program_details = data
      },
+     jumpPage (e) {
+      
+        this.queryParams.p = e.currentPage
+        this.queryParams.pageSize = e.currentSize
+        this.proList(); // 调用接口获取列表数据
+    },
     proList:function(){
         const _this = this
         this.$http({

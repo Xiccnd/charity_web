@@ -21,15 +21,12 @@ const waitTeam = () => import("../views/waitTeam.vue")
 
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
-// 我们后面再讨论嵌套路由。
 const routes = [
     { path: '/', component: default_index  },
     { path: '/default_index', component: default_index },
     {path:'/volunteer_program',component:volunteer_program },
     {path:'/volunteer_team',component:volunteer_team },
     {path:'/program',component:program},
-    {path:'/volunteer_program_details',component:volunteer_program_details},
-    {path:'/volunteer_team_details',component:volunteer_team_details},
     {path:'/center',component:center},
     {path:'/myProject',component:myProject},
     {path:'/myTeam',component:myTeam},

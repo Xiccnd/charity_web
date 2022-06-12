@@ -38,7 +38,19 @@ export default {
   table-layout: fixed;
   box-sizing: border-box;
 }
-
+.pages input {
+    display: inline-block;
+    width: 48px;
+    height: 22px;
+    line-height: 22px;
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+    vertical-align: middle;
+    padding: 0;
+}
 .mid {
   width: 1200px;
   margin-left: auto;
