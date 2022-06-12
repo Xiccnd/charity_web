@@ -126,6 +126,7 @@ export default {
       if (document.getElementById('confirmPw').value !== "" && document.getElementById('confirmPw').value === newPasswordText) {
         this.checkPassword = false;
       } else if (document.getElementById('confirmPw').value !== "" && document.getElementById('confirmPw').value !== newPasswordText){
+        document.getElementById('confirmPwTips').innerHTML = "确认新密码和新密码不匹配";
         this.checkPassword = true;
       }
     },
