@@ -32,7 +32,7 @@
                 </div>
                 <div  class="col v-t">
                   <h2  class="h2">
-                    老湖镇黄花园村志愿服务队
+                    {{ volunteer_team.teamName }}
                   </h2>
                   <table  class="table-info">
                     <colgroup >
@@ -46,7 +46,7 @@
                         style="padding-bottom: 10px"
                       >
                         队伍联络编号：<em  class="c-danger"
-                          >G10000020220527414</em
+                          >{{ volunteer_team.teamid }}</em
                         >
                       </th>
                     </tr>
@@ -106,18 +106,18 @@
                   </colgroup>
                   <tr >
                     <th >区域：</th>
-                    <td >全国</td>
+                    <td >重庆市</td>
                     <th >加入方式：</th>
                     <td >验证信息加入（需审核申请）</td>
                   </tr>
                   <tr >
                     <th >成立日期：</th>
-                    <td ></td>
+                    <td >{{ volunteer_team.registerDate }}</td>
                     <th >联络组织：</th>
                     <td  style="">
                       <a  href="javascript:void(0);"
                         ><em  class="c-danger"
-                          >东平信息港公益协会</em
+                          >{{ volunteer_team.liaisonOrganization }}</em
                         ></a
                       >
                     </td>
@@ -129,11 +129,11 @@
                       >
                     </td>
                     <th  style="display: none">登记机关：</th>
-                    <td  style="display: none">民政部</td>
+                    <td  style="display: none">{{ volunteer_team.registrationAuthority }}</td>
                   </tr>
                   <tr >
                     <th >详细地址：</th>
-                    <td >山东省泰安市东平县</td>
+                    <td >{{ volunteer_team.detailedAddress }}</td>
                     <th ></th>
                     <td ></td>
                   </tr>
@@ -143,14 +143,14 @@
                 <span  :class="{active:cur==0}" @click="cur=0">队伍简介</span>
                 <span :class="{active:cur==1}" @click="cur=1">发起的项目</span>
                 <span :class="{active:cur==2}" @click="cur=2">留言咨询</span>
+                <div data-v-9026023c="" style="margin-top: -32px; text-align: right;">
+                  <a href="javascript:void(0);" class="button" id="intoOrg" style="background:#FF9400;padding-top: 0px;color: white;height:30px;line-height:30px;" v-on:click="myfun()">{{ btn }}</a>
+                </div>
               </div>
               <div  class="tabbar-down" v-show="cur==0">
                 <p  style="padding: 18px"></p>
-                <p  style="width: 100%; text-align: center">
-                  <img
-                    
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAATlBMVEVHcEzv7+/l5eX19fXm5ubk5OTy8vLy8vLo6Ojl5eXo6Ojj4+Pk5OTu7u7p6enp6enn5+f29vb29vb////k5OTh4eHe3t7a2trs7Oz7+/tIfX9+AAAAEnRSTlMAQGbLpOIQ/L1+MPDPyCCKT+GZrxW5AAAEX0lEQVRo3u2Z65KrKhCFo1HBS6Jpuej7v+jpBoyoGMnE/Nh10lM1M5UMfKxe3UCcy+UXv/jFL37xb0bRFF9nVE36dUaSV19npM3963bw7Ot+dHn3bcT9+zKKMk++jyi30oqzEdsJq/zEQquyEAIZpzVMkTY82OGnMe4pirjvNOUZjHvX5rysJhoXWerh2k83ySJJy6zmbVdMhEbYaBzn3rQfdHTGeSN4VqbPXFQtEZQSCqQ0nApT9UnH3JPl6KrNiSDGvheq7/sRf8eoz+vKLkOCVBIJvYPQT3xFiLytTiHUQkol+iksZFBqoN+RU2fdZ62BBFzx0HshVY+m6Ikq9B84rfACJSwJNk1agv/KQHqwsKNruaOppy8lV4RBaiXWL5o3tHqDkwrpVCh/ucOAmpTWWoyT8esAqUxhR3CK2iiRi4Sgy1rqASZP9gKMnDizqeOkgp2Z9pQgQppmjeqdRgyAeRFqCM4VVmK6UyqGWcujXNG0LHIyiAkpMfVl9oO+V6KMMMXZMWIvCC2Oldg0PU0cVX14TmZCzovW1CrjKyUuTb7kY+8TocdF/ct1DfhKKE3SpWmOXe/T0ga6HkoGBJSs0uR3TH6wmeht4WBZCj0slQTS5EsJeu+2KiFlqD1MDUwbMSkJp8lbVtD7/KlkZ9xANWBmxX4zTQf9foS9rxqrZH/LcKsH83c7aYrwnnqdvRpJTs9N9zLAbrOBS3PqtchOsilpfUwoa3Id6PXDJeICj/9o2o8pAkI0vB5rfNOHCDEhAv6XtVB6PEgC7c+vU0q3Mm5buwt+MECM2scw3Mz0EO4lrwbr7PU1qchwrXJfCCYL072XMLMN5BEH8D0LbvDGTdzDEAI6XGGmwnXEaULBhb9VLYRYCAsljPKk9CCiIea4GraOKjAQ2FTYKE1JMHxf5JzztkwPIQNQcjVb1692kFXCbJ4kvQF2l8Vv6TEEzC1q0TZYmmyCMCXZnCcnwkFc8BgIgLkYjUshDoJz2XcoT3irhGe4y6eQWRwE6MYyH/FaDjMEE4YbNrNmgxfWk6Y+emQxQ4DREW8xg51eOgiQTBSnGMASEltd3toMRtgdBTwlJi/O7I8hAPZMZJMZEwTkMk+fQSaMXEHC8WcITS0UnArJcMrtYDYl6SWDqUhIcqNNZW+lryDUl5EPWq5wy7Fy2LsQutLmN4j5EHRpaQCn0ys00266HAIj5kPQwyaXi5A1e0pmBMRIuU/jHjxkTVCJj8CBb0AArs3WmoCSJSIKcvFnxQpYWbNRskagn7HGP+v+VovFDrVSskXEGY8l7MfKmoWSECKuhC/FkgLXm2eNp4QQzRoRyaCH/Ytho62AlRJC3PimCspLdHSP5dARrVHSU2IQ1w3i9t4TtnSFMRUgHGQP8f7Dwm6Viwfdx+gQDiNY9rfnhEXKNxVgbvUbxOOzJ4RJy9miOTeIR1ae8ayzSNr25mqVzwh2w+vo+f9JSeb4/j/mfvGLX/zifxH/AbaECw5U0cxRAAAAAElFTkSuQmCC"
-                  />
+                <p  style="width: 100%; text-align: left">
+                  {{ volunteer_team.teamProfile }}
                 </p>
               </div>
               <div  class="tabbar-down" v-show="cur==1">
@@ -207,7 +207,8 @@
                 队伍联系人
               </h2>
               <div  class="link-info">
-                <h2 >李运志</h2>
+                <h2 >{{ volunteer_team.contact }}</h2>
+                <p data-v-9026023c="">手机：{{ volunteer_team.telephone }}</p>
                 <!---->
                 <!---->
                 <!---->
@@ -248,7 +249,7 @@
                 队伍地址
               </h2>
               <div  class="link-info">
-                <p >山东省泰安市东平县</p>
+                <p >{{ volunteer_team.address }}</p>
                 <p  class="row w">
                   <span
                     
@@ -287,8 +288,55 @@ export default {
    data () {
            return {
              cur: 0,// 默认选中第一个值
+             volunteer_team: {
+               teamid: 1,
+               teamName: "涪陵区发展中心志愿服务队",
+               contact:"麻辣鸡丝",
+               telephone:"123456789",
+               detailedAddress:"重庆市涪陵区",
+               liaisonOrganization:"重庆市蓝帽子城市环境服务站",
+               teamProfile:"志愿志愿志愿志愿志愿志愿",
+               address:"重庆市涪陵区",
+               registerDate:"2020-07-25",
+               regisDepartment:"银河系",
+               registrationAuthority:"银河系"
+             },
+             btn:"我要加入",
+             tid:"",
+             personCount:""
          }
-   }
+   },
+  props:['id'],
+  created() {
+    this.tid = this.$route.query.id
+    const _this = this
+    this.$http.get("http://localhost:8088/volunteerTeam/selectOne",
+        {
+          params:{
+            id:this.tid
+          }
+        }).then(res => {
+      this.volunteer_team=res.data
+    })
+    this.$http({
+      method:"get",
+      url:"http://192.168.1.147:8088/volunteersTeamid/selectAllNumByTid",
+      params:{
+        teamid:this.volunteer_team.teamid
+      }
+    })
+        .then(res => {
+          _this.personCount=res.data
+        })
+        .catch(err => {
+          console.error(err);
+        })
+  },
+  methods:{
+    myfun:function (){
+      this.btn="申请成功"
+    }
+  }
 };
 </script >
 

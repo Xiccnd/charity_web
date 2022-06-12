@@ -481,6 +481,7 @@ export default {
         }
       ],
       pid:"",
+      cur: 0,// 默认选中第一个值
     };
   },
   props: ['id'],
@@ -488,11 +489,6 @@ export default {
     Guidebar,
     LoginHead,
   },
-  data () {
-           return {
-             cur: 0,// 默认选中第一个值
-         }
-   },
   created() {
     this.pid=this.$route.query.id
     const _this = this
