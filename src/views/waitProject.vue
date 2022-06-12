@@ -118,7 +118,7 @@ export default {
         location.reload();
       }).catch(err => {
         console.log(err);
-        // location.reload();
+        alert('出错了！');
       })
     },
     reApply: function (id) {
@@ -133,7 +133,7 @@ export default {
         location.reload()
       }).catch(err => {
         console.log(err);
-        // location.reload();
+        alert('出错了！');
       })
     },
     toDetail: function (id) {
