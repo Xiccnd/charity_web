@@ -28,35 +28,17 @@
             <div class="login-wrap">
               <div class="login-input">
                 <img src="../assets/images/login/head.png">
-                <input type="text" id="username" placeholder="请输入用户名或身份证号码" maxlength="30"
-                       onchange="this.value=this.value.replace(/[^\w_.]/g,'')">
+                <input type="text" id="username" placeholder="请输入用户名" v-on:blur="checkUsername"/>
               </div>
-              <span id="usernameTips" class="login-tips"></span>
-              <div class="login-input">
+              <span id="usernameTips" class="login-tips" v-show="username"></span>
+              <div class="login-input" style="margin-top: 20px;">
                 <img src="../assets/images/login/password.png">
-                <input type="password" id="password" placeholder="请输入密码" maxlength="30">
-                <img src="../assets/images/login/closeeyes.png" alt="" class="pwd_img">
-                <img src="../assets/images/login/openeyes.png" alt="" class="pwd_img" style="display: none;">
+                <input type="password" id="password" placeholder="请输入密码" v-on:blur="checkPassword">
               </div>
-              <span id="passwordTips" class="login-tips"></span>
-              <div class="login-input" style="line-height: 2.1;">
-                <img src="../assets/images/login/safe.png" alt="">
-                <input type="text" placeholder="请输入验证码" id="code" maxlength="4"
-                       onchange="this.value=this.value.replace(/[^0-9a-zA-Z]/g,'')"
-                       style="display: inline-block; width: 60%;">
-                <span id="imgCode"
-                      style="margin-left: 10px; cursor: pointer; border: 1px solid rgb(223, 223, 223); text-align: center; width: 35%; height: 46px; border-radius: 4px; float: right;">
-                  <b style="font-size:20px;margin-left:1px;color: rgb(93,65,26)">X</b>&nbsp;<font
-                    style="font-size:20px;margin-left:1px;color: rgb(87,80,57)">K</font>&nbsp;
-                  <i style="font-size:20px;margin-left:1px;color: rgb(145,21,0)">J</i>&nbsp;<font
-                    style="font-size:20px;margin-left:1px;color: rgb(72,40,119)">B</font>&nbsp;
-                </span>
-              </div>
-              <span id="imgCodeTips" class="login-tips">&nbsp;</span>
-              <a class="button" v-on:click="login()">登 录</a>
+              <span id="passwordTips" class="login-tips" v-show="password"></span>
+              <a class="button" v-on:click="login()" style="margin-top: 30px">登 录</a>
               <div class="row w login_footer">
-                <a href="#/chongqing/volreg" class="col v-m login-txt a_3 width1">立即注册</a>
-                <a href="#/chongqing/orgreg" class="col v-m login-txt a_4 width1" style="display: none;">立即注册</a>
+                <a class="col v-m login-txt a_3 width1" v-on:click="toRegister">立即注册</a>
                 <a href="https://chinavolunteer.mca.gov.cn/NVSI/LEAP/site/index.html#/forgetpwd1/1" id="Forgot_password"
                    class="col v-m t-r login-txt a_5 width1">忘记密码?</a>
                 <a href="https://chinavolunteer.mca.gov.cn/NVSI/LEAP/site/index.html#/findpwd" id="Account_appeal"
@@ -74,33 +56,66 @@
 import Head from '../components/login_head.vue'
 import guidebar from "../components/guidebar.vue";
 export default {
-
   components: {
     guidebar,
     Head
   },
+  data() {
+    return {
+      username: false,
+      password: false
+    }
+  },
   methods: {
+    checkUsername: function () {
+      if (document.getElementById('username').value === "") {
+        document.getElementById('usernameTips').innerHTML = "用户名不能为空";
+        this.username = true;
+      } else {
+        this.username = false;
+      }
+    },
+    checkPassword: function () {
+      if (document.getElementById('password').value === "") {
+        document.getElementById('passwordTips').innerHTML = "密码不能为空";
+        this.password = true;
+      } else {
+        this.password = false;
+      }
+    },
     login: function () {
       const username = document.getElementById('username').value
       const password = document.getElementById('password').value
-      this.$http.post("/user/Login",
-          {
-            name:username,
-            password:password
-          },
-      ).then(res => {
-        if (res.data !== -1) {
-          localStorage.setItem("username", username)
-          localStorage.setItem("perId", res.data)
-          document.getElementById('password').value = ''
-          this.$router.push("/volunteer_center")
-        }else {
-          localStorage.clear()
-          location.reload()
-        }
-      }).catch(err => {
-        console.log(err);
-      })
+      if (document.getElementById('username').value === "") {
+        alert('用户名不能为空')
+      } else if (document.getElementById('password').value === "") {
+        alert('密码不能为空')
+      } else {
+        this.$http.post("/user/Login",
+            {
+              name:username,
+              password:password
+            },
+        ).then(res => {
+          if (res.data === -2) {
+            alert("用户名不存在！");
+            document.getElementById('username').value = "";
+          } else if (res.data === -1) {
+            alert("密码错误！");
+            document.getElementById('password').value = "";
+          } else {
+            localStorage.setItem("username", username)
+            localStorage.setItem("perId", res.data)
+            document.getElementById('password').value = ''
+            this.$router.push("/volunteer_center")
+          }
+        }).catch(err => {
+          console.log(err);
+        })
+      }
+    },
+    toRegister: function () {
+      this.$router.push("/volunteer_register")
     }
   }
 }
@@ -188,6 +203,10 @@ export default {
   transition: 0.3s;
 }
 
+.login-txt:hover {
+  cursor: pointer;
+}
+
 .login-wrap {
   padding: 0 40px;
 }
@@ -255,5 +274,10 @@ export default {
 
 body .bannerimg {
   background: url(../assets/images/background/banner.1e1ab6c.png) no-repeat center top;
+}
+.login-tips{
+  display: inline-block;
+  font-size: 14px;
+  color: red;
 }
 </style>
