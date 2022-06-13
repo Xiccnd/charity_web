@@ -119,28 +119,7 @@ export default {
         })
       }
     },
-    loginTeam: function () {
-      const username = document.getElementById('username').value
-      const password = document.getElementById('password').value
-      this.$http.post("",
-          {
-            name:username,
-            password:password
-          },
-      ).then(res => {
-        if (res.data !== -1) {
-          localStorage.setItem("username", username)
-          localStorage.setItem("perId", res.data)
-          document.getElementById('password').value = ''
-          this.$router.push("/")
-        }else {
-          localStorage.clear()
-          location.reload()
-        }
-      }).catch(err => {
-        console.log(err);
-      })
-    },
+
     myfun(){
       var c = this.a
       var cs = this.as
@@ -148,6 +127,7 @@ export default {
       this.bs=cs
       this.a=this.b
       this.b=c
+
     },
     toRegister: function () {
       this.$router.push("/volunteer_register")
