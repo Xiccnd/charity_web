@@ -114,7 +114,6 @@
 <script >
 import NormalHead from "@/components/normal_head";
 import Guidebar from "@/components/guidebar";
-import Pages from "@/components/pages"
 import Program from "@/components/program"
 import Search from "@/components/program_search"
 export default {
@@ -149,7 +148,6 @@ export default {
   components: {
     NormalHead,
     Guidebar,
-    Pages,
     Program,
     Search
   },

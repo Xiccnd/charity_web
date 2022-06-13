@@ -21,7 +21,7 @@
           <span class="red" @click="bthClick('/volunteer_login')" style="cursor: pointer" v-show="!isLogin">请登录</span>
           <span class="red" id="login_username" @click="bthClick('/volunteer_center')" style="cursor: pointer" v-show="isLogin"></span>
           <a href="javascript:void(0);" class="a" v-show="!isLogin" @click="bthClick('/volunteer_register')">志愿者注册</a> <span v-show="!isLogin">|</span>
-          <a href="javascript:void(0);" class="a" v-show="!isLogin" @click="bthClick2('/volunteer_team_register')">志愿队伍注册</a>
+          <a href="javascript:void(0);" class="a" v-show="!isLogin" @click="bthClick('/volunteer_team_register')">志愿队伍注册</a>
           <a href="javascript:void(0);" v-show="isLogin" v-on:click="logout()">注销</a>
           <img src="../assets/images/header/font.png" alt="" style="margin-bottom: 13px"/>
         </div>
@@ -53,9 +53,6 @@ export default {
   },
   methods:{
     bthClick(address) {
-      this.$router.replace(address)
-    },
-    bthClick2(address){
       this.$router.replace(address)
     },
     checkLoginUser: function () {

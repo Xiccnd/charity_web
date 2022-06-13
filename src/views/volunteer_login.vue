@@ -18,11 +18,11 @@
           <div class="col v-t white">
             <h2 class="login_header">
               <div>
-                <a href="#/chongqing/login/3" class="col v-m login-txt a_1">志愿队伍登录</a>
+                <a href="#/chongqing/login/3" class="col v-m login-txt a_1" @click="myfun">{{ a }}</a>
                 <a href="#/chongqing/login/2" aria-current="page"
                    class="col v-m login-txt a_1 router-link-exact-active router-link-active" style="display: none;">志愿者登录</a>
               </div>
-              <a style="text-decoration: none;color:red">志愿者登录</a>
+              <a style="text-decoration: none;color:red">{{ b }}</a>
               <a href="#/chongqing/login/1" class="a_2" style="color: rgb(153, 153, 153); font-size: 14px;">管理部门登录</a>
             </h2>
             <div class="login-wrap">
@@ -38,8 +38,6 @@
               <span id="passwordTips" class="login-tips" v-show="password"></span>
               <a class="button" v-on:click="login()" style="margin-top: 30px">登 录</a>
               <span id="imgCodeTips" class="login-tips">&nbsp;</span>
-              <a class="button" v-on:click="login()" v-bind:style="as">志 愿 者 登 录</a>
-              <a class="button" v-on:click="loginTeam()" v-bind:style="bs">队 伍 登 录</a>
               <div class="row w login_footer">
                 <a class="col v-m login-txt a_3 width1" v-on:click="toRegister">立即注册</a>
                 <a href="https://chinavolunteer.mca.gov.cn/NVSI/LEAP/site/index.html#/forgetpwd1/1" id="Forgot_password"
@@ -64,18 +62,14 @@ export default {
       a:"志愿队伍登录",
       b:"志愿者登录",
       as:"",
-      bs:"display: none"
+      bs:"display: none",
+      username: false,
+      password: false
     }
   },
   components: {
     guidebar,
     Head
-  },
-  data() {
-    return {
-      username: false,
-      password: false
-    }
   },
   methods: {
     checkUsername: function () {
@@ -97,24 +91,33 @@ export default {
     login: function () {
       const username = document.getElementById('username').value
       const password = document.getElementById('password').value
-      this.$http.post("/user/Login",
-          {
-            name:username,
-            password:password
-          },
-      ).then(res => {
-        if (res.data !== -1) {
-          localStorage.setItem("username", username)
-          localStorage.setItem("perId", res.data)
-          document.getElementById('password').value = ''
-          this.$router.push("/volunteer_center")
-        }else {
-          localStorage.clear()
-          location.reload()
-        }
-      }).catch(err => {
-        console.log(err);
-      })
+      if (document.getElementById('username').value === "") {
+        alert('用户名不能为空')
+      } else if (document.getElementById('password').value === "") {
+        alert('密码不能为空')
+      } else {
+        this.$http.post("/user/Login",
+            {
+              name:username,
+              password:password
+            },
+        ).then(res => {
+          if (res.data === -2) {
+            alert("用户名不存在！");
+            document.getElementById('username').value = "";
+          } else if (res.data === -1) {
+            alert("密码错误！");
+            document.getElementById('password').value = "";
+          } else {
+            localStorage.setItem("username", username)
+            localStorage.setItem("perId", res.data)
+            document.getElementById('password').value = ''
+            this.$router.push("olunteer_center")
+          }
+        }).catch(err => {
+          console.log(err);
+        })
+      }
     },
     loginTeam: function () {
       const username = document.getElementById('username').value
@@ -145,33 +148,6 @@ export default {
       this.bs=cs
       this.a=this.b
       this.b=c
-      if (document.getElementById('username').value === "") {
-        alert('用户名不能为空')
-      } else if (document.getElementById('password').value === "") {
-        alert('密码不能为空')
-      } else {
-        this.$http.post("/user/Login",
-            {
-              name:username,
-              password:password
-            },
-        ).then(res => {
-          if (res.data === -2) {
-            alert("用户名不存在！");
-            document.getElementById('username').value = "";
-          } else if (res.data === -1) {
-            alert("密码错误！");
-            document.getElementById('password').value = "";
-          } else {
-            localStorage.setItem("username", username)
-            localStorage.setItem("perId", res.data)
-            document.getElementById('password').value = ''
-            this.$router.push("/volunteer_center")
-          }
-        }).catch(err => {
-          console.log(err);
-        })
-      }
     },
     toRegister: function () {
       this.$router.push("/volunteer_register")
