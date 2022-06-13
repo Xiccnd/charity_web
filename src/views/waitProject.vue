@@ -71,8 +71,7 @@
                 <td>{{item.postName}}</td>
                 <td>{{item.statusName}}</td>
                 <td>
-                  <a v-if="item.statusName === '审核中'" v-on:click="cancelApply(item.pid)">取消申请</a>
-                  <a v-if="item.statusName === '取消中'" v-on:click="reApply(item.pid)">重新申请</a>
+                  <a v-if="item.statusName === '退出审核' || item.statusName === '加入审核'" v-on:click="cancelApply(item.pid, item.mark)">取消申请</a>
                 </td>
               </tr>
             </table>
@@ -101,36 +100,23 @@ export default {
           joinTime: "",
           postName: "",
           statusName: "",
+          mark: ""
         }
       ]
     }
   },
   methods: {
-    cancelApply: function (id) {
+    cancelApply: function (pid, mark) {
       this.$http({
         url: "/volunteersProject/upData",
         method: "GET",
         params: {
           name: localStorage.getItem("username"),
-          pid: id
+          pid,
+          mark,
         }
       }).then(res => {
         location.reload();
-      }).catch(err => {
-        console.log(err);
-        alert('出错了！');
-      })
-    },
-    reApply: function (id) {
-      this.$http({
-        url: "/volunteersProject/upData2",
-        method: "GET",
-        params: {
-          name: localStorage.getItem("username"),
-          pid: id
-        }
-      }).then(res => {
-        location.reload()
       }).catch(err => {
         console.log(err);
         alert('出错了！');
@@ -148,6 +134,7 @@ export default {
         }
       }).then(res =>{
         this.allProject = res.data;
+        console.log(res.data);
       }).catch(err => {
         console.log(err);
       })
