@@ -49,15 +49,15 @@
                 <th style="width: 20%">队伍名称</th>
                 <th style="width: 20%">联系方式</th>
                 <th style="width: 20%">加入时间</th>
-                <th style="width: 10%">状态</th>
-                <th style="width: 10%">操作</th>
+                <th style="width: 20%">状态</th>
+                <th style="width: 20%">操作</th>
               </tr>
               <tr v-for="item in allTeam" style="height: 50px;">
-                <td><a v-on:click="toDetail(item.pid)">{{ item.pname }}</a></td>
+                <td><a v-on:click="toDetail(item.teamId)">{{ item.teamName }}</a></td>
                 <td>{{ item.telephone }}</td>
                 <td>{{ item.joinTime }}</td>
                 <td>{{ item.statusName }}</td>
-                <td><a v-on:click="quit(item.pid)">申请退出</a></td>
+                <td><a v-on:click="quit(item.teamId, item.mark)" v-if="item.statusName === '已加入'">申请退出</a></td>
               </tr>
             </table>
           </li>
@@ -80,23 +80,25 @@ export default {
     return {
       allTeam: [
         {
-          pid: "",
-          pname: "",
+          teamId: "",
+          teamName: "",
           telephone: "",
           joinTime: "",
           statusName: "",
+          mark: ""
         }
       ]
     }
   },
   methods: {
-    quit: function (id) {
+    quit: function (teamId, mark) {
       this.$http({
-        url: "/volunteersProject/upData",
+        url: "/volunteersTeamid/upData",
         method: "GET",
         params: {
           name: localStorage.getItem("username"),
-          pid: id
+          teamId,
+          mark,
         }
       }).then(res => {
         location.reload()
@@ -106,11 +108,11 @@ export default {
       })
     },
     toDetail: function (id) {
-      this.$router.push("/volunteer_program/volunteer_program_details?id=" + id)
+      this.$router.push("/volunteer_team/volunteer_team_details?id=" + id)
     },
     getTeam: function () {
       this.$http({
-        url: "/volunteersProject/myProject",
+        url: "/volunteersTeamid/selectMyTeam",
         method: "POST",
         data: {
           name: localStorage.getItem("username")
@@ -441,5 +443,8 @@ p {
 .grid-item:nth-child(2) .form {
   margin-right: 0;
 }
-
+table tr td a:hover {
+  color: red;
+  cursor: pointer;
+}
 </style>

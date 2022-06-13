@@ -112,7 +112,7 @@ export default {
             localStorage.setItem("username", username)
             localStorage.setItem("perId", res.data)
             document.getElementById('password').value = ''
-            this.$router.push("olunteer_center")
+            this.$router.push("/volunteer_center")
           }
         }).catch(err => {
           console.log(err);
