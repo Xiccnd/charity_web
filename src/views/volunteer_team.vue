@@ -13,8 +13,16 @@
         <div class="category__wrap" style="display: none">
           <div class="category__content">
             <a href="javascript:void(0); " class="category__item active">全部</a>
-            <div class="category" >
-              <h2 class="category__title">服务类别</h2>
+
+          <div class="category">
+            <h2 class="category__title">服务类别</h2>
+            <div class="category__content">
+               <a href="javascript:void(0);" class="category__item active">全部</a>
+               <a class="category__item" v-for="(ter,i) in territory" :key="i">
+                {{ter.territorydes}}
+              </a>
+            </div>
+            <div class="category__wrap" style="display: none">
               <div class="category__content">
                 <a href="javascript:void(0);" class="category__item active">全部</a>
                 <a class="category__item" v-for="(ter,i) in territory" :key="i">
@@ -51,6 +59,7 @@
           </div>
         </div>
       </div>
+      </div>
       <div class="category">
         <h2 class="category__title">队伍类型</h2>
         <div class="category__content">
@@ -77,6 +86,8 @@
         <span class="hidden">收起</span>
         <span class="">更多条件</span>
       </div>
+
+
     </template>
     <template v-slot:search>
       <search @searchdata="getdata"></search>
@@ -144,7 +155,7 @@
 <script >
 import NormalHead from "@/components/normal_head";
 import Guidebar from "@/components/guidebar";
-import Pages from "@/components/pages";
+import Pagination from "@/components/pagination";
 import Program from "@/components/program";
 import Search from "@/components/team_search";
 export default {
@@ -153,7 +164,7 @@ export default {
       //项目
       volunteer_program_details: [
         {
-          pid: 0,
+          pid: 1,
           pname: "汛期安全知识”志愿宣讲活动 ",
           projectStatus: "招募中",
           posts: 1,
@@ -184,7 +195,7 @@ export default {
   components: {
     NormalHead,
     Guidebar,
-    Pages,
+    Pagination,
     Program,
     Search,
   },
