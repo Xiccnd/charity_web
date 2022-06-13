@@ -37,6 +37,9 @@
               </div>
               <span id="passwordTips" class="login-tips" v-show="password"></span>
               <a class="button" v-on:click="login()" style="margin-top: 30px">登 录</a>
+              <span id="imgCodeTips" class="login-tips">&nbsp;</span>
+              <a class="button" v-on:click="login()" v-bind:style="as">志 愿 者 登 录</a>
+              <a class="button" v-on:click="loginTeam()" v-bind:style="bs">队 伍 登 录</a>
               <div class="row w login_footer">
                 <a class="col v-m login-txt a_3 width1" v-on:click="toRegister">立即注册</a>
                 <a href="https://chinavolunteer.mca.gov.cn/NVSI/LEAP/site/index.html#/forgetpwd1/1" id="Forgot_password"
@@ -56,6 +59,14 @@
 import Head from '../components/login_head.vue'
 import guidebar from "../components/guidebar.vue";
 export default {
+  data(){
+    return{
+      a:"志愿队伍登录",
+      b:"志愿者登录",
+      as:"",
+      bs:"display: none"
+    }
+  },
   components: {
     guidebar,
     Head
@@ -86,6 +97,54 @@ export default {
     login: function () {
       const username = document.getElementById('username').value
       const password = document.getElementById('password').value
+      this.$http.post("/user/Login",
+          {
+            name:username,
+            password:password
+          },
+      ).then(res => {
+        if (res.data !== -1) {
+          localStorage.setItem("username", username)
+          localStorage.setItem("perId", res.data)
+          document.getElementById('password').value = ''
+          this.$router.push("/volunteer_center")
+        }else {
+          localStorage.clear()
+          location.reload()
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    loginTeam: function () {
+      const username = document.getElementById('username').value
+      const password = document.getElementById('password').value
+      this.$http.post("",
+          {
+            name:username,
+            password:password
+          },
+      ).then(res => {
+        if (res.data !== -1) {
+          localStorage.setItem("username", username)
+          localStorage.setItem("perId", res.data)
+          document.getElementById('password').value = ''
+          this.$router.push("/")
+        }else {
+          localStorage.clear()
+          location.reload()
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    myfun(){
+      var c = this.a
+      var cs = this.as
+      this.as=this.bs
+      this.bs=cs
+      this.a=this.b
+      this.b=c
       if (document.getElementById('username').value === "") {
         alert('用户名不能为空')
       } else if (document.getElementById('password').value === "") {
