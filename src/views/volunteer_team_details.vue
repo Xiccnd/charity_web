@@ -290,16 +290,16 @@ export default {
              cur: 0,// 默认选中第一个值
              volunteer_team: {
                teamid: 1,
-               teamName: "涪陵区发展中心志愿服务队",
-               contact:"麻辣鸡丝",
-               telephone:"123456789",
-               detailedAddress:"重庆市涪陵区",
-               liaisonOrganization:"重庆市蓝帽子城市环境服务站",
-               teamProfile:"志愿志愿志愿志愿志愿志愿",
-               address:"重庆市涪陵区",
-               registerDate:"2020-07-25",
-               regisDepartment:"银河系",
-               registrationAuthority:"银河系"
+               teamName: "",
+               contact:"",
+               telephone:"",
+               detailedAddress:"",
+               liaisonOrganization:"",
+               teamProfile:"",
+               address:"",
+               registerDate:"",
+               regisDepartment:"",
+               registrationAuthority:""
              },
              btn:"我要加入",
              tid:"",
@@ -310,7 +310,7 @@ export default {
   created() {
     this.tid = this.$route.query.id
     const _this = this
-    this.$http.get("http://localhost:8088/volunteerTeam/selectOne",
+    this.$http.get("http://192.168.1.147:8088/volunteerTeam/selectOne",
         {
           params:{
             id:this.tid

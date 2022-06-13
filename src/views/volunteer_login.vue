@@ -18,11 +18,11 @@
           <div class="col v-t white">
             <h2 class="login_header">
               <div>
-                <a href="#/chongqing/login/3" class="col v-m login-txt a_1">志愿队伍登录</a>
+                <a href="#/chongqing/login/3" class="col v-m login-txt a_1" @click="myfun">{{ a }}</a>
                 <a href="#/chongqing/login/2" aria-current="page"
                    class="col v-m login-txt a_1 router-link-exact-active router-link-active" style="display: none;">志愿者登录</a>
               </div>
-              <a style="text-decoration: none;color:red">志愿者登录</a>
+              <a style="text-decoration: none;color:red">{{ b }}</a>
               <a href="#/chongqing/login/1" class="a_2" style="color: rgb(153, 153, 153); font-size: 14px;">管理部门登录</a>
             </h2>
             <div class="login-wrap">
@@ -37,6 +37,7 @@
               </div>
               <span id="passwordTips" class="login-tips" v-show="password"></span>
               <a class="button" v-on:click="login()" style="margin-top: 30px">登 录</a>
+              <span id="imgCodeTips" class="login-tips">&nbsp;</span>
               <div class="row w login_footer">
                 <a class="col v-m login-txt a_3 width1" v-on:click="toRegister">立即注册</a>
                 <a href="https://chinavolunteer.mca.gov.cn/NVSI/LEAP/site/index.html#/forgetpwd1/1" id="Forgot_password"
@@ -56,15 +57,19 @@
 import Head from '../components/login_head.vue'
 import guidebar from "../components/guidebar.vue";
 export default {
-  components: {
-    guidebar,
-    Head
-  },
-  data() {
-    return {
+  data(){
+    return{
+      a:"志愿队伍登录",
+      b:"志愿者登录",
+      as:"",
+      bs:"display: none",
       username: false,
       password: false
     }
+  },
+  components: {
+    guidebar,
+    Head
   },
   methods: {
     checkUsername: function () {
@@ -107,12 +112,22 @@ export default {
             localStorage.setItem("username", username)
             localStorage.setItem("perId", res.data)
             document.getElementById('password').value = ''
-            this.$router.push("/volunteer_center")
+            this.$router.push("olunteer_center")
           }
         }).catch(err => {
           console.log(err);
         })
       }
+    },
+
+    myfun(){
+      var c = this.a
+      var cs = this.as
+      this.as=this.bs
+      this.bs=cs
+      this.a=this.b
+      this.b=c
+
     },
     toRegister: function () {
       this.$router.push("/volunteer_register")

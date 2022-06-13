@@ -211,7 +211,7 @@ export default {
   props: [],
   created() {
     const _this = this
-    this.$http.post("http://192.168.1.147:8088/classOfService/queryAll")
+    this.$http.get("/classOfService/queryAll")
         .then(res => {
           _this.service = res.data
         })
@@ -224,7 +224,7 @@ export default {
   },
   methods: {
     btn:function (){
-      this.$http.post("http://localhost:8088/volunteerTeam/insVolunteerTeam",this.team
+      this.$http.post("volunteerTeamcensor/Add",this.team
       )
     }
   },

@@ -2,9 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import volunteer_program from '../views/volunteer_program.vue'
 import program from '../components/program.vue'
 import default_index from '../views/default_index.vue'
-import volunteer_team_register from '../views/volunteer_team_register.vue'
 const login = () => import("../views/volunteer_login.vue")
 const register = () => import("../views/volunteer_register.vue")
+const volunteer_team_register = () => import("../views/volunteer_team_register.vue")
 const center = () => import("../views/volunteer_center.vue")
 const volunteer_program_details = () => import("../views/volunteer_program_details.vue")
 
@@ -21,19 +21,15 @@ const waitTeam = () => import("../views/waitTeam.vue")
 
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
-// 我们后面再讨论嵌套路由。
 const routes = [
     { path: '/', component: default_index  },
     { path: '/default_index', component: default_index },
     {path:'/volunteer_program',component:volunteer_program },
     {path:'/volunteer_team',component:volunteer_team },
     {path:'/program',component:program},
-    {path:'/volunteer_program_details',component:volunteer_program_details},
-    {path:'/volunteer_team_details',component:volunteer_team_details},
     {path:'/center',component:center},
     {path:'/myProject',component:myProject},
     {path:'/myTeam',component:myTeam},
-    {path:'/volunteer_team_register',component:volunteer_team_register},
     {path:'/updatePassword',component:updatePassword},
     {path:'/waitProject',component:waitProject},
     {path:'/waitTeam',component:waitTeam},
@@ -64,7 +60,12 @@ const routes = [
     {
         path: '/media',
         component: media
+    },
+    {
+        path: '/volunteer_team_register',
+        component: volunteer_team_register
     }
+    
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置
