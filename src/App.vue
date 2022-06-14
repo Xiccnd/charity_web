@@ -12,13 +12,8 @@ export default {
   components: {
    Footer
   },
-  methods: {},
 };
 </script>
- mounted() {
-    //设置滚动条指定
-    document.documentElement.scrollTop=0
-  },
 <style>
 @import "./assets/css/base.css";
 .white {
