@@ -59,6 +59,7 @@ const routes = [
     },
     {
         path: '/volunteer_program/volunteer_program_details',
+        name: '/volunteer_program/volunteer_program_details',
         component: volunteer_program_details
     },
     {

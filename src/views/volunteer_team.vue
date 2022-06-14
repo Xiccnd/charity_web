@@ -190,29 +190,44 @@ export default {
           recruitDate: "2022-6-9",
         },
       ],
+      //区域
       territory: [
         { territoryid: 0, territorydes: "全部" },
         { territoryid: 1, territorydes: "万州区" },
         { territoryid: 2, territorydes: "永川区" },
       ],
+      //服务类别
       class_of_service: [
         { sid: 0, serviceName: "全部" },
         { sid: 1, serviceName: "社区服务" },
         { sid: 2, serviceName: "扶贫减贫" },
       ],
-      list: null,
+      list: null,//所有队伍
       listLoading: true,
       totalPage: 1, // 统共页数，默认为1
       currentPage: 1, //当前页数 ，默认为1
       pageSize: 8, // 每页显示数量
       currentPageData: [],//当前页显示内容
-      headPage: 1
+      headPage: 1,
+      team:[]//该用户申请的队伍
     };
   },
   props: [],
   created() {
     this.proList();
     this.territorylist();
+    const _this = this
+    //获取用户申请的队伍
+    this.$http({
+      method:"get",
+      url:"/volunteersTeamid/selectOne",
+      params: {
+        name: localStorage.getItem("username")
+      }
+    }).then(res => {
+      _this.team=res.data
+      console.log(this.team)
+    })
   },
   mounted() {},
   components: {

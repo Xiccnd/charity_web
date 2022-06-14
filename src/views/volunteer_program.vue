@@ -50,11 +50,11 @@
     <template v-slot:panel>
           <div  id="getList" >
             <ul  class="panel-list">
-              <li class="panel-list__item" style="width: 25%" v-for="(item,i) in currentPageData" :key="i">
+              <li class="panel-list__item" style="width: 25%" v-for="(item,i) in currentPageData" :key="i" >
                 <div class="panel-card">
-                  <router-link :to="{path:'/volunteer_program/volunteer_program_details',query:{id:item.pid}}">
-                  <img src="../assets/images/program/1.png" alt="" style="width: 260px; height: 170px"/>
-                  </router-link>
+                    <router-link :to="{name:'/volunteer_program/volunteer_program_details',params:{id:item.pid,statusname:item.statusName,allproject:JSON.stringify(this.allProject, null, 4)}}">
+                    <img src="../assets/images/program/1.png" alt="" style="width: 260px; height: 170px"/>
+                    </router-link>
                   <p  class="t-c">
                     <a href="javascript:void(0);" class="button button-small success round">{{item.statusName}}</a>
                   </p>
@@ -130,19 +130,30 @@ export default {
         { sid: 1, serviceName: "社区服务" },
         { sid: 2, serviceName: "扶贫减贫" },
       ],
+      allProject: [
+        {
+          id: "",
+          pid: "",
+          postid: "",
+          joinTime: "",
+          status: "",
+        }
+      ],
       list: null,
       listLoading: true,
       totalPage: 1, // 统共页数，默认为1
       currentPage: 1, //当前页数 ，默认为1
       pageSize: 8, // 每页显示数量
       currentPageData: [],//当前页显示内容
-      headPage: 1
+      headPage: 1,
+      postid:[],
     };
   },
   props: [],
   created() {
     this.proList();
     this.territorylist();
+    this.login()
   },
   mounted() {},
   components: {
@@ -174,6 +185,7 @@ export default {
               .catch(err => {
                 console.error(err); 
               })
+      //  查看用户申请的岗位
       },
     territorylist:function(){
         const _this = this
@@ -188,6 +200,22 @@ export default {
                 console.error(err); 
               })
       },
+    login:function (){
+      //  查看用户申请的岗位
+      if(localStorage.getItem("username") != null){
+        this.$http({
+          url: "/volunteersProject/Project",
+          method: "POST",
+          data: {
+            name: localStorage.getItem("username")
+          }
+        }).then(res => {
+          this.allProject = res.data;
+        }).catch(err => {
+          console.log(err);
+        })
+      }
+    },
     getCurrentPageData() {
       let begin = (this.currentPage - 1) * this.pageSize;
       let end = this.currentPage * this.pageSize;

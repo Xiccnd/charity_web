@@ -37,7 +37,7 @@
                       
                       class="button button-small success round"
                       style="width: 88px; padding: 0px"
-                      >招募中</span
+                      >{{ statusName }}</span
                     >
                   </h2>
                   <table  class="table-info">
@@ -151,7 +151,7 @@
                         id="871661babe0c4b23844467a9cef5e8eb"
                         class="button"
                         style="background: rgb(255, 148, 0)"
-                        v-on:click="myfun(item.postid+1)"
+                        v-on:click="myfun(item.postid+1,true)"
                         >我要报名</a
                       >
                     </th>
@@ -464,7 +464,7 @@ export default {
           postCondition:"",
           postName:"",
           targetNum:"",
-          enrolledNum:""
+          enrolledNum:"",
         }
       ],
       team:{
@@ -480,17 +480,23 @@ export default {
           serviceName:""
         }
       ],
+      allProject: [
+
+      ],
       pid:"",
+      statusName:"",
       cur: 0,// 默认选中第一个值
     };
   },
-  props: ['id'],
+  props: ['id','statusname','allproject'],
   components: {
     Guidebar,
     LoginHead,
   },
   created() {
-    this.pid=this.$route.query.id
+    this.pid=this.$route.params.id
+    this.statusName=this.$route.params.statusname
+    this.allProject=JSON.parse(this.$route.params.allproject)
     const _this = this
     this.$http.get("/volunteerProgramDetails/volunterProgramPost",
         {
@@ -508,6 +514,11 @@ export default {
               })
               .then(res =>{
                 _this.team = res.data
+                for(let i=0;i<this.allProject.length;i++){
+                  if(this.allProject[i].pid==this.volunteer[0].pid){
+                    this.myfun(this.allProject[i].postid+1,false)
+                  }
+                }
               })
           this.$http.get("/volunteerProgramDetails/classOfServices",
               {
@@ -519,26 +530,26 @@ export default {
                 _this.classs = res.data
               })
         })
-
-
   },
   mounted() {
   },
   methods: {
-    myfun:function (index){
+    myfun:function (index,flat){
       var postId = index-1;
       var pname = localStorage.getItem("username")
       var btn = document.getElementsByClassName("button")[index];
       if(pname != null){
-        this.$http.get("/volunteersProject/inserter",{
-          params:{
-            name:pname,
-            postid:postId,
-            pid:this.volunteer[0].pid
-          }
-        }).then(err => {
-          console.error(err)
-        })
+        if(flat){
+          this.$http.get("/volunteersProject/inserter",{
+            params:{
+              name:pname,
+              postid:postId,
+              pid:this.volunteer[0].pid
+            }
+          }).then(err => {
+            console.error(err)
+          })
+        }
         btn.innerHTML="申请成功"
       }else{
         alert("登录后,可进行操作")
@@ -554,7 +565,7 @@ export default {
       var minutes = data.getMinutes()<10?'0'+data.getMinutes() : data.getMinutes();
       var second = data.getSeconds()<10?'0'+data.getSeconds() : data.getSeconds();
       return `${y}-${m}-${d} ${hours}:${minutes}:${second}`;
-    }
+    },
   },
 };
 </script >

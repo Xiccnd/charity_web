@@ -338,7 +338,7 @@ export default {
       if(pname != null){
         this.$http({
           method:"get",
-          url:"",
+          url:"volunteersTeamid/inserter",
           params:{
             name:pname,
             teamid:this.volunteer_team.teamid,
@@ -346,7 +346,7 @@ export default {
         }).then(err => {
           console.error(err)
         })
-        this.btn.innerHTML="申请成功"
+        this.btn="申请成功"
       }else{
         alert("登录后,可进行操作")
       }
