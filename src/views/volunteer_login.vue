@@ -28,15 +28,15 @@
             <div class="login-wrap">
               <div class="login-input">
                 <img src="../assets/images/login/head.png">
-                <input type="text" id="username" placeholder="请输入用户名" v-on:blur="checkUsername"/>
+                <input type="text" id="username" placeholder="请输入用户名" v-on:blur="checkUsername"  v-on:keydown.enter="enterLogin"/>
               </div>
               <span id="usernameTips" class="login-tips" v-show="username"></span>
               <div class="login-input" style="margin-top: 20px;">
                 <img src="../assets/images/login/password.png">
-                <input type="password" id="password" placeholder="请输入密码" v-on:blur="checkPassword">
+                <input type="password" id="password" placeholder="请输入密码" v-on:blur="checkPassword" v-on:keydown.enter="enterLogin">
               </div>
               <span id="passwordTips" class="login-tips" v-show="password"></span>
-              <a class="button" v-on:click="login()" style="margin-top: 30px">登 录</a>
+              <a id="loginButton" class="button" v-on:click="login()" style="margin-top: 30px">登 录</a>
               <span id="imgCodeTips" class="login-tips">&nbsp;</span>
               <div class="row w login_footer">
                 <a class="col v-m login-txt a_3 width1" v-on:click="toRegister">立即注册</a>
@@ -72,6 +72,9 @@ export default {
     Head
   },
   methods: {
+    enterLogin: function () {
+      document.getElementById('loginButton').click();
+    },
     checkUsername: function () {
       if (document.getElementById('username').value === "") {
         document.getElementById('usernameTips').innerHTML = "用户名不能为空";
