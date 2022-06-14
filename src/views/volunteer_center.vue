@@ -744,11 +744,7 @@ export default {
       this.$router.push("/myProject")
     }
   },
-  mounted: function () {
-    if (localStorage.getItem("username") != null) {
-    } else {
-      this.$router.push("/volunteer_login")
-    }
+  mounted() {
     this.getInfo()
   }
 };
