@@ -224,6 +224,7 @@ export default {
   methods: {
     getdata(data) {
       this.list = data;
+      this.currentPages(1)
       this.totalPage=Math.ceil(this.list.length / this.pageSize);
       this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
       this.getCurrentPageData();
@@ -282,7 +283,15 @@ export default {
     },
     //当前页
     currentPages(i) {
-      this.currentPage=i;
+      if(i>this.totalPage){
+        alert("超出最大页数,自动跳到尾页")
+        this.currentPage=this.totalPage
+      }else if(i<1){
+        alert("小于最小页数,自动跳到首页")
+        this.currentPage=1
+      }else{
+          this.currentPage=i;
+      }
       this.getCurrentPageData();
     },
     //上一页

@@ -112,7 +112,7 @@
                   </tr>
                   <tr >
                     <th >成立日期：</th>
-                    <td >{{ volunteer_team.registerDate }}</td>
+                    <td >{{ dateFormat(volunteer_team.registerDate) }}</td>
                     <th >联络组织：</th>
                     <td  style="">
                       <a  href="javascript:void(0);"
@@ -334,7 +334,32 @@ export default {
   },
   methods:{
     myfun:function (){
-      this.btn="申请成功"
+      var pname = localStorage.getItem("username")
+      if(pname != null){
+        this.$http({
+          method:"get",
+          url:"",
+          params:{
+            name:pname,
+            teamid:this.volunteer_team.teamid,
+          }
+        }).then(err => {
+          console.error(err)
+        })
+        this.btn.innerHTML="申请成功"
+      }else{
+        alert("登录后,可进行操作")
+      }
+    },
+    dateFormat:function (time){
+      var data = new Date(time);
+      var y = data.getFullYear();
+      var m = data.getMonth()+1;
+      var d = data.getDate();
+      var hours = data.getHours()<10?'0'+data.getHours() : data.getHours();
+      var minutes = data.getMinutes()<10?'0'+data.getMinutes() : data.getMinutes();
+      var second = data.getSeconds()<10?'0'+data.getSeconds() : data.getSeconds();
+      return `${y}-${m}-${d} ${hours}:${minutes}:${second}`;
     }
   }
 };

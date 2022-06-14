@@ -11,6 +11,12 @@ const volunteer_program_details = () => import("../views/volunteer_program_detai
 const volunteer_team = () => import("../views/volunteer_team.vue")
 const volunteer_team_details = () => import("../views/volunteer_team_details.vue")
 const media = () => import("../views/media.vue")
+const style = () => import("../views/style.vue")
+const information = () => import("../views/information.vue")
+const research = () => import("../views/research.vue")
+const policy = () => import("../views/policy.vue")
+const notice = () => import("../views/notice.vue")
+const guide = () => import("../views/guide.vue")
 
 const myProject = () => import("../views/myProject.vue")
 const myTeam = () => import("../views/myTeam.vue")
@@ -33,6 +39,12 @@ const routes = [
     {path:'/updatePassword',component:updatePassword},
     {path:'/waitProject',component:waitProject},
     {path:'/waitTeam',component:waitTeam},
+    {path:'/style',component:style},
+    {path:'/information',component:information},
+    {path:'/research',component:research},
+    {path:'/policy',component:policy},
+    {path:'/notice',component:notice},
+    {path:'/guide',component:guide},
     {
      path: '/volunteer_login', 
      component: login

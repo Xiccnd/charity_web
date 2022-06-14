@@ -2,7 +2,7 @@
    <li class="col v-m" style="width: 90%">
                <form @submit.prevent="search()">
               <span class="label">项目起止日期</span>
-              <div slot="" class="mx-datepicker" style="width: 120px">
+              <div slot="" class="mx-datepicker" style="width: 150px">
                 <div class="mx-input-wrapper">
                   <input
                     name="date"
@@ -16,7 +16,7 @@
                 </div>
               </div>
               <span class="label">至</span>
-              <div class="mx-datepicker" style="width: 120px">
+              <div class="mx-datepicker" style="width: 150px">
                 <div class="mx-input-wrapper">
                   <input
                     name="date"
@@ -50,16 +50,6 @@
                 class="button button-small"
                 type="submit"
                 style="height: 34px; line-height: 34px">搜索</button>
-              <button
-                href="javascript:void(0);"
-                class="button button-small"
-                type="reset"
-                style="
-                  margin-left: 6px;
-                  background-color: rgb(204, 204, 204);
-                  height: 34px;
-                  line-height: 34px;
-                ">重置</button>
               
               </form>
             </li>
