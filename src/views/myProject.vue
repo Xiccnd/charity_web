@@ -70,7 +70,7 @@
                 <td>{{ item.joinTime }}</td>
                 <td>{{ item.postName }}</td>
                 <td>{{ item.statusName }}</td>
-                <td><a v-on:click="quit(item.pid)">申请退出</a></td>
+                <td><a v-on:click="quit(item.pid, item.mark)" v-if="item.statusName === '进行中'">申请退出</a></td>
               </tr>
             </table>
           </li>
@@ -99,18 +99,20 @@ export default {
           joinTime: "",
           postName: "",
           statusName: "",
+          mark: "",
         }
       ]
     }
   },
   methods: {
-    quit: function (id) {
+    quit: function (pid, mark) {
       this.$http({
         url: "/volunteersProject/upData",
         method: "GET",
         params: {
           name: localStorage.getItem("username"),
-          pid: id
+          pid,
+          mark,
         }
       }).then(res => {
         location.reload()
@@ -131,6 +133,7 @@ export default {
         }
       }).then(res => {
         this.allProject = res.data;
+        console.log(this.allProject);
       }).catch(err => {
         console.log(err);
       })
