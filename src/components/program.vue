@@ -27,7 +27,6 @@
             <ul  class="panel-list panel-lists">
              <slot name="panel"></slot> 
             </ul>
-            <Pages></Pages>
           </div>
         </div>
       </div>

@@ -12,10 +12,9 @@
         </div>
         <div class="category__wrap" style="display: none">
           <div class="category__content">
-            <a href="javascript:void(0); " class="category__item active"
-              >全部</a
-            >
-          <div class="category" >
+            <a href="javascript:void(0); " class="category__item active">全部</a>
+
+          <div class="category">
             <h2 class="category__title">服务类别</h2>
             <div class="category__content">
                <a href="javascript:void(0);" class="category__item active">全部</a>
@@ -25,32 +24,41 @@
             </div>
             <div class="category__wrap" style="display: none">
               <div class="category__content">
-                <a href="javascript:void(0); " class="category__item active">全部</a>
+                <a href="javascript:void(0);" class="category__item active">全部</a>
+                <a class="category__item" v-for="(ter,i) in territory" :key="i">
+                  {{ter.territorydes}}
+                </a>
+              </div>
+              <div class="category__wrap" style="display: none">
+                <div class="category__content">
+                  <a href="javascript:void(0); " class="category__item active">全部</a>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="category">
-            <h2 class="category__title">队伍类型</h2>
-            <div class="category__content">
-              <a href="javascript:void(0);" class="category__item active">全部</a>
-               <a href="javascript:void(0);" v-for="(item,i) in class_of_service" :key="i"
-                class="category__item ">{{item.serviceName}}</a>
+            <div class="category">
+              <h2 class="category__title">队伍类型</h2>
+              <div class="category__content">
+                <a href="javascript:void(0);" class="category__item active">全部</a>
+                <a href="javascript:void(0);" v-for="(item,i) in class_of_service" :key="i"
+                  class="category__item ">{{item.serviceName}}</a>
+              </div>
             </div>
-          </div>
-          <div class="category">
-            <h2 class="category__title">队伍人数</h2>
-            <div class="category__content">
-              <a href="javascript:void(0);" class="category__item active">全部</a>
-              <a href="javascript:void(0);" class="category__item">招募待启动</a>
-              <a href="javascript:void(0);" class="category__item">招募中</a>
-              <a href="javascript:void(0);" class="category__item">招募已结束</a>
+            <div class="category">
+              <h2 class="category__title">队伍人数</h2>
+              <div class="category__content">
+                <a href="javascript:void(0);" class="category__item active">全部</a>
+                <a href="javascript:void(0);" class="category__item">招募待启动</a>
+                <a href="javascript:void(0);" class="category__item">招募中</a>
+                <a href="javascript:void(0);" class="category__item">招募已结束</a>
+              </div>
             </div>
-          </div>
-          <div class="category-handle">
-            <span class="hidden">收起</span>
-            <span class="">更多条件</span>
+            <div class="category-handle">
+              <span class="hidden">收起</span>
+              <span class="">更多条件</span>
+            </div>
           </div>
         </div>
+      </div>
       </div>
       <div class="category">
         <h2 class="category__title">队伍类型</h2>
@@ -78,6 +86,8 @@
         <span class="hidden">收起</span>
         <span class="">更多条件</span>
       </div>
+
+
     </template>
     <template v-slot:search>
       <search @searchdata="getdata"></search>
@@ -86,7 +96,7 @@
       <li
         class="panel-list__item"
         style="width: 25%"
-        v-for="(item, i) in volunteer_program_details"
+        v-for="(item, i) in currentPageData"
         :key="i"
       >
         <div class="panel-card">
@@ -138,13 +148,31 @@
           </ul>
         </div>
       </li>
+
+      <Pages></Pages>
+
+      <div   id="cpaginate">
+        <div  class="pages">
+          <a href="javascript:void(0);" class="pages-btn" @click="firstPage">首页</a>
+          <a href="javascript:void(0);" class="pages-btn" @click="prevPage">上一页</a>
+          <span v-for="(item,index) in totalPage" :key="index">
+            <a href="javascript:void(0);" @click="currentPages(item)">{{ item }}</a>
+          </span>
+          <a href="javascript:void(0);" class="pages-btn" @click="nextPage">下一页</a>
+          <a href="javascript:void(0);" class="pages-btn" @click="lastPage">尾页</a>
+          <span >第</span>
+          <input  type="text" v-model="currentPage" />
+          <span >页</span>
+          <a href="javascript:void(0);" class="pages-btn" @click="currentPages(currentPage)">跳转</a>
+          <span >{{ currentPage }}/{{ totalPage }}页</span>
+        </div>
+      </div>
     </template>
   </program>
 </template>
 <script >
 import NormalHead from "@/components/normal_head";
 import Guidebar from "@/components/guidebar";
-import Pages from "@/components/pages";
 import Program from "@/components/program";
 import Search from "@/components/team_search";
 export default {
@@ -153,7 +181,7 @@ export default {
       //项目
       volunteer_program_details: [
         {
-          pid: 0,
+          pid: 1,
           pname: "汛期安全知识”志愿宣讲活动 ",
           projectStatus: "招募中",
           posts: 1,
@@ -172,7 +200,13 @@ export default {
         { sid: 1, serviceName: "社区服务" },
         { sid: 2, serviceName: "扶贫减贫" },
       ],
-
+      list: null,
+      listLoading: true,
+      totalPage: 1, // 统共页数，默认为1
+      currentPage: 1, //当前页数 ，默认为1
+      pageSize: 8, // 每页显示数量
+      currentPageData: [],//当前页显示内容
+      headPage: 1
     };
   },
   props: [],
@@ -184,13 +218,15 @@ export default {
   components: {
     NormalHead,
     Guidebar,
-    Pages,
     Program,
     Search,
   },
   methods: {
     getdata(data) {
-      this.volunteer_program_details = data;
+      this.list = data;
+      this.totalPage=Math.ceil(this.list.length / this.pageSize);
+      this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
+      this.getCurrentPageData();
     },
     proList: function () {
       const _this = this;
@@ -200,6 +236,10 @@ export default {
       })
         .then((res) => {
           _this.volunteer_program_details = res.data;
+          _this.list=res.data
+          this.totalPage=Math.ceil(this.list.length / this.pageSize);
+          this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
+          this.getCurrentPageData();
         })
         .catch((err) => {
           console.error(err);
@@ -232,6 +272,54 @@ export default {
           console.error(err);
         });
     },
+    getCurrentPageData() {
+      let begin = (this.currentPage - 1) * this.pageSize;
+      let end = this.currentPage * this.pageSize;
+      this.currentPageData = this.list.slice(
+          begin,
+          end
+      );
+    },
+    //当前页
+    currentPages(i) {
+      this.currentPage=i;
+      this.getCurrentPageData();
+    },
+    //上一页
+    prevPage() {
+
+      if (this.currentPage == 1) {
+        return false;
+      } else {
+        this.currentPage--;
+        this.getCurrentPageData();
+      }
+    },
+    // 下一页
+    nextPage() {
+      if (this.currentPage == this.totalPage) {
+        return false;
+      } else {
+        this.currentPage++;
+        this.getCurrentPageData();
+      }
+    },
+    //尾页
+    lastPage() {
+
+      if (this.currentPage == this.totalPage) {
+        return false;
+      } else {
+        this.currentPage=this.totalPage;
+        this.getCurrentPageData();
+      }
+
+    } ,
+    //首页
+    firstPage(){
+      this.currentPage= this.headPage;
+      this.getCurrentPageData();
+    }
   },
 };
 </script>
@@ -384,5 +472,60 @@ export default {
   padding: 0 30px;
   cursor: pointer;
   transition: 0.3s;
+}
+.pages {
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0;
+}
+.pages .pages-btn, .pages input {
+  border-radius: 4px;
+}
+.pages .pages-btn {
+  white-space: nowrap;
+  width: 48px;
+  border-radius: 24px;
+}
+.disabled{
+  display: none!important;
+}
+
+.pages a {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  text-align: center;
+  line-height: 22px;
+  font-size: 12px;
+  color: #999;
+  vertical-align: middle;
+  margin: 0 5px;
+  transition: 0.3s;
+}
+.pages a.active, .pages .pages-btn:last-child:hover {
+  border-color: #cc0000;
+  background: #cc0000;
+  color: #fff;
+}
+.pages span {
+  font-size: 12px;
+  color: #333;
+  margin: 0 5px;
+  vertical-align: middle;
+}
+.pages input {
+  display: inline-block;
+  width: 48px;
+  height: 22px;
+  line-height: 22px;
+  border: 1px solid #ccc;
+  border-radius: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+  vertical-align: middle;
+  padding: 0;
 }
 </style>

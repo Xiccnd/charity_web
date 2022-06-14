@@ -481,6 +481,7 @@ export default {
         }
       ],
       pid:"",
+      cur: 0,// 默认选中第一个值
     };
   },
   props: ['id'],
@@ -488,15 +489,10 @@ export default {
     Guidebar,
     LoginHead,
   },
-  data () {
-           return {
-             cur: 0,// 默认选中第一个值
-         }
-   },
   created() {
     this.pid=this.$route.query.id
     const _this = this
-    this.$http.get("http://localhost:8088/volunteerProgramDetails/volunterProgramPost",
+    this.$http.get("/volunteerProgramDetails/volunterProgramPost",
         {
           params:{
             id:this.pid
@@ -504,7 +500,7 @@ export default {
         })
         .then(res =>{
           _this.volunteer = res.data
-          this.$http.get("http://localhost:8088/volunteerTeam/selectOne",
+          this.$http.get("/volunteerTeam/selectOne",
               {
                 params:{
                   id:this.volunteer[0].teamid
@@ -513,7 +509,7 @@ export default {
               .then(res =>{
                 _this.team = res.data
               })
-          this.$http.get("http://localhost:8088/volunteerProgramDetails/classOfServices",
+          this.$http.get("/volunteerProgramDetails/classOfServices",
               {
                 params:{
                   id:this.volunteer[0].pid
