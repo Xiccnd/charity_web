@@ -103,7 +103,7 @@
           <router-link
             :to="{
               path: '/volunteer_team/volunteer_team_details',
-              query: { id: item.pid },
+              query: { id: item.pid, flet:JSON.stringify(this.team) },
             }"
           >
             <img
@@ -190,29 +190,46 @@ export default {
           recruitDate: "2022-6-9",
         },
       ],
+      //区域
       territory: [
         { territoryid: 0, territorydes: "全部" },
         { territoryid: 1, territorydes: "万州区" },
         { territoryid: 2, territorydes: "永川区" },
       ],
+      //服务类别
       class_of_service: [
         { sid: 0, serviceName: "全部" },
         { sid: 1, serviceName: "社区服务" },
         { sid: 2, serviceName: "扶贫减贫" },
       ],
-      list: null,
+      list: null,//所有队伍
       listLoading: true,
       totalPage: 1, // 统共页数，默认为1
       currentPage: 1, //当前页数 ，默认为1
       pageSize: 8, // 每页显示数量
       currentPageData: [],//当前页显示内容
-      headPage: 1
+      headPage: 1,
+      team:[]//该用户申请的队伍
     };
   },
   props: [],
   created() {
     this.proList();
     this.territorylist();
+    const _this = this
+    //获取用户申请的队伍
+    if(localStorage.getItem("username") != null){
+      this.$http({
+        method:"get",
+        url:"/volunteersTeamid/selectOne",
+        params: {
+          name: localStorage.getItem("username")
+        }
+      }).then(res => {
+        _this.team=res.data
+      })
+    }
+
   },
   mounted() {},
   components: {
@@ -224,6 +241,7 @@ export default {
   methods: {
     getdata(data) {
       this.list = data;
+      this.currentPages(1)
       this.totalPage=Math.ceil(this.list.length / this.pageSize);
       this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
       this.getCurrentPageData();
@@ -282,7 +300,15 @@ export default {
     },
     //当前页
     currentPages(i) {
-      this.currentPage=i;
+      if(i>this.totalPage){
+        alert("超出最大页数,自动跳到尾页")
+        this.currentPage=this.totalPage
+      }else if(i<1){
+        alert("小于最小页数,自动跳到首页")
+        this.currentPage=1
+      }else{
+          this.currentPage=i;
+      }
       this.getCurrentPageData();
     },
     //上一页

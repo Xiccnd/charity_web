@@ -706,7 +706,7 @@ export default {
     },
     submitChange :function () {
       let changeInfo = {
-        uname: this.userInfo.uname,
+        uname: localStorage.getItem("username"),
         mailbox: document.getElementById('email').value,
         weixin: document.getElementById('weixin').value,
         profile: document.getElementById('profile').value,
@@ -721,7 +721,7 @@ export default {
         education: document.getElementById('educationSelect').options[document.getElementById('educationSelect').selectedIndex].value,
         employment: document.getElementById('jobSelect').options[document.getElementById('jobSelect').selectedIndex].value
       }
-      // console.log(changeInfo);
+      console.log(changeInfo);
       this.$http({
         url: "personalData/upData",
         method: "POST",

@@ -423,12 +423,15 @@ return{
       const _this = this
       var numReg = /^1[3|4|5|7|8|9][0-9]\d{4,11}$/
       var numRe = new RegExp(numReg)
+<<<<<<< HEAD
       if(this.user.telephone==''){
                   document.getElementById('phonenumTips').innerHTML="手机号码不能为空，请确保该手机号码真实有效"
                    document.getElementById('phonenumTips').classList.remove('right-tip');
                    document.getElementById('phonenumTips').classList.remove ('right2-tip');
                    document.getElementById('phonenumTips').classList.add('warn-tip');
     }else{
+=======
+>>>>>>> 7fd78156452f28cea43b4dff3657b77836d25565
         this.$http({
                 method:"post",
                 url:"/user/RegistrationVerification",
@@ -437,12 +440,17 @@ return{
                 }
                })
               .then(res => {
+<<<<<<< HEAD
                 console.log(res.data.telephone)
                 if(this.user.telephone==res.data.telephone){
+=======
+               if (res.data == true) {
+>>>>>>> 7fd78156452f28cea43b4dff3657b77836d25565
                 document.getElementById('phonenumTips').innerHTML="手机号码已存在"
                 document.getElementById('phonenumTips').classList.remove('right-tip');
                 document.getElementById('phonenumTips').classList.remove ('right2-tip');
                 document.getElementById('phonenumTips').classList.add('warn-tip');
+<<<<<<< HEAD
                   }else if(!numRe.test(this.user.telephone)){
                     document.getElementById('phonenumTips').innerHTML="手机号码输入不规范"
                    document.getElementById('phonenumTips').classList.remove('right-tip');
@@ -450,16 +458,35 @@ return{
                    document.getElementById('phonenumTips').classList.add('warn-tip'); 
                  }else{
                    document.getElementById('phonenumTips').innerHTML="   &nbsp;"
+=======
+                  }else if(this.user.telephone==''){
+                  document.getElementById('phonenumTips').innerHTML="手机号码不可为空"
+                   document.getElementById('phonenumTips').classList.remove('right-tip');
+                   document.getElementById('phonenumTips').classList.remove ('right2-tip');
+                   document.getElementById('phonenumTips').classList.add('warn-tip');
+                 }else if(!numRe.test(this.user.telephone)){
+                    document.getElementById('phonenumTips').innerHTML="手机号码不规范(用户名长度6～16个字符)"
+                   document.getElementById('phonenumTips').classList.remove('right-tip');
+                   document.getElementById('phonenumTips').classList.remove ('right2-tip');
+                   document.getElementById('phonenumTips').classList.add('warn-tip');
+                 }else{
+                   document.getElementById('phonenumTips').innerHTML="手机号码可用"
+>>>>>>> 7fd78156452f28cea43b4dff3657b77836d25565
                    document.getElementById('phonenumTips').classList.add('right-tip');
                    document.getElementById('phonenumTips').classList.add ('right2-tip');
                    document.getElementById('phonenumTips').classList.remove('warn-tip');
                  }
               })
               .catch(err => {
+<<<<<<< HEAD
                 console.error(err); 
               })
               
               }
+=======
+                console.error(err);
+              })
+>>>>>>> 7fd78156452f28cea43b4dff3657b77836d25565
  },
     },
 

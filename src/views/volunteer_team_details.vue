@@ -112,7 +112,7 @@
                   </tr>
                   <tr >
                     <th >成立日期：</th>
-                    <td >{{ volunteer_team.registerDate }}</td>
+                    <td >{{ dateFormat(volunteer_team.registerDate) }}</td>
                     <th >联络组织：</th>
                     <td  style="">
                       <a  href="javascript:void(0);"
@@ -144,7 +144,8 @@
                 <span :class="{active:cur==1}" @click="cur=1">发起的项目</span>
                 <span :class="{active:cur==2}" @click="cur=2">留言咨询</span>
                 <div data-v-9026023c="" style="margin-top: -32px; text-align: right;">
-                  <a href="javascript:void(0);" class="button" id="intoOrg" style="background:#FF9400;padding-top: 0px;color: white;height:30px;line-height:30px;" v-on:click="myfun()">{{ btn }}</a>
+                  <a href="javascript:void(0);" class="button" id="intoOrg"
+                     style="background:#FF9400;padding-top: 0px;color: white;height:30px;line-height:30px;" v-on:click="myfun(true)">{{ btn }}</a>
                 </div>
               </div>
               <div  class="tabbar-down" v-show="cur==0">
@@ -280,6 +281,7 @@
 <script>
 import Guidebar from "@/components/guidebar";
 import LoginHead from "@/components/login_head";
+import volunteer_team from "@/views/volunteer_team";
 export default {
   components: {
     Guidebar,
@@ -301,6 +303,7 @@ export default {
                regisDepartment:"",
                registrationAuthority:""
              },
+             team:[],
              btn:"我要加入",
              tid:"",
              personCount:""
@@ -309,6 +312,7 @@ export default {
   props:['id'],
   created() {
     this.tid = this.$route.query.id
+    this.team = JSON.parse(this.$route.query.flet)
     const _this = this
     this.$http.get("http://192.168.1.147:8088/volunteerTeam/selectOne",
         {
@@ -317,6 +321,11 @@ export default {
           }
         }).then(res => {
       this.volunteer_team=res.data
+      for (let i = 0; i < this.team.length; i++){
+        if(this.volunteer_team.teamid==this.team[i].teamid){
+          this.btn="申请成功"
+        }
+      }
     })
     this.$http({
       method:"get",
@@ -333,8 +342,35 @@ export default {
         })
   },
   methods:{
-    myfun:function (){
-      this.btn="申请成功"
+    myfun:function (flet){
+      var pname = localStorage.getItem("username")
+      if(pname != null){
+        if(flet){
+          this.$http({
+            method:"get",
+            url:"volunteersTeamid/inserter",
+            params:{
+              name:pname,
+              teamid:this.volunteer_team.teamid,
+            }
+          }).then(err => {
+            console.error(err)
+          })
+        }
+        this.btn="申请成功"
+      }else{
+        alert("登录后,可进行操作")
+      }
+    },
+    dateFormat:function (time){
+      var data = new Date(time);
+      var y = data.getFullYear();
+      var m = data.getMonth()+1;
+      var d = data.getDate();
+      var hours = data.getHours()<10?'0'+data.getHours() : data.getHours();
+      var minutes = data.getMinutes()<10?'0'+data.getMinutes() : data.getMinutes();
+      var second = data.getSeconds()<10?'0'+data.getSeconds() : data.getSeconds();
+      return `${y}-${m}-${d} ${hours}:${minutes}:${second}`;
     }
   }
 };

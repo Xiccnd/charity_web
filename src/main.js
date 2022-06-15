@@ -4,6 +4,7 @@ import router from './router/index'
 import css1 from './assets/css/index.css'
 import axios from 'axios'
 
+
 // vueaxios.defaults.baseURL="http://localhost:8181";
 
 const app = createApp(App)
