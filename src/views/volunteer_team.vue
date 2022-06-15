@@ -103,7 +103,7 @@
           <router-link
             :to="{
               path: '/volunteer_team/volunteer_team_details',
-              query: { id: item.pid },
+              query: { id: item.pid, flet:JSON.stringify(this.team) },
             }"
           >
             <img
@@ -218,16 +218,18 @@ export default {
     this.territorylist();
     const _this = this
     //获取用户申请的队伍
-    this.$http({
-      method:"get",
-      url:"/volunteersTeamid/selectOne",
-      params: {
-        name: localStorage.getItem("username")
-      }
-    }).then(res => {
-      _this.team=res.data
-      console.log(this.team)
-    })
+    if(localStorage.getItem("username") != null){
+      this.$http({
+        method:"get",
+        url:"/volunteersTeamid/selectOne",
+        params: {
+          name: localStorage.getItem("username")
+        }
+      }).then(res => {
+        _this.team=res.data
+      })
+    }
+
   },
   mounted() {},
   components: {
