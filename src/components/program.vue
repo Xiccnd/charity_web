@@ -39,7 +39,14 @@ export default {
    components: {
     NormalHead,
   },
+  methods:{
+    btnlocal() {
+      console.log(1)
+      // proList(data)
+    },
   }
+  
+}
 </script>
 <style scoped>
 .protabbar span.active:before {

@@ -9,7 +9,7 @@
             <h2 class="category__title">项目区域</h2>
             <div class="category__content">
                <!-- <a href="javascript:void(0);" class="category__item active">全部</a> -->
-               <a class="category__item" v-for="(ter,i) in territory" :key="i">
+               <a href="javascript:void(0);" class="category__item" :class="selectedIndex == i ? 'active':''" @click="btnlocal(ter.territorydes,i)" v-for="(ter,i) in territory" :key="i">
                 {{ter.territorydes}}
               </a>
             </div>
@@ -23,28 +23,27 @@
             <h2 class="category__title">服务类别</h2>
             <div class="category__content">
               <!-- <a href="javascript:void(0);" class="category__item active">全部</a> -->
-               <a href="javascript:void(0);" v-for="(item,i) in class_of_service" :key="i"
+               <a href="javascript:void(0);" :class="selectedIndex1 == i ? 'active':''" @click="btnservce(item.serviceName,i)" v-for="(item,i) in class_of_service" :key="i"
                 class="category__item ">{{item.serviceName}}</a>
             </div>
           </div>
           <div class="category">
             <h2 class="category__title">项目状态</h2>
             <div class="category__content">
-              <a href="javascript:void(0);" class="category__item active"
+              <a href="javascript:void(0);" :class="selectedIndex2 == 0 ? 'active':''" class="category__item " @click="btneroll('',0)"
                 >全部</a
               >
-              <a href="javascript:void(0);" class="category__item"
-                >招募待启动</a
+              <a href="javascript:void(0);" :class="selectedIndex2 == 1 ? 'active':''" class="category__item" @click="btneroll(1,1)"
+                >进行中</a
               >
-              <a href="javascript:void(0);" class="category__item">招募中</a>
-              <a href="javascript:void(0);" class="category__item"
-                >招募已结束</a
+              <a href="javascript:void(0);" :class="selectedIndex2 == 2 ? 'active':''" class="category__item" @click="btneroll(2,2)"
+                >已结束</a
               >
             </div>
           </div>
           <div class="category-handle">
-            <span class="hidden">收起</span>
-            <span class="">更多条件</span>
+            <span class="hidden" >收起</span>
+            <span class="">更多条件 </span>
           </div>
     </template>
     <template v-slot:search>
@@ -94,7 +93,7 @@
             </ul>
         </div>
 
-      <div   id="cpaginate">
+      <div id="cpaginate">
         <div  class="pages">
           <a href="javascript:void(0);" class="pages-btn" @click="firstPage">首页</a>
           <a href="javascript:void(0);" class="pages-btn" @click="prevPage">上一页</a>
@@ -122,16 +121,20 @@ import Search from "@/components/program_search"
 export default {
   data() {
     return {
+    selectedIndex: 0,
+    selectedIndex1: 0,
+    selectedIndex2: 0,
       //项目
     territory:[
-      {territoryid:0,territorydes:"全部"},
-      {territoryid:1,territorydes:"万州区"},
-      {territoryid:2,territorydes:"永川区"}
+      
     ],
+    searchinfo:{
+      local:'全部',
+      serviceName:'全部',
+      state:''
+    },
       class_of_service: [
-        { sid: 0, serviceName: "全部" },
-        { sid: 1, serviceName: "社区服务" },
-        { sid: 2, serviceName: "扶贫减贫" },
+       
       ],
       allProject: [
         {
@@ -156,6 +159,7 @@ export default {
   created() {
     this.proList();
     this.territorylist();
+    this.servicelist();
     this.login()
   },
   mounted() {},
@@ -166,6 +170,30 @@ export default {
     Search
   },
   methods: { 
+    btnlocal(data,i) {
+      this.searchinfo.local = data
+      this.proList(this.searchinfo.serviceName,this.searchinfo.local,this.searchinfo.state)
+      this.checkcolor(i)
+    },
+    btnservce(data,i){
+      this.searchinfo.serviceName = data
+      this.proList(this.searchinfo.serviceName,this.searchinfo.local,this.searchinfo.state)
+      this.checkcolor1(i)
+    },
+    btneroll(data,i){
+      this.searchinfo.state = data
+      this.proList(this.searchinfo.serviceName,this.searchinfo.local,this.searchinfo.state)
+      this.checkcolor2(i)
+    },
+    checkcolor(index){
+       this.selectedIndex = index;
+    },
+    checkcolor1(index){
+       this.selectedIndex1 = index;
+    },
+    checkcolor2(index){
+       this.selectedIndex2 = index;
+    },
     getdata(data){
       this.list = data
       this.currentPages(1)
@@ -173,11 +201,22 @@ export default {
       this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
       this.getCurrentPageData();
      },
-    proList:function(){
+    proList(serviceName,local,state){
+        if(serviceName == '全部'){
+          serviceName=''
+        }
+        if(local == '全部'){
+          local=''
+        }
         const _this = this
         this.$http({
                   method:"get",
-                  url:"/volunteerProgramDetails/selectAll"
+                  url:"/volunteerProgramDetails/selectAll",
+                  params:{
+                    location:local,
+                    serviceName:serviceName,
+                    projectStatus:state
+                  }
                })
               .then(res => {
                 _this.list=res.data
@@ -198,6 +237,19 @@ export default {
                })
               .then(res => {
                 _this.territory=res.data
+              })
+              .catch(err => {
+                console.error(err); 
+              })
+      },
+      servicelist:function(){
+        const _this = this
+        this.$http({
+                  method:"get",
+                  url:"classOfService/queryAll"
+               })
+              .then(res => {
+                _this.class_of_service=res.data
               })
               .catch(err => {
                 console.error(err); 
