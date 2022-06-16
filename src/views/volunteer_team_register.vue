@@ -27,7 +27,7 @@
                     <em data-v-18d5a56f="">*</em><span data-v-18d5a56f="" id="orgname">用户名：</span>
                     <span data-v-18d5a56f="" id="orgtip" style="font-size: 14px; color: rgb(102, 102, 102);"></span>
                   </p>
-                  <input type="text" id="groupName" maxlength="50" placeholder="请输入用户名" v-model="team.name"></div>
+                  <input type="text" id="groupName" maxlength="50" placeholder="请输入用户名" v-model="team.uname"></div>
                 <span data-v-18d5a56f="" id="groupNameTips" class="form-error down-tip" style="color: red;"></span>
               </li>
 
@@ -84,7 +84,7 @@
                 <div data-v-18d5a56f="" class="form">
                   <p data-v-18d5a56f="" class="form-label">
                     <em data-v-18d5a56f="">*</em>手机号码：</p>
-                  <input type="text" id="volNum" v-model="team.telephone" maxlength="6" oninput="this.value=this.value.replace(/[^\d]/g,'');if(this.value==0)value='';" placeholder="请输入手机号码">
+                  <input type="text" id="volNum" v-model="team.telephone" maxlength="11" oninput="this.value=this.value.replace(/[^\d]/g,'');if(this.value==0)value='';" placeholder="请输入手机号码">
                 </div>
                 <span data-v-18d5a56f="" id="volNumTips" class="form-error down-tip" style="color: red;"></span>
               </li>
@@ -186,7 +186,7 @@ export default {
   data() {
     return {
         team:{
-          name:"",
+          uname:"",
           password:"",
           contact:"",
           teamName: "",
@@ -224,8 +224,10 @@ export default {
   },
   methods: {
     btn:function (){
-      this.$http.post("volunteerTeamcensor/Add",this.team
-      )
+      this.$http.post("volunteerTeamcensor/Add",this.team).then(res =>{
+        alert("注册成功")
+        this.$router.push("/volunteer_login2")
+      })
     }
   },
 };

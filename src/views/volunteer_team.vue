@@ -103,7 +103,7 @@
           <router-link
             :to="{
               path: '/volunteer_team/volunteer_team_details',
-              query: { id: item.pid, flet:JSON.stringify(this.team) },
+              query: { id: item.teamid, flet:JSON.stringify(this.team) },
             }"
           >
             <img
@@ -114,7 +114,7 @@
           </router-link>
           <h2 class="panel-card__name">
             <a href="javascript:void(0);" title="给外卖骑手送温暖">{{
-              item.pname
+              item.teamName
             }}</a>
           </h2>
           <p  class="row w">
@@ -178,18 +178,6 @@ import Search from "@/components/team_search";
 export default {
   data() {
     return {
-      //项目
-      volunteer_program_details: [
-        {
-          pid: 1,
-          pname: "汛期安全知识”志愿宣讲活动 ",
-          projectStatus: "招募中",
-          posts: 1,
-          targetNumber: 3,
-          enrolledNumber: 2,
-          recruitDate: "2022-6-9",
-        },
-      ],
       //区域
       territory: [
         { territoryid: 0, territorydes: "全部" },
@@ -250,10 +238,9 @@ export default {
       const _this = this;
       this.$http({
         method: "get",
-        url: "/volunteerProgramDetails/selectAll",
+        url: "/volunteerTeam/queryAll",
       })
         .then((res) => {
-          _this.volunteer_program_details = res.data;
           _this.list=res.data
           this.totalPage=Math.ceil(this.list.length / this.pageSize);
           this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;

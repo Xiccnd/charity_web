@@ -314,13 +314,14 @@ export default {
     this.tid = this.$route.query.id
     this.team = JSON.parse(this.$route.query.flet)
     const _this = this
-    this.$http.get("http://192.168.1.147:8088/volunteerTeam/selectOne",
+    this.$http.get("/volunteerTeam/selectOne",
         {
           params:{
             id:this.tid
           }
         }).then(res => {
-      this.volunteer_team=res.data
+          console.log(res.data)
+      this.volunteer_team=res.data.data
       for (let i = 0; i < this.team.length; i++){
         if(this.volunteer_team.teamid==this.team[i].teamid){
           this.btn="申请成功"
@@ -329,7 +330,7 @@ export default {
     })
     this.$http({
       method:"get",
-      url:"http://192.168.1.147:8088/volunteersTeamid/selectAllNumByTid",
+      url:"/volunteersTeamid/selectAllNumByTid",
       params:{
         teamid:this.volunteer_team.teamid
       }

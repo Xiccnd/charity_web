@@ -18,13 +18,13 @@
           <div class="col v-t white">
             <h2 class="login_header">
               <div>
-                <router-link to="/volunteer_login2">
-                  <a href="#" class="col v-m login-txt a_1">志愿队伍登录</a>
+                 <router-link to="/volunteer_login">
+                 <a href="#" class="col v-m login-txt a_1">志愿者登录</a>
                 </router-link>
                 <a href="#/chongqing/login/2" aria-current="page"
                    class="col v-m login-txt a_1 router-link-exact-active router-link-active" style="display: none;">志愿者登录</a>
               </div>
-              <a style="text-decoration: none;color:red">志愿者登录</a>
+              <a style="text-decoration: none;color:red">志愿队伍登录</a>
               <a href="#/chongqing/login/1" class="a_2" style="color: rgb(153, 153, 153); font-size: 14px;">管理部门登录</a>
             </h2>
             <div class="login-wrap">
@@ -101,13 +101,13 @@ export default {
       } else if (document.getElementById('password').value === "") {
         alert('密码不能为空')
       } else {
-        this.$http.post("/user/Login",
+        this.$http.post("/user/TeamLogin",
             {
               name:username,
               password:password,
-              perid:2
             },
         ).then(res => {
+          console.log(res.data)
           if (res.data === -2) {
             alert("用户名不存在！");
             document.getElementById('username').value = "";
@@ -118,7 +118,8 @@ export default {
             localStorage.setItem("username", username)
             localStorage.setItem("perId", res.data)
             document.getElementById('password').value = ''
-            this.$router.push("/volunteer_center")
+            let url ='http://localhost:8089/';
+            window.location.href =url;
           }
         }).catch(err => {
           console.log(err);

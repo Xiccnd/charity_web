@@ -53,15 +53,26 @@
             <div class="tabbar-down">
               <div class="grid g-width">
                 <div class="grid-item g-12">
-                  <div class="form">
+                  <!-- <div class="form">
                     <p
                         class="form-label"
                         style="position: relative; top: -20px; margin-bottom: 0px"
                     >
                       <span style="margin-top: 30px">用户名：{{userInfo.uname}}</span>
                     </p>
+                  </div> -->
+                  <div class="form">
+                    <p class="form-label">真实姓名：</p>
+                    <input
+                        type="text"
+                        id="name"
+                        maxlength="15"
+                        placeholder="请输入真实姓名"
+                    />
+                    <p id="" class="form-error"></p>
                   </div>
-                  <div class="form" style="margin-top: 32px">
+
+                  <div class="form" style="margin-top: 0px">
                     <p class="form-label">国家/地区：</p>
                     <div class="select">
                       <select id="countrySelect">
@@ -501,7 +512,7 @@
                     </div>
                     <p class="form-error"></p>
                   </div>
-                  <div id="profile_div" class="form" style="">
+                  <div id="profile_div" class="form" style="margin-top: 8px;">
                     <p class="form-label">头像地址：</p>
                     <div class="row w">
                       <div class="col v-m">
@@ -626,6 +637,7 @@ export default {
         telephone: "",
         uname: "",
         weixin: "",
+        name:""
       }
     }
   },
@@ -636,6 +648,7 @@ export default {
             uname: localStorage.getItem("username")
           },
       ).then(res => {
+        console.log(res.data)
         this.userInfo = {
           address: res.data.address,
           area: res.data.area,
@@ -650,7 +663,8 @@ export default {
           qq: res.data.qq,
           telephone: res.data.telephone,
           uname: res.data.uname,
-          weixin: res.data.weixin
+          weixin: res.data.weixin,
+          name: res.data.name
         }
         let options = document.getElementById('countrySelect').options
         for (let i = 0; i < options.length; i++) {
@@ -700,12 +714,14 @@ export default {
         document.getElementById('qq').value = toRaw(this.userInfo).qq
         document.getElementById('detailedAddress').value = toRaw(this.userInfo).address
         document.getElementById('serviceArea').value = toRaw(this.userInfo).area
+        document.getElementById('name').value = toRaw(this.userInfo).name
       }).then(err => {
         // console.log(err);
       })
     },
     submitChange :function () {
       let changeInfo = {
+        name: document.getElementById('name').value,
         uname: localStorage.getItem("username"),
         mailbox: document.getElementById('email').value,
         weixin: document.getElementById('weixin').value,
@@ -728,6 +744,7 @@ export default {
         data: changeInfo
       }).then(res => {
         console.log(res);
+        alert("修改成功")
         window.scrollTo(0,0);
         location.reload();
       }).catch(err => {

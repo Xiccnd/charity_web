@@ -54,7 +54,7 @@
                     <tr >
                       <th >服务类别：</th>
                       <td v-for="(item, index) in classs" :key="index">
-                        <span  class="button outline"
+                        <span  class=" outline"
                           >{{item.serviceName}}</span
                         >
                       </td>
@@ -513,7 +513,8 @@ export default {
                 }
               })
               .then(res =>{
-                _this.team = res.data
+                console.log(res.data)
+                _this.team = res.data.data
                 for(let i=0;i<this.allProject.length;i++){
                   if(this.allProject[i].pid==this.volunteer[0].pid){
                     this.myfun(this.allProject[i].postid+1,false)
@@ -537,7 +538,7 @@ export default {
     myfun:function (index,flat){
       var postId = index-1;
       var pname = localStorage.getItem("username")
-      var btn = document.getElementsByClassName("button")[index];
+      var btn = document.getElementsByClassName("button")[index-1];
       if(pname != null){
         if(flat){
           this.$http.get("/volunteersProject/inserter",{
@@ -546,8 +547,10 @@ export default {
               postid:postId,
               pid:this.volunteer[0].pid
             }
-          }).then(err => {
-            console.error(err)
+          }).then(res =>{
+              console.log(res.data);
+          }).catch(err => {
+            console.error(err);
           })
         }
         btn.innerHTML="申请成功"

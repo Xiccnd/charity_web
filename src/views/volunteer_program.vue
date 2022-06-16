@@ -5,7 +5,7 @@
           <div class="category" >
             <h2 class="category__title">项目区域</h2>
             <div class="category__content">
-               <a href="javascript:void(0);" class="category__item active">全部</a>
+               <!-- <a href="javascript:void(0);" class="category__item active">全部</a> -->
                <a class="category__item" v-for="(ter,i) in territory" :key="i">
                 {{ter.territorydes}}
               </a>
@@ -19,7 +19,7 @@
           <div class="category">
             <h2 class="category__title">服务类别</h2>
             <div class="category__content">
-              <a href="javascript:void(0);" class="category__item active">全部</a>
+              <!-- <a href="javascript:void(0);" class="category__item active">全部</a> -->
                <a href="javascript:void(0);" v-for="(item,i) in class_of_service" :key="i"
                 class="category__item ">{{item.serviceName}}</a>
             </div>
