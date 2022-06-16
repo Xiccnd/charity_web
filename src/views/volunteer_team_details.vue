@@ -13,7 +13,7 @@
                 <span> 志愿队伍</span>
               </template>
               <template v-slot:tp>
-                <span> 支援队伍详情</span>
+                <span> 志愿队伍详情</span>
               </template>
             </guidebar>
           </li>
@@ -260,6 +260,7 @@
                       
                       href="javascript:void(0);"
                       class="button outline"
+                       v-on:click="lookMap"
                       >查看地图</a
                     ></span
                   >
@@ -276,16 +277,19 @@
       </div>
     </div>
   </div>
+   <BaiduMap ref="child"></BaiduMap>
 </template>
 
 <script>
 import Guidebar from "@/components/guidebar";
 import LoginHead from "@/components/login_head";
 import volunteer_team from "@/views/volunteer_team";
+import BaiduMap from "@/components/BaiduMap";
 export default {
   components: {
     Guidebar,
     LoginHead,
+    BaiduMap,
   },
    data () {
            return {
@@ -306,7 +310,8 @@ export default {
              team:[],
              btn:"我要加入",
              tid:"",
-             personCount:""
+             personCount:"",
+             city:"重庆市"
          }
    },
   props:['id'],
@@ -343,6 +348,13 @@ export default {
         })
   },
   methods:{
+    lookMap:function(){
+      this.$refs.child.isPay=true;
+      console.log(this.team.detailedAddress)
+      // this.$refs.child.address='巫山县巫山第二中学';
+      this.$refs.child.initMapHeight();
+			this.$refs.child.map(this.volunteer_team.address,this.city);
+    },
     myfun:function (flet){
       var pname = localStorage.getItem("username")
       if(pname != null){

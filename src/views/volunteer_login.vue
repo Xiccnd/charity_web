@@ -25,7 +25,7 @@
                    class="col v-m login-txt a_1 router-link-exact-active router-link-active" style="display: none;">志愿者登录</a>
               </div>
               <a style="text-decoration: none;color:red">志愿者登录</a>
-              <a href="#/chongqing/login/1" class="a_2" style="color: rgb(153, 153, 153); font-size: 14px;">管理部门登录</a>
+              <a href="#/chongqing/login/1" class="a_2" style="color: rgb(153, 153, 153); font-size: 14px;"></a>
             </h2>
             <div class="login-wrap">
               <div class="login-input">
@@ -105,20 +105,23 @@ export default {
             {
               name:username,
               password:password,
-              perid:2
             },
         ).then(res => {
+          console.log(res.data)
           if (res.data === -2) {
             alert("用户名不存在！");
             document.getElementById('username').value = "";
           } else if (res.data === -1) {
             alert("密码错误！");
             document.getElementById('password').value = "";
-          } else {
+          } else  if (res.data === 2){
             localStorage.setItem("username", username)
             localStorage.setItem("perId", res.data)
             document.getElementById('password').value = ''
             this.$router.push("/volunteer_center")
+          }else{
+           alert("权限错误！");
+            document.getElementById('username').value = "";
           }
         }).catch(err => {
           console.log(err);

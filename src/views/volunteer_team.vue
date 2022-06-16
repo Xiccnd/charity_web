@@ -1,6 +1,9 @@
 <!--  -->
 <template>
   <program>
+    <template v-slot:tip>
+      <span>志愿队伍</span>
+    </template>
     <template v-slot:catagory>
       <div class="category">
         <h2 class="category__title">服务类别</h2>

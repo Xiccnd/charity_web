@@ -8,7 +8,7 @@
             <div class="router">
               <span>当前位置：</span>
               <a href="#/home" class="">首页</a>
-              <span>志愿项目</span>
+              <slot name="tip"></slot>
             </div>
           </li>
         </ul>
