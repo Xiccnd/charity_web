@@ -420,6 +420,7 @@
                       
                       href="javascript:void(0);"
                       class="button outline"
+                       v-on:click="lookMap"
                       >查看地图</a
                     ></span
                   >
@@ -436,11 +437,13 @@
       </div>
     </div>
   </div>
+  <BaiduMap ref="child"></BaiduMap>
 </template>
 
 <script>
 import Guidebar from "@/components/guidebar";
 import LoginHead from "@/components/login_head";
+import BaiduMap from "@/components/BaiduMap";
 export default {
   data() {
     return {
@@ -486,12 +489,15 @@ export default {
       pid:"",
       statusName:"",
       cur: 0,// 默认选中第一个值
+      address:'延庆区新城街2号',
+      city:'重庆市',
     };
   },
   props: ['id','statusname','allproject'],
   components: {
     Guidebar,
     LoginHead,
+    BaiduMap,
   },
   created() {
     this.pid=this.$route.params.id
@@ -505,6 +511,7 @@ export default {
           }
         })
         .then(res =>{
+          console.log(res.data)
           _this.volunteer = res.data
           this.$http.get("/volunteerTeam/selectOne",
               {
@@ -535,6 +542,13 @@ export default {
   mounted() {
   },
   methods: {
+    lookMap:function(){
+      this.$refs.child.isPay=true;
+      console.log(this.team.detailedAddress)
+      // this.$refs.child.address='巫山县巫山第二中学';
+      this.$refs.child.initMapHeight();
+			this.$refs.child.map(this.team.address,this.city);
+    },
     myfun:function (index,flat){
       var postId = index-1;
       var pname = localStorage.getItem("username")

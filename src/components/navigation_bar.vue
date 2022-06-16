@@ -31,7 +31,7 @@ export default {
       this.$router.replace(this.tags[index].address)
     },
     checkindex(index) {
-      if (this.$route.path === this.tags[index].address ||this.$route.path === this.tags[index].address0) {
+      if (this.$route.path === this.tags[index].address || this.$route.path === this.tags[index].address0) {
         return "active"
       } else {
         return ""

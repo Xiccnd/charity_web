@@ -1,6 +1,9 @@
 <!--  -->
 <template>
   <program>
+    <template v-slot:tip>
+      <span>志愿项目</span>
+    </template>
     <template v-slot:catagory>
           <div class="category" >
             <h2 class="category__title">项目区域</h2>

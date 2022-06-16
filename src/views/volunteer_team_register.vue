@@ -15,7 +15,7 @@
       <ul data-v-18d5a56f="" class="row w">
         <li data-v-18d5a56f="" class="col v-t w white">
           <div data-v-18d5a56f="" class="tabbar">
-            <a data-v-18d5a56f="" href="#/chongqing/volreg" class="">志愿者注册</a>
+            <a data-v-18d5a56f="" href="#" class="" v-on:click="voredict()">志愿者注册</a>
             <a data-v-18d5a56f="" href="#/chongqing/orgreg" aria-current="page" class="active router-link-exact-active router-link-active">志愿队伍注册</a></div>
           <div data-v-18d5a56f="" class="tabbar-down" style="padding: 0px 20px;">
             <h2 data-v-18d5a56f="" class="subtitle subtitle-margin subtitle-noline">基本信息</h2>
@@ -223,6 +223,9 @@ export default {
     Guidebar,
   },
   methods: {
+    voredict(){
+    this.$router.push("/volunteer_register")
+    },
     btn:function (){
       this.$http.post("volunteerTeamcensor/Add",this.team).then(res =>{
         alert("注册成功")

@@ -23,7 +23,7 @@
                 >志愿者注册</a
               >
               <!-- <router-link to="/volunteer_team_register"> -->
-                 <a  href="#" class="">志愿队伍注册</a>
+                 <a  href="#" class="" v-on:click="voredict()">志愿队伍注册</a>
               <!-- </router-link> -->
              
             </div>
@@ -311,6 +311,9 @@ return{
 
 },
   methods:{
+     voredict(){
+    this.$router.push("/volunteer_team_register")
+    },
     register:function(){
         const _this = this
         this.$http({
@@ -339,20 +342,8 @@ return{
       const _this = this
       var numReg = /^\w{6,16}$/
       var numRe = new RegExp(numReg)
-        this.$http({
-                method:"post",
-                url:"/user/RegistrationVerification",
-                data:{
-                  name:this.user.name
-                }
-               })
-              .then(res => {
-               if (res.data == true) {
-                document.getElementById('usernameTips').innerHTML="用户名已存在"
-                document.getElementById('usernameTips').classList.remove('right-tip');
-                document.getElementById('usernameTips').classList.remove ('right2-tip');
-                document.getElementById('usernameTips').classList.add('warn-tip');
-                  }else if(this.user.name==''){
+
+       if(this.user.name==''){
                   document.getElementById('usernameTips').innerHTML="用户名不可为空"
                    document.getElementById('usernameTips').classList.remove('right-tip');
                    document.getElementById('usernameTips').classList.remove ('right2-tip');
@@ -363,6 +354,21 @@ return{
                    document.getElementById('usernameTips').classList.remove ('right2-tip');
                    document.getElementById('usernameTips').classList.add('warn-tip'); 
                  }else{
+                  this.$http({
+                method:"post",
+                url:"/user/RegistrationVerification",
+                data:{
+                  name:this.user.name
+                }
+               })
+              .then(res => {
+                console.log(res.data)
+               if (res.data.name == this.user.name) {
+                document.getElementById('usernameTips').innerHTML="用户名已存在"
+                document.getElementById('usernameTips').classList.remove('right-tip');
+                document.getElementById('usernameTips').classList.remove ('right2-tip');
+                document.getElementById('usernameTips').classList.add('warn-tip');
+                  }else{
                    document.getElementById('usernameTips').innerHTML="用户名可用"
                    document.getElementById('usernameTips').classList.add('right-tip');
                    document.getElementById('usernameTips').classList.add ('right2-tip');
@@ -371,7 +377,9 @@ return{
               })
               .catch(err => {
                 console.error(err); 
-              })
+              }) 
+                 }
+       
  },
    checkpawd(){
       const _this = this
