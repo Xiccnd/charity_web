@@ -167,7 +167,10 @@ export default {
     padding-left: 30px;
 }
 
-
+.button{
+  outline: none;
+  border:none;
+}
 .button-small {
   width: 46px;
   height: 28px;

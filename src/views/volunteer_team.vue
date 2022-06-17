@@ -6,88 +6,30 @@
     </template>
     <template v-slot:catagory>
       <div class="category">
-        <h2 class="category__title">服务类别</h2>
+        <h2 class="category__title">所属区域</h2>
         <div class="category__content">
-          <a href="javascript:void(0);" class="category__item active">全部</a>
-          <a class="category__item" v-for="(ter, i) in territory" :key="i">
+          <!-- <a href="javascript:void(0);"  class="category__item active">全部</a> -->
+          <a href="javascript:void(0);" class="category__item"  :class="selectedIndex == i ? 'active':''" @click="btnlocal(ter.territorydes,i)" v-for="(ter, i) in territory" :key="i">
             {{ ter.territorydes }}
           </a>
         </div>
-        <div class="category__wrap" style="display: none">
-          <div class="category__content">
-            <a href="javascript:void(0); " class="category__item active">全部</a>
-
-          <div class="category">
-            <h2 class="category__title">服务类别</h2>
-            <div class="category__content">
-               <a href="javascript:void(0);" class="category__item active">全部</a>
-               <a class="category__item" v-for="(ter,i) in territory" :key="i">
-                {{ter.territorydes}}
-              </a>
-            </div>
-            <div class="category__wrap" style="display: none">
-              <div class="category__content">
-                <a href="javascript:void(0);" class="category__item active">全部</a>
-                <a class="category__item" v-for="(ter,i) in territory" :key="i">
-                  {{ter.territorydes}}
-                </a>
-              </div>
-              <div class="category__wrap" style="display: none">
-                <div class="category__content">
-                  <a href="javascript:void(0); " class="category__item active">全部</a>
-                </div>
-              </div>
-            </div>
-            <div class="category">
-              <h2 class="category__title">队伍类型</h2>
-              <div class="category__content">
-                <a href="javascript:void(0);" class="category__item active">全部</a>
-                <a href="javascript:void(0);" v-for="(item,i) in class_of_service" :key="i"
-                  class="category__item ">{{item.serviceName}}</a>
-              </div>
-            </div>
-            <div class="category">
-              <h2 class="category__title">队伍人数</h2>
-              <div class="category__content">
-                <a href="javascript:void(0);" class="category__item active">全部</a>
-                <a href="javascript:void(0);" class="category__item">招募待启动</a>
-                <a href="javascript:void(0);" class="category__item">招募中</a>
-                <a href="javascript:void(0);" class="category__item">招募已结束</a>
-              </div>
-            </div>
-            <div class="category-handle">
-              <span class="hidden">收起</span>
-              <span class="">更多条件</span>
-            </div>
-          </div>
-        </div>
-      </div>
       </div>
       <div class="category">
-        <h2 class="category__title">队伍类型</h2>
+        <h2 class="category__title">服务类型</h2>
         <div class="category__content">
-          <a href="javascript:void(0);" class="category__item active">全部</a>
           <a
             href="javascript:void(0);"
             v-for="(item, i) in class_of_service"
             :key="i"
-            class="category__item"
+            :class="selectedIndex1 == i ? 'active':''"
+            class="category__item" @click="btnservce(item.serviceName,i)"
             >{{ item.serviceName }}</a
           >
         </div>
       </div>
-      <div class="category">
-        <h2 class="category__title">队伍人数</h2>
-        <div class="category__content">
-          <a href="javascript:void(0);" class="category__item active">全部</a>
-          <a href="javascript:void(0);" class="category__item">招募待启动</a>
-          <a href="javascript:void(0);" class="category__item">招募中</a>
-          <a href="javascript:void(0);" class="category__item">招募已结束</a>
-        </div>
-      </div>
       <div class="category-handle">
-        <span class="hidden">收起</span>
-        <span class="">更多条件</span>
+        <!-- <span class="hidden">收起</span>
+        <span class="">更多条件</span> -->
       </div>
 
 
@@ -181,17 +123,17 @@ import Search from "@/components/team_search";
 export default {
   data() {
     return {
+      selectedIndex: 0,
+      selectedIndex1: 0,
+      searchinfo:{
+      local:'全部',
+      serviceName:'全部',
+    },
       //区域
       territory: [
-        { territoryid: 0, territorydes: "全部" },
-        { territoryid: 1, territorydes: "万州区" },
-        { territoryid: 2, territorydes: "永川区" },
       ],
       //服务类别
       class_of_service: [
-        { sid: 0, serviceName: "全部" },
-        { sid: 1, serviceName: "社区服务" },
-        { sid: 2, serviceName: "扶贫减贫" },
       ],
       list: null,//所有队伍
       listLoading: true,
@@ -207,6 +149,7 @@ export default {
   created() {
     this.proList();
     this.territorylist();
+    this.servicelist();
     const _this = this
     //获取用户申请的队伍
     if(localStorage.getItem("username") != null){
@@ -230,6 +173,22 @@ export default {
     Search,
   },
   methods: {
+    btnlocal(data,i) {
+      this.searchinfo.local = data
+      this.proList(this.searchinfo.serviceName,this.searchinfo.local)
+      this.checkcolor(i)
+    },
+    btnservce(data,i){
+      this.searchinfo.serviceName = data
+      this.proList(this.searchinfo.serviceName,this.searchinfo.local)
+      this.checkcolor1(i)
+    },
+    checkcolor(index){
+       this.selectedIndex = index;
+    },
+    checkcolor1(index){
+       this.selectedIndex1 = index;
+    },
     getdata(data) {
       this.list = data;
       this.currentPages(1)
@@ -237,11 +196,21 @@ export default {
       this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
       this.getCurrentPageData();
     },
-    proList: function () {
+    proList: function (serviceName,local) {
+       if(serviceName == '全部'){
+          serviceName=''
+        }
+        if(local == '全部'){
+          local=''
+        }
       const _this = this;
       this.$http({
         method: "get",
         url: "/volunteerTeam/queryAll",
+        params:{
+            address:local,
+            serviceName:serviceName,
+          }
       })
         .then((res) => {
           _this.list=res.data
@@ -266,6 +235,19 @@ export default {
           console.error(err);
         });
     },
+    servicelist:function(){
+        const _this = this
+        this.$http({
+                  method:"get",
+                  url:"classOfService/queryAll"
+               })
+              .then(res => {
+                _this.class_of_service=res.data
+              })
+              .catch(err => {
+                console.error(err); 
+              })
+      },
     queryList: function () {
       const _this = this;
       this.$http({

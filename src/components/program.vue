@@ -19,6 +19,7 @@
             <li class="col v-m t-r">
               <div class="text-tab" style="margin-right: -10px">
                 <a href="javascript:void(0);" id="list" class="active">列表</a>
+                |
                 <a href="javascript:void(0);" id="map">地图</a>
               </div>
             </li>
