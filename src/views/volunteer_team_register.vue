@@ -153,12 +153,12 @@
                 <div data-v-18d5a56f="" class="form">
                   <p data-v-18d5a56f="" class="form-label">
                     <em data-v-18d5a56f="">*</em>服务类别：
-                    <em data-v-18d5a56f="">（最多选择4项）</em>
+                    <em data-v-18d5a56f=""></em>
                   </p>
                   <div data-v-18d5a56f="" class="checkbox-fixed">
                     <span v-for="(item,index) in service" :key="index">
                     <label data-v-18d5a56f="" for="afc01caad28b4c2e93bb0b7ac1840a6a" class="checkbox">
-                      <input data-v-18d5a56f="" type="checkbox"  name="checkbox" :value="item.sid" v-model="team.sids" >
+                      <input data-v-18d5a56f="" type="radio"  name="checkbox" :value="item.sid" v-model="team.sids" >
                       <span data-v-18d5a56f=""></span>
                       <i data-v-18d5a56f="">{{ item.serviceName }}</i>
                     </label>
