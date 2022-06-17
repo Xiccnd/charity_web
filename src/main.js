@@ -9,7 +9,7 @@ import axios from 'axios'
 
 const app = createApp(App)
 //请求根路径
-axios.defaults.baseURL = 'http://192.168.1.142:8282'
+axios.defaults.baseURL = 'http://192.168.1.147:8088'
 app.use(router)
 //全局挂载在app上
 app.config.globalProperties.$http = axios

@@ -13,7 +13,7 @@ export default {
   data(){
     return{
       tags :[
-        {address:"/default_index",pagename:"首页",address0:"/"},
+        {address:"/default_index",pagename:"首页",address0:'/'},
         {address:"/volunteer_program",pagename:"志愿项目"},
         {address:"/volunteer_team",pagename:"志愿队伍"},
         {address:"/style",pagename:"志愿风采"},
