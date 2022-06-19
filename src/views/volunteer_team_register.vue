@@ -27,8 +27,8 @@
                     <em data-v-18d5a56f="">*</em><span data-v-18d5a56f="" id="orgname">用户名：</span>
                     <span data-v-18d5a56f="" id="orgtip" style="font-size: 14px; color: rgb(102, 102, 102);"></span>
                   </p>
-                  <input type="text" id="groupName" maxlength="50" placeholder="请输入用户名" v-model="team.uname"></div>
-                <span data-v-18d5a56f="" id="groupNameTips" class="form-error down-tip" style="color: red;"></span>
+                  <input type="text" id="groupName" maxlength="16" placeholder="请输入用户名" v-model="team.uname" @blur="checkName()"></div>
+                <span data-v-18d5a56f="" id="groupNameTips1" class="form-error down-tip" style="color: red;">{{ checkname }}</span>
               </li>
 
               <li data-v-18d5a56f="" class="grid-item g-12">
@@ -37,8 +37,8 @@
                     <em data-v-18d5a56f="">*</em><span data-v-18d5a56f="" id="orgname">密码：</span>
                     <span data-v-18d5a56f="" id="orgtip" style="font-size: 14px; color: rgb(102, 102, 102);"></span>
                   </p>
-                  <input type="text" id="groupName" maxlength="50" placeholder="请输入密码" v-model="team.password"></div>
-                <span data-v-18d5a56f="" id="groupNameTips" class="form-error down-tip" style="color: red;"></span>
+                  <input type="password" id="groupName" maxlength="20" placeholder="请输入密码" v-model="team.password" @blur="checkPass()"></div>
+                <span data-v-18d5a56f="" id="groupNameTips2" class="form-error down-tip" style="color: red;">{{ checkpass }}</span>
               </li>
 
               <li data-v-18d5a56f="" class="grid-item g-12">
@@ -47,8 +47,9 @@
                     <em data-v-18d5a56f="">*</em><span data-v-18d5a56f="" id="orgname">队伍名称：</span>
                     <span data-v-18d5a56f="" id="orgtip" style="font-size: 14px; color: rgb(102, 102, 102);">（请与统一社会信用代码证书机构名称保持一致）</span>
                   </p>
-                  <input type="text" id="groupName" maxlength="50" placeholder="请输入队伍名称" v-model="team.teamName"></div>
-                <span data-v-18d5a56f="" id="groupNameTips" class="form-error down-tip" style="color: red;"></span>
+                  <input type="text" id="groupName" maxlength="50" placeholder="请输入队伍名称" v-model="team.teamName" @blur="checkTeam"
+                         onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"></div>
+                <span data-v-18d5a56f="" id="groupNameTips3" class="form-error down-tip" style="color: red;">{{ checkteam }}</span>
               </li>
 
               <li data-v-18d5a56f="" class="grid-item g-12">
@@ -58,14 +59,12 @@
                   </p>
                   <div data-v-18d5a56f="" class="row w">
                     <div data-v-18d5a56f="" class="col v-m">
-                      <input type="text" id="address" maxlength="50"  placeholder="请选择详细地址" v-model="team.detailedAddress">
-                    </div>
-                    <div data-v-18d5a56f="" class="col v-m pl-10" style="width: 90px;">
-                      <a data-v-18d5a56f="" href="javascript:void(0);" class="button button-line">选择</a>
+                      <input type="text" id="address" maxlength="50"  placeholder="请选择详细地址" v-model="team.detailedAddress" @blur="checkDetaile"
+                             onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))">
                     </div>
                   </div>
                 </div>
-                <span data-v-18d5a56f="" id="detailAddressTips" class="form-error down-tip"></span>
+                <span data-v-18d5a56f="" id="detailAddressTips" class="form-error down-tip" style="color: red">{{ checkdetaile }}</span>
               </li>
 
               <li data-v-18d5a56f="" class="grid-item g-12">
@@ -74,35 +73,38 @@
                     <em data-v-18d5a56f="">*</em>项目联系人：</p>
                   <div data-v-18d5a56f="" class="row w">
                     <div data-v-18d5a56f="" class="col v-m">
-                      <input type="text" id="orgArea" placeholder="请输入项目联系人" v-model="team.contact"></div>
+                      <input type="text" id="orgArea" placeholder="请输入项目联系人" v-model="team.contact" @blur="checkContact"
+                             onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"></div>
                   </div>
                 </div>
-                <span data-v-18d5a56f="" id="orgAreaTips" class="form-error down-tip"></span>
+                <span data-v-18d5a56f="" id="orgAreaTips" class="form-error down-tip" style="color: red">{{ checkcontact }}</span>
               </li>
 
               <li data-v-18d5a56f="" class="grid-item g-12">
                 <div data-v-18d5a56f="" class="form">
                   <p data-v-18d5a56f="" class="form-label">
                     <em data-v-18d5a56f="">*</em>手机号码：</p>
-                  <input type="text" id="volNum" v-model="team.telephone" maxlength="11" oninput="this.value=this.value.replace(/[^\d]/g,'');if(this.value==0)value='';" placeholder="请输入手机号码">
+                  <input type="text" id="volNum" v-model="team.telephone" maxlength="11" oninput="this.value=this.value.replace(/[^\d]/g,'');if(this.value==0)value='';" placeholder="请输入手机号码" @blur="checkPhone">
                 </div>
-                <span data-v-18d5a56f="" id="volNumTips" class="form-error down-tip" style="color: red;"></span>
+                <span data-v-18d5a56f="" id="volNumTips" class="form-error down-tip" style="color: red;">{{ checkphone }}</span>
               </li>
 
               <li data-v-18d5a56f="" class="grid-item g-12">
                 <div data-v-18d5a56f="" class="form"><p data-v-18d5a56f="" class="form-label">
                   <em data-v-18d5a56f="">*</em> <span data-v-18d5a56f="">地址：</span></p>
-                  <input type="text" id="orgUnit" maxlength="50" placeholder="请输入地址" v-model="team.address">
+                  <input type="text" id="orgUnit" maxlength="50" placeholder="请输入地址" v-model="team.address" @blur="checkAddress"
+                         onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))">
                 </div>
-                <span data-v-18d5a56f="" id="orgUnitTips" class="form-error down-tip" style="color: red;"></span>
+                <span data-v-18d5a56f="" id="orgUnitTips" class="form-error down-tip" style="color: red;">{{checkaddress}}</span>
               </li>
 
               <li data-v-18d5a56f="" class="grid-item g-12">
                 <div data-v-18d5a56f="" class="form"><p data-v-18d5a56f="" class="form-label">
                   <em data-v-18d5a56f="">*</em>联络组织：</p>
-                  <input type="text" id="tyCode" maxlength="18" placeholder="请输入联络组织" v-model="team.liaisonOrganization">
+                  <input type="text" id="tyCode" maxlength="18" placeholder="请输入联络组织" v-model="team.liaisonOrganization" @blur="checkOrgan"
+                         onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))">
                 </div>
-                <span data-v-18d5a56f="" class="form-error down-tip" id="tyCodeTips"></span>
+                <span data-v-18d5a56f="" class="form-error down-tip" id="tyCodeTips" style="color: red">{{checkorgan}} </span>
               </li>
 
 
@@ -125,9 +127,10 @@
                 <div data-v-18d5a56f="" class="form">
                   <p data-v-18d5a56f="" class="form-label">
                     <em data-v-18d5a56f="">*</em>登记部门：</p>
-                  <input type="text" id="loginDepart" maxlength="20" placeholder="请选择登记部门" v-model="team.regisDepartment">
+                  <input type="text" id="loginDepart" maxlength="20" placeholder="请选择登记部门" v-model="team.regisDepartment" @blur="checkDepar"
+                         onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))">
                 </div>
-                <span data-v-18d5a56f="" id="loginDepartTips" class="form-error down-tip"></span>
+                <span data-v-18d5a56f="" id="loginDepartTips" class="form-error down-tip" style="color: red">{{checkdepar}}</span>
               </li>
 
               <li data-v-18d5a56f="" id="loginjg" class="grid-item g-12">
@@ -137,14 +140,12 @@
                   </p>
                   <div data-v-18d5a56f="" class="row w">
                     <div data-v-18d5a56f="" class="col v-m">
-                      <input type="text" id="loginOrg" maxlength="20" placeholder="请选择登记机关" v-model="team.registrationAuthority">
-                    </div>
-                    <div data-v-18d5a56f="" class="col v-m pl-10" style="width: 90px;">
-                      <a data-v-18d5a56f="" href="javascript:void(0);" class="button button-line">选择</a>
+                      <input type="text" id="loginOrg" maxlength="20" placeholder="请选择登记机关" v-model="team.registrationAuthority" @blur="checkAuth"
+                             onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))">
                     </div>
                   </div>
                 </div>
-                <span data-v-18d5a56f="" id="loginOrgTips" class="form-error down-tip"></span>
+                <span data-v-18d5a56f="" id="loginOrgTips" class="form-error down-tip" style="color: red">{{checkauth}}</span>
               </li>
               <!----> <!---->
               <!----> <!---->
@@ -158,7 +159,8 @@
                   <div data-v-18d5a56f="" class="checkbox-fixed">
                     <span v-for="(item,index) in service" :key="index">
                     <label data-v-18d5a56f="" for="afc01caad28b4c2e93bb0b7ac1840a6a" class="checkbox">
-                      <input data-v-18d5a56f="" type="radio"  name="checkbox" :value="item.sid" v-model="team.sids" >
+                      <input data-v-18d5a56f="" type="radio"  name="checkbox" :value="item.sid" v-model="team.sids" 
+                      >
                       <span data-v-18d5a56f=""></span>
                       <i data-v-18d5a56f="">{{ item.serviceName }}</i>
                     </label>
@@ -201,11 +203,20 @@ export default {
       },
       service:[
         {
-          sid:"1",
-          serviceName:"其他",
+          sid:"",
+          serviceName:"",
         }
       ],
-
+      checkname:"以字母开头，长度在6-16之间，只能包含字符、数字和下划线",
+      checkpass:"密码最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符",
+      checkteam:"只能为汉字",
+      checkdetaile:"只能为汉字",
+      checkcontact:"只能为汉字",
+      checkorgan:"只能为汉字",
+      checkphone:"",
+      checkaddress:"只能为汉字",
+      checkdepar:"只能为汉字",
+      checkauth:"只能为汉字"
     };
   },
   props: [],
@@ -213,6 +224,7 @@ export default {
     const _this = this
     this.$http.get("/classOfService/queryAll")
         .then(res => {
+          console.log(res.data)
           _this.service = res.data
         })
   },
@@ -223,14 +235,119 @@ export default {
     Guidebar,
   },
   methods: {
-    voredict(){
-    this.$router.push("/volunteer_register")
+    checkName(){
+      var nameRegex=/^[a-zA-Z]\w{5,15}$/
+      var Regex = new RegExp(nameRegex)
+      if(this.team.uname==''){
+        this.checkname="用户名不可为空(以字母开头，长度在6-16之间，只能包含字符、数字和下划线)"
+        document.getElementById("groupNameTips1").style.color="red"
+      }else if(!Regex.test(this.team.uname)){
+        this.checkname="用户名不规范(以字母开头，长度在6-16之间，只能包含字符、数字和下划线)"
+        document.getElementById("groupNameTips1").style.color="red"
+      }else{
+        this.checkname="用户名可用"
+        document.getElementById("groupNameTips1").style.color="green"
+      }
+    },
+    checkPass(){
+      var passRegex=/^.*(?=.{6})(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?]).*$/
+      var Regex = new RegExp(passRegex)
+      if(this.team.password==''){
+        this.checkpass="密码不可为空(密码长度至少6字符,至少1个大写字母，1个小写字母，1个数字，1个特殊字符)"
+        document.getElementById("groupNameTips2").style.color="red"
+      }else if(!Regex.test(this.team.password)){
+        this.checkpass="密码不规范(密码长度至少6字符,至少1个大写字母，1个小写字母，1个数字，1个特殊字符)"
+        document.getElementById("groupNameTips2").style.color="red"
+      }else{
+        this.checkpass="密码可用"
+        document.getElementById("groupNameTips2").style.color="green"
+      }
+    },
+    checkTeam(){
+      if(this.team.teamName==''){
+        this.checkteam="名称不可为空"
+        document.getElementById("groupNameTips3").style.color="red"
+      }else{
+        this.checkteam="名称可用"
+        document.getElementById("groupNameTips3").style.color="green"
+      }
+    },
+    checkPhone(){
+      var numReg = /^1[3|4|5|7|8|9][0-9]\d{4,11}$/
+      var numRe = new RegExp(numReg)
+      if(this.team.telephone==''){
+        document.getElementById("volNumTips").style.color="red"
+        this.checkphone="电话不可为空"
+      }else if(!numRe.test(this.team.telephone)){
+        document.getElementById("volNumTips").style.color="red"
+        this.checkphone="电话不规范"
+      }else{
+        document.getElementById("volNumTips").style.color="green"
+        this.checkphone="电话可用"
+      }
+    },
+    checkDetaile(){
+      if(this.team.detailedAddress==''){
+        document.getElementById("detailAddressTips").style.color="red"
+        this.checkdetaile="地址不可为空"
+      }else{
+        document.getElementById("detailAddressTips").style.color="green"
+        this.checkdetaile="地址可用"
+      }
+    },
+    checkContact(){
+      if(this.team.contact==''){
+        document.getElementById("orgAreaTips").style.color="red"
+        this.checkcontact="联系人不可为空"
+      }else{
+        document.getElementById("orgAreaTips").style.color="green"
+        this.checkcontact="联系人可用"
+      }
+    },
+    checkAddress(){
+      if(this.team.address==''){
+        document.getElementById("orgUnitTips").style.color="red"
+        this.checkaddress="地址不可为空"
+      }else{
+        document.getElementById("orgUnitTips").style.color="green"
+        this.checkaddress="地址可用"
+      }
+    },
+    checkOrgan(){
+      if(this.team.liaisonOrganization==''){
+        document.getElementById("tyCodeTips").style.color="red"
+        this.checkorgan="组织不可为空"
+      }else{
+        document.getElementById("tyCodeTips").style.color="green"
+        this.checkorgan="组织可用"
+      }
+    },
+    checkDepar(){
+      if(this.team.regisDepartment==''){
+        document.getElementById("loginDepartTips").style.color="red"
+        this.checkdepar="部门不可为空"
+      }else{
+        document.getElementById("loginDepartTips").style.color="green"
+        this.checkdepar="部门可用"
+      }
+    },
+    checkAuth(){
+      if(this.team.registrationAuthority==''){
+        document.getElementById("loginOrgTips").style.color="red"
+        this.checkauth="机关不可为空"
+      }else{
+        document.getElementById("loginOrgTips").style.color="green"
+        this.checkauth="机关可用"
+      }
     },
     btn:function (){
-      this.$http.post("volunteerTeamcensor/Add",this.team).then(res =>{
-        alert("注册成功")
-        this.$router.push("/volunteer_login2")
-      })
+      this.$http.post("/volunteerTeamcensor/Add",this.team)
+      console.log(this.team)
+      alert("注册成功")
+      this.$router.push("/volunteer_login2")
+    },
+    voredict(){
+    this.$router.push("/volunteer_register")
     }
   },
 };
@@ -277,7 +394,9 @@ h2 {
   margin-inline-end: 0px;
   font-weight: bold;
 }
-
+.form-error {
+  font-size: 14px;
+}
 element.style {
   margin-top: 10px;
 }
@@ -305,7 +424,17 @@ ul ul {
   margin-block-start: 0px;
   margin-block-end: 0px;
 }
-
+.grid-item {
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+.down-tip[data-v-4d853816] {
+  font-size: 14px;
+  height: 17px;
+  padding-left: 20px;
+}
 ul {
   display: block;
   list-style-type: disc;
@@ -360,10 +489,6 @@ li {
   text-align: -webkit-match-parent;
 }
 
-.checkbox-fixed .checkbox, .checkbox-fixed .radio {
-  width: 162px;
-  margin-right: 0;
-}
 
 
 .checkbox {

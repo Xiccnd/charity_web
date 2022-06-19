@@ -213,6 +213,7 @@ export default {
           }
       })
         .then((res) => {
+          console.log(res.data)
           _this.list=res.data
           this.totalPage=Math.ceil(this.list.length / this.pageSize);
           this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
