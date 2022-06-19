@@ -32,7 +32,10 @@
             <li class="col v-m">
               <h2>浏览网站人数统计</h2>
               <div class="count">
-                <span> 0</span><span> 0</span><span> 7</span><span> 0</span><span> 9</span><span> 2</span><span> 1</span><span> 0</span>
+                <span v-for="(item, i) in Naccessnum"
+                    :key="i"> 
+                    {{item}}
+                </span>
               </div>
             </li>
           </ul>
@@ -47,6 +50,26 @@
 
 <script>
 export default {
+  props:['accessnum'],
+  data() {
+    return {
+      Naccessnum:[],
+      var:[],
+    }
+  },
+  watch:{
+    accessnum: function(newValue){
+      this.toArrNum(newValue);
+    }
+  },
+  methods: {
+    toArrNum(Num){
+      var str = Num.toString();
+      for(var i=0;i<str.length;i++){
+        this.Naccessnum.push(str[i]);
+      }
+    }
+  },
 };
 </script>
 

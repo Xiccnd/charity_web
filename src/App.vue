@@ -2,7 +2,7 @@
   <div>
     <router-view></router-view>
   </div>
-  <Footer></Footer>
+  <Footer v-bind:accessnum="accessNum"></Footer>
 </template>
 
 <script>
@@ -11,6 +11,28 @@ export default {
   name: "App",
   components: {
    Footer
+  },
+  data() {
+    return {
+        accessNum:'',
+    }
+  },
+  methods: {
+    getAccessNum(){
+      this.$http({
+          method: "get",
+          url: "/news/getAccessNum",
+        }).then((res) => {
+          this.accessNum = res.data;
+      }).catch((err) => {
+        console.error(err);
+    });
+    },
+  },
+  mounted() {
+    window.addEventListener("load", () => {
+      this.getAccessNum();
+    });
   },
 };
 </script>
