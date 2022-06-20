@@ -16,13 +16,6 @@
           <slot name="catagory"></slot>
           <ul class="row w">
             <slot name="search"></slot>
-            <li class="col v-m t-r">
-              <div class="text-tab" style="margin-right: -10px">
-                <a href="javascript:void(0);" id="list" class="active">列表</a>
-                |
-                <a href="javascript:void(0);" id="map">地图</a>
-              </div>
-            </li>
           </ul>
           <div  id="getList" >
             <ul  class="panel-list panel-lists">

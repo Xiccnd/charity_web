@@ -1,7 +1,7 @@
 <template>
-   <li class="col v-m" style="width: 90%">
+   <li class="col v-m" style="width: 100%">
                <form @submit.prevent="search()">
-              <span class="label">队伍登记日期</span>
+              <!-- <span class="label">队伍登记日期</span>
               <div slot="" class="mx-datepicker" style="width: 120px">
                 <div class="mx-input-wrapper">
                   <input
@@ -28,7 +28,7 @@
                   />
                  
                 </div>
-              </div>
+              </div> -->
               <span class="label">队伍联络编号</span>
               <input
                 type="text"

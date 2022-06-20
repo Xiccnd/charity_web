@@ -25,19 +25,9 @@
           <a href="javascript:void(0);" v-show="isLogin" v-on:click="logout()">注销</a>
           <img src="../assets/images/header/font.png" alt="" style="margin-bottom: 13px"/>
         </div>
-        <div class="js-search" style="margin-top: -20px;overflow: visible;background: rgb(255, 255, 255);">
-          <div class="js-select">
-            <b class="js-select-core">新闻文章</b>
-            <ul class="js-select-options">
-              <li class="active">新闻文章</li>
-              <li class="">志愿项目</li>
-              <li class="">志愿队伍</li>
-            </ul>
-          </div>
-          <input type="text" maxlength="30" style="width: 412px"/>
-          <button
-              style="border-radius: 0px 99px 99px 0px; cursor: pointer"
-          ></button>
+        <div class="js-search" style="margin-top: -20px;overflow: visible;background: rgb(255, 255, 255);border:none">
+
+          
         </div>
       </div>
     </div>
