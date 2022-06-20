@@ -145,6 +145,27 @@
                       手机号码不能为空，请确保该手机号码真实有效
                     </p>
                   </div>
+
+
+                  <div  class="form g-12">
+                    <p  class="form-label">
+                      <em >*</em>真实姓名：
+                    </p>
+                    <input
+                      type="text"
+                      id="realname"
+                      maxlength="11"
+                      placeholder="请输入真实姓名"
+                      v-model="user.realname"
+                      v-on:blur="checkRealname"
+                    />
+                    <p
+                      id="realnameTips"
+                      class="form-error warn-tip"
+                    >
+                      真实姓名不能为空
+                    </p>
+                  </div>
                 </ul>
               </li>
             </ul>
@@ -302,10 +323,11 @@ return{
   user:{
     name:"",
     password:"",
-    telephone:""
+    telephone:"",
+    realname:"",
  },
   password1:"",
-  
+  realname:""
 }
   
 
@@ -321,7 +343,7 @@ return{
                   url:"/user/Add",
                 data:{
                 user:this.user,
-                password1:this.password1
+                password1:this.password1,
                 }
                })
               .then(res => {
@@ -468,6 +490,28 @@ return{
 
 
         
+ },
+   checkRealname(){
+      const _this = this
+      var numReg = /[\u4e00-\u9fa5]{2,8}/
+      var numRe = new RegExp(numReg)
+
+          if(this.user.realname==''){
+                  document.getElementById('realnameTips').innerHTML="真实姓名不可为空"
+                   document.getElementById('realnameTips').classList.remove('right-tip');
+                   document.getElementById('realnameTips').classList.remove ('right2-tip');
+                   document.getElementById('realnameTips').classList.add('warn-tip');
+                 }else if(!numRe.test(this.user.realname)){
+                    document.getElementById('realnameTips').innerHTML="请输入中文"
+                   document.getElementById('realnameTips').classList.remove('right-tip');
+                   document.getElementById('realnameTips').classList.remove ('right2-tip');
+                   document.getElementById('realnameTips').classList.add('warn-tip'); 
+                 }else{
+                   document.getElementById('realnameTips').innerHTML="&nbsp"
+                   document.getElementById('realnameTips').classList.add('right-tip');
+                   document.getElementById('realnameTips').classList.add ('right2-tip');
+                   document.getElementById('realnameTips').classList.remove('warn-tip');
+                 }   
  },
     },
 

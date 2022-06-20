@@ -68,6 +68,7 @@
                         id="name"
                         maxlength="15"
                         placeholder="请输入真实姓名"
+                        disabled
                     />
                     <p id="" class="form-error"></p>
                   </div>
