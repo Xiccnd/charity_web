@@ -57,7 +57,9 @@
               <h2 class="subtitle subtitle-noline">热点图片</h2>
               <ul class="images images-v">
                 <li>
-                  <a href="javascript:void(0);"
+                  <a 
+                    href="javascript:void(0);"
+                    v-on:click="newsHot(1)"
                   >
                     <img class="img" src="../assets/images/media/1.jpg" alt="">
                     <i title="习近平总书记考察河北承德纪实" class="oneline">

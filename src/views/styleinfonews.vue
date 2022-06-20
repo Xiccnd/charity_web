@@ -10,7 +10,10 @@
               <span data-v-392f6828="">当前位置：</span>
               <a data-v-392f6828="" href="#/home" >首页</a>
               <!---->
-              <a data-v-392f6828="" href="javascript:void(0);" class="after">使用指南</a>
+              <a data-v-392f6828="" href="javascript:void(0);" class="after" v-if="Thenum==3">志愿者</a>
+              <a data-v-392f6828="" href="javascript:void(0);" class="after" v-if="Thenum==4">志愿队伍</a> 
+              <a data-v-392f6828="" href="javascript:void(0);" class="after" v-if="Thenum==5">志愿项目</a>
+              <a data-v-392f6828="" href="javascript:void(0);" class="after" v-if="Thenum==6">志愿团体</a>
             </div>
           </li>
         </ul>
@@ -18,7 +21,10 @@
           <li data-v-392f6828="" class="col v-t g-16">
             <div data-v-392f6828="" class="wrapper" style="height: 845px">
               <div data-v-392f6828="" style="display: none"></div>
-              <h2 data-v-392f6828="" class="subtitle" style="">使用指南</h2>
+              <h2 data-v-392f6828="" class="subtitle" style="" v-if="Thenum==3">志愿者</h2>
+              <h2 data-v-392f6828="" class="subtitle" style="" v-if="Thenum==4">志愿队伍</h2>
+              <h2 data-v-392f6828="" class="subtitle" style="" v-if="Thenum==5">志愿项目</h2>
+              <h2 data-v-392f6828="" class="subtitle" style="" v-if="Thenum==6">志愿团体</h2>
               <div
                   data-v-392f6828=""
                   class="wrapper-tab"
@@ -160,6 +166,7 @@ export default {
       headPage: 1,
       currentPageData: [],//当前页显示内容
       hotnews:null,
+      Thenum:'',
     }
   },
   components: {
@@ -172,11 +179,12 @@ export default {
       window.open(urlpath);
     },
     //获取当前页新闻列表
-    getNewsData(){
+    getNewsData(num){
       this.$http({
           method: "get",
-          url: "/news/queryAll?newstype=9",
+          url: "/news/queryAll?newstype="+num,
         }).then((res) => {
+          this.Thenum = num;
           this.news = res.data;
           this.totalPage=Math.ceil(this.news.length / this.pageSize);///?????????
           this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
@@ -251,7 +259,11 @@ export default {
     }
   },
   created() {
-    this.getNewsData();
+    //newsid==165 这一整串
+    var afterUrl =  window.location.search.substring(1);
+    //==后的字符
+    var afterEqual = afterUrl.substring(afterUrl.indexOf('=')+1);
+    this.getNewsData(afterEqual);
     this.getHotNewsData();
   },
 };

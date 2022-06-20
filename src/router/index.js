@@ -26,6 +26,7 @@ const updatePassword = () => import("../views/updatePassword.vue")
 const waitProject = () => import("../views/waitProject.vue")
 const waitTeam = () => import("../views/waitTeam.vue")
 const news = () => import("../views/news.vue")
+const styleinfonews = () => import("../views/styleinfonews.vue")
 const researchvideo = () => import("../views/researchvideo.vue")
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
@@ -48,6 +49,7 @@ const routes = [
     {path:'/notice',component:notice},
     {path:'/guide',component:guide},
     {path:'/news',component:news},
+    {path:'/styleinfonews',component:styleinfonews},
     {path:'/researchvideo',component:researchvideo},
     {
      path: '/volunteer_login', 
